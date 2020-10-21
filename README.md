@@ -1,4 +1,4 @@
 # FantasyStock
 
-* Tech Stack
+* Tech Stack:
 React Redux PostgreSQL Express Node Passport Axios Mocha 
