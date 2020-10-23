@@ -4,6 +4,7 @@
   "description": "",
   "main": "webpack.config.js",
   "scripts": {
+    "start": "nodemon server/index.js",
     "dev": "webpack -d --watch",
     "build": "webpack -p"
   },
@@ -32,6 +33,7 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.12.1",
+    "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "html-webpack-plugin": "^4.5.0",
     "react": "^17.0.0",
