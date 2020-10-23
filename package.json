@@ -42,13 +42,10 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.12.1",
-<<<<<<< HEAD
     "cookie-session": "^1.4.0",
     "cookie-sessions": "0.0.2",
-=======
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
->>>>>>> 3a00939... feat/global navbar
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "eslint-config-airbnb": "^18.2.0",
