@@ -15,7 +15,6 @@ export const userSlice = createSlice({
 
 export const { setUser } = userSlice.actions;
 
-// eslint-disable-next-line arrow-parens
-export const selectUser = state => state.user.user;
+export const selectUser = (state) => state.user.user;
 
 export default userSlice.reducer;
