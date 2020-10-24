@@ -6,8 +6,21 @@ import YourStocks from "./views/YourStocks.jsx";
 import Waivers from "./views/Waivers.jsx";
 import Home from "./views/Home.jsx";
 import Nav from "./components/Nav.jsx";
+import { useDispatch, useSelector } from "react-redux";
+import { selectUser, setUser } from "./features/userSlice";
 
 function App() {
+
+  // const user = useSelector(selectUser);
+
+  // const dispatch = useDispatch();
+
+  // const handleClick = () => {
+
+  //   dispatch(setUser({ id: '1', name: 'Jose', lastName: 'Rodriguez' }))
+  // }
+
+
   return (
     <Router>
       <div className="app">

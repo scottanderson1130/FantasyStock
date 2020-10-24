@@ -64,7 +64,9 @@ function Nav() {
           <Typography className="nav_logo" variant="h6">
             Name
     </Typography>
-          <Button color="inherit">Log in</Button>
+
+          <Button color="inherit"><a href="/auth/google">Log in </a></Button>
+
           <Button color="inherit">Logo</Button>
         </Toolbar>
       </AppBar>
