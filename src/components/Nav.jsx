@@ -36,7 +36,7 @@ function Nav() {
     },
     {
       option: 'Waivers',
-      path: '/waiver'
+      path: '/waivers'
     },
     {
       option: 'Settings',
