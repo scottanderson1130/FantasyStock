@@ -1,5 +1,6 @@
 const { Router } = require('express');
 const passport = require('passport');
+
 const authRouter = Router();
 
 authRouter.get(
@@ -9,14 +10,12 @@ authRouter.get(
 authRouter.get(
   '/google/callback',
   passport.authenticate('google', { failureRedirect: '/failed' }),
-  function (req, res) {
-    console.log('Login Success');
+  (req, res) => {
     res.redirect('/');
   }
 );
 
 authRouter.get('/logout', (req, res) => {
-  console.log('Logout Success');
   req.session = null;
   req.logout();
   res.redirect('/');

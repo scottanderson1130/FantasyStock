@@ -6,6 +6,7 @@ const cors = require('cors');
 const path = require('path');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
+const bodyParser = require('body-parser');
 const { authRouter } = require('../authentication/routes');
 
 require('../authentication/passport-setup.js');
@@ -14,7 +15,6 @@ const app = express();
 // const { userRouter } = require('./routes/user');
 // const { stockRouter } = require('./routes/stock');
 // const models = require('./db/index');
-const bodyParser = require('body-parser');
 // Cookies and Session info
 
 // middleware
@@ -26,7 +26,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(
   cookieSession({
     name: 'fantasy-stock',
-    keys: ['key1', 'key2'],
+    keys: ['key1', 'key2']
   })
 );
 
