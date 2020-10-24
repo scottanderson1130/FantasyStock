@@ -5,3 +5,7 @@
 .basicTable_row {
   cursor: pointer !important;
 }
+
+.MuiTableSortLabel-root.MuiTableSortLabel-active.MuiTableSortLabel-root.MuiTableSortLabel-active .MuiTableSortLabel-icon {
+  color: white !important;
+}

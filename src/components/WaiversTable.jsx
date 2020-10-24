@@ -159,7 +159,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function BasicTable() {
+function WaiversTable() {
   const classes = useStyles();
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('calories');
@@ -218,4 +218,4 @@ function BasicTable() {
   );
 }
 
-export default BasicTable;
+export default WaiversTable;
