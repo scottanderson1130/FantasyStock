@@ -11,7 +11,7 @@ before_install:
 
 before_deploy:
   - npm run start
-  - npm run lint
 
 script:
   - npm run test
+  - npm run lint
