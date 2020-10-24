@@ -94,9 +94,8 @@ function Nav() {
           <ChevronLeft className='nav_close' />
         </IconButton>
         <ul className='nav_navigation'>
-          {views.map((view, i) => (
-            // eslint-disable-next-line react/no-array-index-key
-            <Link key={i} className='nav_link' to={view.path}>
+          {views.map((view) => (
+            <Link key={view.option} className='nav_link' to={view.path}>
               <li onClick={handleDrawerClose} className='nav_options'>
                 {view.option}
               </li>

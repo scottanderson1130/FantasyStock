@@ -20,7 +20,7 @@ function TickerBar() {
         {() => (
           <>
             {examples.map((example) => (
-              <h3 className='tickerBar_text'>
+              <h3 key={example.ticker} className='tickerBar_text'>
                 {example.ticker}
                 {' '}
                 +

@@ -1,0 +1,23 @@
+.yourStocks_container {
+  display: flex;
+  flex-direction: column;
+}
+
+.yourStocks_logo {
+  height: 100px !important;
+  width: 100px !important;
+}
+
+.yourStocks_teamInfo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 30px;
+  padding-left: 80px;
+  padding-right: 80px
+}
+
+
+.yourStocks_table {
+  padding-right: 50px !important;
+}
