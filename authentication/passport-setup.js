@@ -2,11 +2,11 @@ const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 require('dotenv').config();
 
-passport.serializeUser(function (user, done) {
+passport.serializeUser((user, done) => {
   done(null, user);
 });
 
-passport.deserializeUser(function (user, done) {
+passport.deserializeUser((user, done) => {
   done(null, user);
 });
 
@@ -15,15 +15,8 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: 'http://localhost:8080/auth/google/callback',
+      callbackURL: 'http://localhost:8080/auth/google/callback'
     },
-    function (accessToken, refreshToken, profile, done) {
-      /*
-     use the profile info (mainly profile id) to check if the user is registerd in ur db
-     If yes select the user and pass him to the done callback
-     If not create the user and then select him and pass to callback
-    */
-      return done(null, profile);
-    }
+    (accessToken, refreshToken, profile, done) => done(null, profile)
   )
 );
