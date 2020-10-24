@@ -1,0 +1,13 @@
+.tickerBar{
+  padding-top: 20px;
+  padding-bottom: 20px;
+  /* background-color: black */
+}
+
+.tickerBar_text {
+  padding-left: 50px;
+  clear: both;
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+}

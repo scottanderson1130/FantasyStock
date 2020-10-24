@@ -6,6 +6,7 @@ import YourStocks from './views/YourStocks.jsx';
 import Waivers from './views/Waivers.jsx';
 import Home from './views/Home.jsx';
 import Nav from './components/Nav.jsx';
+import TickerBar from './components/TickerBar.jsx';
 
 // import { useDispatch, useSelector } from 'react-redux';
 // import { selectUser, setUser } from './features/userSlice';
@@ -24,6 +25,7 @@ function App() {
     <Router>
       <div className='app'>
         <Nav />
+        <TickerBar />
         <Switch>
           <Route path='/' exact component={Home} />
           <Route path='/scoreboard' component={ScoreBoard} />
