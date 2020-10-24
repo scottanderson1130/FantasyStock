@@ -1,5 +1,5 @@
 import React from 'react';
-import WaiversTable from '../components/WaiversTable.jsx'
+import WaiversTable from '../components/WaiversTable.jsx';
 
 function Waivers() {
   return (
