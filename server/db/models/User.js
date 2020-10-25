@@ -26,17 +26,16 @@ module.exports = (sequelize, DataTypes) => {
   //NOTE: INTEGER is money including cents. move decimal two points over essentially. Increases accuracy in real world figures as well as speed of calculation
   // Question: what happens to lost fractions? Essentially rounding errors??
   User.associate = (models) => {
-    User.associate = (models) => {
-      User.belongsToMany(models.League, {
-        through: models.League_user,
-        foreignKey: 'id_user',
-      });
-      User.associate = (models) => {
-        User.belongsToMany(models.Stock, {
-          through: models.Portfolio,
-          foreignKey: 'id_user',
-        });
+    User.belongsToMany(models.League, {
+      through: models.League_user,
+      foreignKey: 'id_user',
+    });
+    User.belongsToMany(models.Stock, {
+      through: models.Portfolio,
+      foreignKey: 'id_user',
+    });
   };
+  
 
   return User;
 };
