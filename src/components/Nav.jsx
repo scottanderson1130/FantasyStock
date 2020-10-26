@@ -13,6 +13,7 @@ import {
 import { ChevronLeft, Menu } from '@material-ui/icons';
 import '../css/Nav.css';
 
+// eslint-disable-next-line react/prop-types
 function Nav({ logIn }) {
   const [open, setOpen] = useState(false);
 

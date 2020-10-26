@@ -6,6 +6,13 @@ import Grid from '@material-ui/core/Grid';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+
 import '../css/YourStocks.css';
 
 const useStyles = makeStyles({
@@ -28,6 +35,14 @@ const useStyles = makeStyles({
 });
 
 function Home(logIn) {
+  const [open, setOpen] = React.useState(false);
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   const classes = useStyles();
   return (
     (!logIn)
@@ -70,7 +85,33 @@ function Home(logIn) {
           <div>
             <Grid container justify='center'>
               <div className={classes.root}>
-                <Button>Create New League</Button>
+                <Button variant='outlined' color='primary' onClick={handleClickOpen}>
+                  Create New League
+                </Button>
+                <Dialog open={open} onClose={handleClose} aria-labelledby='form-dialog-title'>
+                  <DialogTitle id='form-dialog-title'>Create A League</DialogTitle>
+                  <DialogContent>
+                    <DialogContentText>
+                      Form Data to Fill in
+                    </DialogContentText>
+                    <TextField
+                      autoFocus
+                      margin='dense'
+                      id='name'
+                      label='League Name'
+                      type='email'
+                      fullWidth
+                    />
+                  </DialogContent>
+                  <DialogActions>
+                    <Button onClick={handleClose} color='primary'>
+                      Cancel
+                    </Button>
+                    <Button onClick={handleClose} color='primary'>
+                      Create!
+                    </Button>
+                  </DialogActions>
+                </Dialog>
               </div>
             </Grid>
           </div>

@@ -13,6 +13,7 @@ const examples = [
   }
 ];
 
+// eslint-disable-next-line react/prop-types
 function TickerBar({ logIn }) {
   return (
     (!logIn) ? <div />
