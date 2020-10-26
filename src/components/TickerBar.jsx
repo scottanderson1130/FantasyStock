@@ -13,24 +13,28 @@ const examples = [
   }
 ];
 
-function TickerBar() {
+function TickerBar({ logIn }) {
   return (
-    <div className='tickerBar'>
-      <Ticker mode='smooth' className='tickerBar_ticker'>
-        {() => (
-          <>
-            {examples.map((example) => (
-              <h3 key={example.ticker} className='tickerBar_text'>
-                {example.ticker}
-                +
-                {example.price}
-                {' '}
-              </h3>
-            ))}
-          </>
-        )}
-      </Ticker>
-    </div>
+    (!logIn) ? <div />
+      : (
+        <div className='tickerBar'>
+          <Ticker mode='smooth' className='tickerBar_ticker'>
+            {() => (
+              <>
+                {examples.map((example) => (
+                  <h3 key={example.ticker} className='tickerBar_text'>
+                    {example.ticker}
+                    +
+                    {example.price}
+                    {' '}
+                  </h3>
+                ))}
+              </>
+            )}
+          </Ticker>
+        </div>
+      )
+
   );
 }
 

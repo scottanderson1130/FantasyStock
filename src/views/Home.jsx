@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-function Home() {
-  const [loggedIn, setLoggedIn] = useState(false);
-
+function Home(logIn) {
   return (
-    (!loggedIn) ? <h1>Please Log In</h1>
+    (!logIn)
+      ? (
+        <div>
+          <h1>Please Log In</h1>
+        </div>
+      )
       : (
         <div>
           <h1>Home</h1>

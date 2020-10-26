@@ -12,6 +12,7 @@ import TickerBar from './components/TickerBar.jsx';
 // import { selectUser, setUser } from './features/userSlice';
 
 function App() {
+  const logIn = true;
   // const user = useSelector(selectUser);
 
   // const dispatch = useDispatch();
@@ -24,8 +25,8 @@ function App() {
   return (
     <Router>
       <div className='app'>
-        <Nav />
-        <TickerBar />
+        <Nav logIn={logIn} />
+        <TickerBar logIn={logIn} />
         <Switch>
           <Route path='/' exact component={Home} />
           <Route path='/scoreboard' component={ScoreBoard} />
