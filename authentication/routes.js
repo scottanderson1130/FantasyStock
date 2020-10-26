@@ -9,9 +9,9 @@ authRouter.get(
 );
 authRouter.get(
   '/google/callback',
-  passport.authenticate('google', { failureRedirect: '/' }),
+  passport.authenticate('google', { failureRedirect: '/failed' }),
   (req, res) => {
-    res.redirect('/yourstocks');
+    res.redirect('/');
   }
 );
 
