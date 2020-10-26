@@ -9,15 +9,25 @@
 }
 
 .yourStocks_teamInfo {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 30px;
   padding-left: 80px;
-  padding-right: 80px
+  padding-right: 80px;
 }
 
 
 .yourStocks_table {
   padding-right: 50px !important;
+}
+
+.YourStocks_card {
+  margin: auto;
+  width: 50%;
+  align-items: center;
+  padding-top: 10px;
+  padding-bottom: 30px;
+  width: 350px;
 }
