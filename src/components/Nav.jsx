@@ -13,7 +13,8 @@ import {
 import { ChevronLeft, Menu } from '@material-ui/icons';
 import '../css/Nav.css';
 
-function Nav() {
+// eslint-disable-next-line react/prop-types
+function Nav({ logIn }) {
   const [open, setOpen] = useState(false);
 
   // Open and close Drawer functions
@@ -77,7 +78,11 @@ function Nav() {
           </Typography>
 
           <Button color='inherit'>
-            <a href='/auth/google'>Log in </a>
+            {(!logIn)
+              ? <a href='/auth/google'>Log in </a>
+              : (
+                <a href='/auth/google'>Log out </a>
+              )}
           </Button>
 
           <Button color='inherit'>Logo</Button>
@@ -93,15 +98,28 @@ function Nav() {
         <IconButton onClick={handleDrawerClose}>
           <ChevronLeft className='nav_close' />
         </IconButton>
-        <ul className='nav_navigation'>
-          {views.map((view) => (
-            <Link key={view.option} className='nav_link' to={view.path}>
-              <li onClick={handleDrawerClose} className='nav_options'>
-                {view.option}
-              </li>
-            </Link>
-          ))}
-        </ul>
+        {(!logIn)
+          ? (
+            <ul className='nav_navigation'>
+              <Link key='home' className='nav_link' to='/'>
+                <li onClick={handleDrawerClose} className='nav_options'>
+                  Home
+                </li>
+              </Link>
+            </ul>
+          )
+          : (
+            <ul className='nav_navigation'>
+              {views.map((view) => (
+                <Link key={view.option} className='nav_link' to={view.path}>
+                  <li onClick={handleDrawerClose} className='nav_options'>
+                    {view.option}
+                  </li>
+                </Link>
+              ))}
+            </ul>
+          )}
+
       </Drawer>
     </nav>
   );
