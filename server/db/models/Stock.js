@@ -2,31 +2,28 @@ module.exports = (sequelize, DataTypes) => {
   const Stock = sequelize.define('stock', {
     ticker: {
       type: DataTypes.STRING,
-      unique: true,
+      unique: true
     },
     company_name: {
       type: DataTypes.STRING,
-      unique: true,
+      unique: true
     },
     current_price_per_share: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.INTEGER
     },
     date_updated: {
-      type: DataTypes.DATE,
-    },
-    current_price_per_share: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.DATE
     },
     shares_available: {
-      type: DataTypes.INTEGER,
-    },
+      type: DataTypes.INTEGER
+    }
   }, {
-    freezeTableName: true,
+    freezeTableName: true
   });
   Stock.associate = (models) => {
     Stock.belongsToMany(models.User, {
       through: models.Portfolio,
-      foreignKey: 'id_stock',
+      foreignKey: 'id_stock'
     });
   };
 

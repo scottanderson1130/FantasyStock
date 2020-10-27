@@ -12,7 +12,7 @@ const sequelize = new Sequelize(database, user, password, {
   host,
   dialect: 'postgres',
   port,
-  logging: false,
+  logging: false
 });
 
 // const HistoryModel = require('./models/History');
@@ -21,7 +21,7 @@ const MessageModel = require('./models/Message');
 const PortfolioModel = require('./models/Portfolio');
 const StockModel = require('./models/Stock');
 const UserModel = require('./models/User');
-const League_userModel = require('./models/League_user')
+const League_userModel = require('./models/League_user');
 
 // const History = HistoryModel(sequelize, Sequelize);
 const League = LeagueModel(sequelize, Sequelize);

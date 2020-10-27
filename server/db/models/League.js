@@ -1,22 +1,22 @@
 module.exports = (sequelize, DataTypes) => {
   const League = sequelize.define('league', {
     league_name: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING
     },
     settings: {
-      type: DataTypes.JSON,
-    },
+      type: DataTypes.JSON
+    }
   }, {
-    freezeTableName: true,
+    freezeTableName: true
   });
 
   League.associate = (models) => {
     League.belongsToMany(models.User, {
       through: models.League_user,
-      foreignKey: 'id_league',
+      foreignKey: 'id_league'
     });
     League.belongsTo(models.User, {
-      foreignKey: 'id_owner',
+      foreignKey: 'id_owner'
     });
   };
   return League;

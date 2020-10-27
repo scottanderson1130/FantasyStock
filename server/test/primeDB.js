@@ -18,8 +18,8 @@ const {
 function primeDB() {
   League.findOrCreate({
     where: {
-      league_name: 'The League',
-    },
+      league_name: 'The League'
+    }
   })
     .then((res) => {
       if (res) {

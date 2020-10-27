@@ -1,6 +1,15 @@
+/* eslint-ignore */
+
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from "./App.jsx";
-require('@babel/polyfill')
+import { Provider } from 'react-redux';
+import App from './App.jsx';
+import store from './app/store.js';
 
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render(
+  // eslint-disable-next-line react/jsx-filename-extension
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('root')
+);

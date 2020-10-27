@@ -7,7 +7,14 @@
     "start": "nodemon server/index.js",
     "dev": "webpack -d --watch",
     "build": "webpack -p",
-    "test": "node server/test/primeDB.js"
+    "test-db": "node server/test/primeDB.js",
+    "test": "mocha",
+    "lint": "eslint . --ext .js --ext .jsx"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint"
+    }
   },
   "repository": {
     "type": "git",
@@ -28,19 +35,41 @@
     "axios": "^0.20.0",
     "babel-loader": "^8.1.0",
     "css-loader": "^5.0.0",
-    "express": "^4.17.1",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-react": "^7.21.5",
+    "eslint-plugin-react-hooks": "^4.2.0",
     "nodemon": "^2.0.6",
+    "passport-google-oauth": "^2.0.0",
     "style-loader": "^2.0.0"
   },
   "dependencies": {
     "@babel/polyfill": "^7.12.1",
+    "@material-ui/core": "^4.11.0",
+    "@material-ui/icons": "^4.9.1",
+    "@material-ui/lab": "^4.0.0-alpha.56",
+    "@reduxjs/toolkit": "^1.4.0",
+    "body-parser": "^1.19.0",
+    "cookie-session": "^1.4.0",
+    "cookie-sessions": "0.0.2",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
+    "eslint": "^7.12.0",
+    "eslint-config-airbnb": "^18.2.0",
+    "express": "^4.17.1",
     "html-webpack-plugin": "^4.5.0",
     "pg": "^8.4.2",
+    "sequelize": "^6.3.5",
+    "husky": "^4.3.0",
+    "mocha": "^8.2.0",
+    "passport": "^0.4.1",
+    "passport-google-oauth20": "^2.0.0",
+    "prop-types": "^15.7.2",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
-    "sequelize": "^6.3.5",
+    "react-redux": "^7.2.1",
+    "react-router-dom": "^5.2.0",
+    "react-ticker": "^1.2.2",
     "webpack": "^4.44.2",
     "webpack-cli": "^3.3.12"
   }

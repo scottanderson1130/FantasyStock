@@ -4,12 +4,17 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
+const cookieSession = require('cookie-session');
+const passport = require('passport');
+const bodyParser = require('body-parser');
+const { authRouter } = require('../authentication/routes');
+
+require('../authentication/passport-setup.js');
 
 const app = express();
 // const { userRouter } = require('./routes/user');
 // const { stockRouter } = require('./routes/stock');
 const models = require('./db/index');
-const bodyParser = require('body-parser');
 // Cookies and Session info
 
 // middleware
@@ -17,18 +22,29 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+/* Google Authorization */
+app.use(
+  cookieSession({
+    name: 'fantasy-stock',
+    keys: ['key1', 'key2']
+  })
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+/* End Google Authorization */
+
 const PORT = process.env.SERVER_PORT || 8080;
+
+app.use('/auth', authRouter);
 
 const DIST_DIR = path.join(__dirname, '../dist');
 const HTML_FILE = path.join(DIST_DIR, 'index.html');
 
-// // Middleware
-// app.use(cors());
-// app.use(express.json());
-// app.use(express.urlencoded())
 app.use(express.static(DIST_DIR));
 
-app.get('/', (req, res) => {
+app.get('/*', (req, res) => {
   res.sendFile(HTML_FILE);
 });
 
