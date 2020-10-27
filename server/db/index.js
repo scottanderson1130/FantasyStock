@@ -15,13 +15,13 @@ const sequelize = new Sequelize(database, user, password, {
   logging: false,
 });
 
-// const HistoryModel = require('../History');
-const LeagueModel = require('../League');
-const MessageModel = require('../Message');
-const PortfolioModel = require('../Portfolio');
-const StockModel = require('../Stock');
-const UserModel = require('../User');
-const League_userModel = require('../League_user')
+// const HistoryModel = require('./models/History');
+const LeagueModel = require('./models/League');
+const MessageModel = require('./models/Message');
+const PortfolioModel = require('./models/Portfolio');
+const StockModel = require('./models/Stock');
+const UserModel = require('./models/User');
+const League_userModel = require('./models/League_user')
 
 // const History = HistoryModel(sequelize, Sequelize);
 const League = LeagueModel(sequelize, Sequelize);
@@ -32,7 +32,7 @@ const User = UserModel(sequelize, Sequelize);
 const League_user = League_userModel(sequelize, Sequelize);
 
 const models = {
-  History,
+  // History,
   League,
   Message,
   Portfolio,
