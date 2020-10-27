@@ -14,7 +14,7 @@ require('../authentication/passport-setup.js');
 const app = express();
 // const { userRouter } = require('./routes/user');
 // const { stockRouter } = require('./routes/stock');
-// const models = require('./db/index');
+const models = require('./db/index');
 // Cookies and Session info
 
 // middleware
@@ -51,25 +51,25 @@ app.get('/*', (req, res) => {
 // app.use('/user', userRouter);
 // app.use('/stock', stockRouter);
 
-// const connection = async () => {
-//   try {
-//     await models.sequelize.authenticate();
-//     console.log('Connection has been established successfully.');
-//   } catch (error) {
-//     console.error('Unable to connect to the database:', error);
-//   }
-// };
-// const syncModels = async () => {
-//   try {
-//     await models.sequelize.sync();
-//     console.log('Models have been synced successfully.');
-//   } catch (error) {
-//     console.error('Unable to sync models:', error);
-//   }
-// };
+const connection = async () => {
+  try {
+    await models.sequelize.authenticate();
+    console.log('Connection has been established successfully.');
+  } catch (error) {
+    console.error('Unable to connect to the database:', error);
+  }
+};
+const syncModels = async () => {
+  try {
+    await models.sequelize.sync();
+    console.log('Models have been synced successfully.');
+  } catch (error) {
+    console.error('Unable to sync models:', error);
+  }
+};
 
-// connection();
-// syncModels();
+connection();
+syncModels();
 app.listen(PORT, () => {
   console.log(`🌌Server has started on port: 🚀${PORT}`);
 });

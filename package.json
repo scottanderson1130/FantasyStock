@@ -6,8 +6,9 @@
   "scripts": {
     "start": "nodemon server/index.js",
     "dev": "webpack -d --watch",
-    "test": "mocha",
     "build": "webpack -p",
+    "test-db": "node server/test/primeDB.js",
+    "test": "mocha",
     "lint": "eslint . --ext .js --ext .jsx"
   },
   "husky": {
@@ -57,6 +58,8 @@
     "eslint-config-airbnb": "^18.2.0",
     "express": "^4.17.1",
     "html-webpack-plugin": "^4.5.0",
+    "pg": "^8.4.2",
+    "sequelize": "^6.3.5",
     "husky": "^4.3.0",
     "mocha": "^8.2.0",
     "passport": "^0.4.1",
