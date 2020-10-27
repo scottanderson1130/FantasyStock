@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { TextField } from '@material-ui/core';
-import WaiversTable from '../components/WaiversTable.jsx';
+import WaiversTable from '../components/Waivers/WaiversTable.jsx';
 import '../css/Waivers.css';
 
 function Waivers() {

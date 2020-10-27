@@ -5,7 +5,7 @@ import MuiAccordionSummary from '@material-ui/core/AccordionSummary';
 import MuiAccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import '../css/ScoreBoard.css';
-import ScoreBoardTable from '../components/ScoreBoardTable.jsx';
+import ScoreBoardTable from '../components/ScoreBoard/ScoreBoardTable.jsx';
 
 const MATCHES = [
   { id: 1, team1: 'The Rogers', team2: 'The Growlers' },
