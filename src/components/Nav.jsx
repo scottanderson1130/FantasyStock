@@ -33,7 +33,7 @@ function Nav({ logIn }) {
     },
     {
       option: 'League Info',
-      path: '/'
+      path: '/leagueinfo'
     },
     {
       option: 'Waivers',
