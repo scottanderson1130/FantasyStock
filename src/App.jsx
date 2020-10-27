@@ -12,7 +12,7 @@ import TickerBar from './components/TickerBar.jsx';
 // import { selectUser, setUser } from './features/userSlice';
 
 function App() {
-  const logIn = false;
+  const logIn = true;
   // const user = useSelector(selectUser);
 
   // const dispatch = useDispatch();
