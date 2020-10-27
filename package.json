@@ -6,7 +6,8 @@
   "scripts": {
     "start": "nodemon server/index.js",
     "dev": "webpack -d --watch",
-    "build": "webpack -p"
+    "build": "webpack -p",
+    "test": "node server/test/primeDB.js"
   },
   "repository": {
     "type": "git",
@@ -36,8 +37,10 @@
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "html-webpack-plugin": "^4.5.0",
+    "pg": "^8.4.2",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
+    "sequelize": "^6.3.5",
     "webpack": "^4.44.2",
     "webpack-cli": "^3.3.12"
   }
