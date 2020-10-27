@@ -107,7 +107,7 @@ function CreateNewLeague() {
           </FormControl>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color='primary'>
+          <Button onClick={handleClose} href='/leagueinfo' color='primary'>
             Create
           </Button>
           <Button onClick={handleClose} color='secondary'>

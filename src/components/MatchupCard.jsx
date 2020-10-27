@@ -49,10 +49,8 @@ function MatchupCard() {
         </Typography>
       </CardContent>
       <CardActions>
-        <Typography>
-          <Button size='small'>My Stocks</Button>
-          <Button size='small'>Matchup</Button>
-        </Typography>
+        <Button size='small' href='/yourstocks'>My Stocks</Button>
+        <Button size='small'>Matchup</Button>
       </CardActions>
     </Card>
   );
