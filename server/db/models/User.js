@@ -1,5 +1,7 @@
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('user', {
+    // net worth more specific? stocks and bank?
+    // bank balance needs to be a join table with league
     username: {
       type: DataTypes.STRING,
       unique: true
