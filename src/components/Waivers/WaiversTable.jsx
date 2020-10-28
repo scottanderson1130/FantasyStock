@@ -10,7 +10,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Paper from '@material-ui/core/Paper';
-import '../css/BasicTable.css';
+import '../../css/BasicTable.css';
 import { TablePagination } from '@material-ui/core';
 import WaiversList from './WaiversList.jsx';
 
