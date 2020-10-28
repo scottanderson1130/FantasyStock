@@ -1,12 +1,10 @@
 module.exports = (sequelize, DataTypes) => {
   const Portfolio = sequelize.define('portfolio', {
     shares: {
-      type: DataTypes.INTEGER,
-      unique: true
+      type: DataTypes.INTEGER
     },
     price_per_share_at_purchase: {
-      type: DataTypes.INTEGER,
-      unique: true
+      type: DataTypes.INTEGER
     }
   }, {
     freezeTableName: true
