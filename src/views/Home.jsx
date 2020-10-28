@@ -1,8 +1,9 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
-import MatchupCard from '../components/MatchupCard.jsx';
-import CreateNewLeague from '../components/CreateNewLeague.jsx';
+import MatchupCard from '../components/Home/MatchupCard.jsx';
+import CreateNewLeague from '../components/Home/CreateNewLeague.jsx';
 import '../css/YourStocks.css';
+import Stocknews from '../components/Home/Stocknews.jsx';
 
 // eslint-disable-next-line react/prop-types
 function Home(logIn) {
@@ -23,6 +24,11 @@ function Home(logIn) {
           <div>
             <Grid container justify='center'>
               <CreateNewLeague />
+            </Grid>
+          </div>
+          <div>
+            <Grid container justify='center'>
+              <Stocknews />
             </Grid>
           </div>
         </div>
