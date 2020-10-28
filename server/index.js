@@ -13,7 +13,7 @@ require('../authentication/passport-setup.js');
 
 const app = express();
 // const { userRouter } = require('./routes/user');
-// const { stockRouter } = require('./routes/stock');
+const { stockRouter } = require('./routes/stock');
 const models = require('./db/index');
 // Cookies and Session info
 
@@ -44,12 +44,11 @@ const HTML_FILE = path.join(DIST_DIR, 'index.html');
 
 app.use(express.static(DIST_DIR));
 
-app.get('/*', (req, res) => {
+// app.use('/user', userRouter);
+app.use('/stock', stockRouter);
+app.get('/', (req, res) => {
   res.sendFile(HTML_FILE);
 });
-
-// app.use('/user', userRouter);
-// app.use('/stock', stockRouter);
 
 const connection = async () => {
   try {
