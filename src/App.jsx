@@ -7,6 +7,7 @@ import Waivers from './views/Waivers.jsx';
 import Home from './views/Home.jsx';
 import Nav from './components/Nav.jsx';
 import TickerBar from './components/TickerBar.jsx';
+import LeagueInfo from './components/LeagueInfo.jsx';
 
 // import { useDispatch, useSelector } from 'react-redux';
 // import { selectUser, setUser } from './features/userSlice';
@@ -32,6 +33,7 @@ function App() {
           <Route path='/scoreboard' component={ScoreBoard} />
           <Route path='/yourstocks' component={YourStocks} />
           <Route path='/waivers' component={Waivers} />
+          <Route path='/leagueinfo' component={LeagueInfo} />
         </Switch>
       </div>
     </Router>

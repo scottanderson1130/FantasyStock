@@ -9,8 +9,9 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Paper from '@material-ui/core/Paper';
-import '../css/BasicTable.css';
+import '../../css/BasicTable.css';
 import { TablePagination } from '@material-ui/core';
+import StocksList from './StocksList.jsx';
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -163,6 +164,7 @@ function BasicTable({ rows }) {
 
   // eslint-disable-next-line react/prop-types
   // eslint-disable-next-line max-len
+  const ControllingRowsPerPage = page * rowsPerPage;
 
   return (
     <div className={classes.root}>
@@ -181,29 +183,10 @@ function BasicTable({ rows }) {
             />
             <TableBody>
               {stableSort(rows, getComparator(order, orderBy))
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row, index) => {
-                  const labelId = `enhanced-table-checkbox-${index}`;
-
-                  return (
-                    <TableRow
-                      className='basicTable_row'
-                      hover
-                      role='checkbox'
-                      tabIndex={-1}
-                      key={row.name}
-                    >
-                      <TableCell padding='checkbox' />
-                      <TableCell component='th' id={labelId} scope='row' padding='none'>
-                        {row.name}
-                      </TableCell>
-                      <TableCell align='right'>{row.calories}</TableCell>
-                      <TableCell align='right'>{row.fat}</TableCell>
-                      <TableCell align='right'>{row.carbs}</TableCell>
-                      <TableCell align='right'>{row.protein}</TableCell>
-                    </TableRow>
-                  );
-                })}
+                .slice(ControllingRowsPerPage, ControllingRowsPerPage + rowsPerPage)
+                .map((row, index) => (
+                  <StocksList row={row} index={index} key={row.name} />
+                ))}
             </TableBody>
           </Table>
         </TableContainer>

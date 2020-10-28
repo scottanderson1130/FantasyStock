@@ -1,8 +1,8 @@
 import React from 'react';
 import { Avatar } from '@material-ui/core/';
-import BasicTable from '../components/BasicTable.jsx';
+import BasicTable from '../components/YourStocks/StocksTable.jsx';
 import '../css/YourStocks.css';
-import CardStats from '../components/CardStats.jsx';
+import CardStats from '../components/YourStocks/CardStats.jsx';
 
 const rows = [
   {
