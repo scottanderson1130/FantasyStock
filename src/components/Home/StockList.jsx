@@ -20,9 +20,11 @@ const useStyles = makeStyles({
   }
 });
 
-function StockList({ article }, key) {
+// eslint-disable-next-line react/prop-types
+function StockList({ article }) {
   // eslint-disable-next-line react/prop-types
   const {
+    // eslint-disable-next-line react/prop-types
     author, title, url, urlToImage, description, publishedAt
   } = article;
   const classes = useStyles();
