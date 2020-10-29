@@ -30,7 +30,6 @@ function WaiversList({ row, index }) {
 
   const handleSubmit = () => {
     setOpen(false);
-    console.log('submitted');
   };
 
   const handleSharesSubmit = (e) => {
