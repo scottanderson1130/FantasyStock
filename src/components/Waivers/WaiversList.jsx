@@ -60,7 +60,8 @@ function WaiversList({ row, index }) {
             {row.ticker}
           </DialogContentText>
           <p>
-            shares available: {''}
+            shares available:
+            {' '}
             {row.shares_available - sharesInput}
           </p>
           <p>
