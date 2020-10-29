@@ -7,3 +7,5 @@ module.exports = (sequelize) => {
 
   return League_user;
 };
+
+// record?
