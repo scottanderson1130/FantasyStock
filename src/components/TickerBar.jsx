@@ -9,7 +9,7 @@ const examples = [
   },
   {
     ticker: 'ALV',
-    price: 465
+    price: -465
   }
 ];
 
@@ -25,9 +25,9 @@ function TickerBar({ logIn }) {
                 {examples.map((example) => (
                   <h3 key={example.ticker} className='tickerBar_text'>
                     {example.ticker}
-                    +
-                    {example.price}
-                    {' '}
+                    <div className={example.price > 0 ? 'green' : 'red'}>
+                      {example.price > 0 ? `+${example.price}` : example.price}
+                    </div>
                   </h3>
                 ))}
               </>
