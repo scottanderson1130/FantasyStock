@@ -52,16 +52,16 @@ function stableSort(array, comparator) {
 
 const headCells = [
   {
-    id: 'name', numeric: false, disablePadding: true, label: 'Dessert (100g serving)'
+    id: 'ticker', numeric: false, disablePadding: true, label: 'Ticker'
   },
   {
-    id: 'calories', numeric: true, disablePadding: false, label: 'Calories'
+    id: 'company_name', numeric: true, disablePadding: false, label: 'Company Name'
   },
   {
-    id: 'fat', numeric: true, disablePadding: false, label: 'Fat (g)'
+    id: 'current_price_per_share', numeric: true, disablePadding: false, label: 'Price Per Share'
   },
   {
-    id: 'carbs', numeric: true, disablePadding: false, label: 'Carbs (g)'
+    id: 'shares_available', numeric: true, disablePadding: false, label: 'Shares Available'
   },
   {
     id: 'protein', numeric: true, disablePadding: false, label: 'Protein (g)'
@@ -165,7 +165,7 @@ function WaiversTable({ rows, search }) {
 
   // eslint-disable-next-line react/prop-types
   // eslint-disable-next-line max-len
-  const filteredStocks = rows.filter((row) => row.name.toLowerCase().indexOf(search.toLowerCase()) !== -1);
+  const filteredStocks = rows.filter((row) => row.company_name.toLowerCase().indexOf(search.toLowerCase()) !== -1);
   const ControllingRowsPerPage = page * rowsPerPage;
 
   return (
@@ -188,7 +188,7 @@ function WaiversTable({ rows, search }) {
               {stableSort(filteredStocks, getComparator(order, orderBy))
                 .slice(ControllingRowsPerPage, ControllingRowsPerPage + rowsPerPage)
                 .map((row, index) => (
-                  <WaiversList row={row} index={index} key={row.name} />
+                  <WaiversList row={row} index={index} key={row.ticker} />
                 ))}
             </TableBody>
           </Table>
