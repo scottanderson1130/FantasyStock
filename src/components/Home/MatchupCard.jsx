@@ -48,9 +48,8 @@ function MatchupCard() {
           Owner | 5-0
         </Typography>
       </CardContent>
-      <CardActions>
+      <CardActions style={{ justifyContent: 'center' }}>
         <Button size='small' href='/yourstocks'>My Stocks</Button>
-        <Button size='small'>Matchup</Button>
       </CardActions>
     </Card>
   );

@@ -30,7 +30,7 @@ const useStyles = makeStyles({
     marginBottom: 12
   },
   buttonPadding: {
-    marginTop: '10px'
+    marginTop: '25px'
   }
 });
 
