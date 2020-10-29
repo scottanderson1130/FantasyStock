@@ -46,7 +46,7 @@ app.use(express.static(DIST_DIR));
 
 // app.use('/user', userRouter);
 app.use('/stock', stockRouter);
-app.get('/', (req, res) => {
+app.get('/*', (req, res) => {
   res.sendFile(HTML_FILE);
 });
 
