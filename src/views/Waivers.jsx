@@ -1,19 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { TextField } from '@material-ui/core';
+import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
 import WaiversTable from '../components/Waivers/WaiversTable.jsx';
 import '../css/Waivers.css';
+import { setWaivers, selectWaivers } from '../features/waiversSlice.js';
 
 function Waivers() {
+  const dispatch = useDispatch();
+
+  const rows = useSelector(selectWaivers);
+
+  // const [rows, setRows] = useState([]);
   const [search, setSearch] = useState('');
 
-  const rows = [
-    {
-      id: 1, ticker: 'AAPL', company_name: 'Apple, Inc', current_price_per_share: 11215, shares_available: 90, protein: 4.3
-    },
-    {
-      id: 2, ticker: 'GOOGL', company_name: 'Alphabet, Inc.', current_price_per_share: 151959, shares_available: 100, protein: 4.9
-    }
-  ];
+  useEffect(() => {
+    axios.get('/stock').then((response) => {
+      dispatch(setWaivers(response.data));
+    });
+  }, [dispatch]);
 
   const handleSearch = (e) => {
     setSearch(e.target.value);

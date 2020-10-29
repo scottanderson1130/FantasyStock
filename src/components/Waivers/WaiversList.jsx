@@ -28,6 +28,10 @@ function WaiversList({ row, index }) {
     setTimeout(() => setSharesInput(''), 2000);
   };
 
+  const handleSubmit = () => {
+    setOpen(false);
+  };
+
   const handleSharesSubmit = (e) => {
     setSharesInput(e.target.value);
   };
@@ -48,7 +52,7 @@ function WaiversList({ row, index }) {
         <TableCell align='right'>{row.company_name}</TableCell>
         <TableCell align='right'>
           $
-          {(1 / 100) * row.current_price_per_share}
+          {((1 / 100) * row.current_price_per_share).toFixed(2)}
         </TableCell>
         <TableCell align='right'>{row.shares_available}</TableCell>
         <TableCell align='right'>{row.protein}</TableCell>
@@ -66,7 +70,7 @@ function WaiversList({ row, index }) {
           </p>
           <p>
             Price per Share: $
-            {(1 / 100) * row.current_price_per_share}
+            {((1 / 100) * row.current_price_per_share).toFixed(2)}
           </p>
           <p>
             Total: $
@@ -81,37 +85,13 @@ function WaiversList({ row, index }) {
             fullWidth
             onChange={(e) => handleSharesSubmit(e)}
           />
-          <TextField
-            autoFocus
-            margin='dense'
-            id='name'
-            label='something'
-            type='email'
-            fullWidth
-          />
-          <TextField
-            autoFocus
-            margin='dense'
-            id='name'
-            label='something'
-            type='email'
-            fullWidth
-          />
-          <TextField
-            autoFocus
-            margin='dense'
-            id='name'
-            label='something'
-            type='email'
-            fullWidth
-          />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color='primary'>
             Cancel
           </Button>
-          <Button onClick={handleClose} color='primary'>
-            Update
+          <Button onClick={handleSubmit} color='primary'>
+            Submit
           </Button>
         </DialogActions>
       </Dialog>
