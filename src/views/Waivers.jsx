@@ -11,13 +11,15 @@ function Waivers() {
 
   const rows = useSelector(selectWaivers);
 
-  // const [rows, setRows] = useState([]);
   const [search, setSearch] = useState('');
 
   useEffect(() => {
-    axios.get('/stock').then((response) => {
+    async function fetchWaivers() {
+      const response = await axios.get('/stock/waivers/1');
       dispatch(setWaivers(response.data));
-    });
+      return response;
+    }
+    fetchWaivers();
   }, [dispatch]);
 
   const handleSearch = (e) => {

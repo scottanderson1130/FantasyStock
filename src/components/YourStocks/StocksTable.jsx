@@ -110,7 +110,6 @@ EnhancedTableHead.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   classes: PropTypes.object.isRequired,
   onRequestSort: PropTypes.func.isRequired,
-  // onSelectAllClick: PropTypes.func.isRequired,
   order: PropTypes.oneOf(['asc', 'desc']).isRequired,
   orderBy: PropTypes.string.isRequired
 };
@@ -139,8 +138,9 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-// eslint-disable-next-line react/prop-types
 function BasicTable({ rows }) {
+  BasicTable.propTypes = rows;
+
   const classes = useStyles();
   const [order, setOrder] = useState('asc');
   const [orderBy, setOrderBy] = useState('calories');
@@ -162,8 +162,6 @@ function BasicTable({ rows }) {
     setPage(0);
   };
 
-  // eslint-disable-next-line react/prop-types
-  // eslint-disable-next-line max-len
   const ControllingRowsPerPage = page * rowsPerPage;
 
   return (
@@ -193,7 +191,6 @@ function BasicTable({ rows }) {
         <TablePagination
           rowsPerPageOptions={[5, 15, 30]}
           component='div'
-          // eslint-disable-next-line react/prop-types
           count={rows.length}
           rowsPerPage={rowsPerPage}
           page={page}
