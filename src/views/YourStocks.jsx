@@ -17,15 +17,12 @@ function YourStocks() {
       response.data.map((stock, ind) => {
         if (stock.stock.company_name) {
           (responseCopy.data[ind].company_name = stock.stock.company_name);
-          // responseCopy.data[stock].company_name = stock.stock.company_name;
         }
         if (stock.stock.ticker) {
           (responseCopy.data[ind].ticker = stock.stock.ticker);
-          // responseCopy.data[stock].company_name = stock.stock.company_name;
         }
         if (stock.stock.current_price_per_share) {
           (responseCopy.data[ind].current_price_per_share = stock.stock.current_price_per_share);
-          // responseCopy.data[stock].company_name = stock.stock.company_name;
         }
         return (responseCopy.data);
       });
