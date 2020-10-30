@@ -12,9 +12,11 @@ import {
 } from '@material-ui/core';
 import { ChevronLeft, Menu } from '@material-ui/icons';
 import '../css/Nav.css';
+import { useSelector } from 'react-redux';
+import { selectLogIn } from '../features/userSlice.js';
 
 // eslint-disable-next-line react/prop-types
-function Nav({ logIn }) {
+function Nav() {
   const [open, setOpen] = useState(false);
 
   // Open and close Drawer functions
@@ -61,6 +63,8 @@ function Nav({ logIn }) {
     }
   ];
 
+  const logIn = useSelector(selectLogIn);
+
   return (
     <nav className='nav'>
       <AppBar className='nav_bar' position='sticky'>
@@ -79,9 +83,9 @@ function Nav({ logIn }) {
 
           <Button color='inherit'>
             {(!logIn)
-              ? <a href='/auth/google'>Log in </a>
+              ? <a href='/auth/google'>Log In </a>
               : (
-                <a href='/auth/google'>Log out </a>
+                <a href='/auth/logout'>Log out </a>
               )}
           </Button>
 

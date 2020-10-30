@@ -1,6 +1,8 @@
 import React from 'react';
 import '../css/TickerBar.css';
 import Ticker from 'react-ticker';
+import { useSelector } from 'react-redux';
+import { selectLogIn } from '../features/userSlice.js';
 
 const examples = [
   {
@@ -14,7 +16,9 @@ const examples = [
 ];
 
 // eslint-disable-next-line react/prop-types
-function TickerBar({ logIn }) {
+function TickerBar() {
+  const logIn = useSelector(selectLogIn);
+
   return (
     (!logIn) ? <div />
       : (

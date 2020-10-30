@@ -4,9 +4,14 @@ import MatchupCard from '../components/Home/MatchupCard.jsx';
 import CreateNewLeague from '../components/Home/CreateNewLeague.jsx';
 import '../css/YourStocks.css';
 import Stocknews from '../components/Home/Stocknews.jsx';
+import { useSelector } from 'react-redux';
+import { selectLogIn } from '../features/userSlice.js';
 
 // eslint-disable-next-line react/prop-types
-function Home(logIn) {
+function Home() {
+
+  const logIn = useSelector(selectLogIn);
+
   return (
     (!logIn)
       ? (
