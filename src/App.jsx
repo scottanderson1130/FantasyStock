@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './css/App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import axios from 'axios';
+import { useDispatch } from 'react-redux';
 import ScoreBoard from './views/ScoreBoard.jsx';
 import YourStocks from './views/YourStocks.jsx';
 import Waivers from './views/Waivers.jsx';
@@ -8,20 +10,25 @@ import Home from './views/Home.jsx';
 import Nav from './components/Nav.jsx';
 import TickerBar from './components/TickerBar.jsx';
 import LeagueInfo from './views/LeagueInfo.jsx';
-
-// import { useDispatch, useSelector } from 'react-redux';
-// import { selectUser, setUser } from './features/userSlice';
+import { setLogIn, setUser } from './features/userSlice.js';
 
 function App() {
   const logIn = true;
-  // const user = useSelector(selectUser);
 
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-  // const handleClick = () => {
-
-  //   dispatch(setUser({ id: '1', name: 'Jose', lastName: 'Rodriguez' }))
-  // }
+  useEffect(() => {
+    axios.get('/auth/profile')
+      .then((response) => {
+        if (response.data !== '') {
+          dispatch(setUser(response.data));
+          dispatch(setLogIn(true));
+        } else {
+          dispatch(setLogIn(false));
+        }
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <Router>

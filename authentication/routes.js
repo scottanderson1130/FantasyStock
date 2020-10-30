@@ -15,6 +15,10 @@ authRouter.get(
   }
 );
 
+authRouter.get('/profile', (req, res) => {
+  res.send(req.user);
+});
+
 authRouter.get('/logout', (req, res) => {
   req.session = null;
   req.logout();
