@@ -13,9 +13,6 @@ module.exports = (sequelize, DataTypes) => {
     },
     date_updated: {
       type: DataTypes.DATE
-    },
-    shares_available: {
-      type: DataTypes.INTEGER
     }
   }, {
     freezeTableName: true
