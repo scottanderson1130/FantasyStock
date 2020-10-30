@@ -7,7 +7,7 @@ import Waivers from './views/Waivers.jsx';
 import Home from './views/Home.jsx';
 import Nav from './components/Nav.jsx';
 import TickerBar from './components/TickerBar.jsx';
-import LeagueInfo from './components/LeagueInfo.jsx';
+import LeagueInfo from './views/LeagueInfo.jsx';
 
 // import { useDispatch, useSelector } from 'react-redux';
 // import { selectUser, setUser } from './features/userSlice';

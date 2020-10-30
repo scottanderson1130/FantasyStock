@@ -103,8 +103,5 @@ dist
 # TernJS port file
 .tern-port
 
-<<<<<<< HEAD
 .package-lock.json
-=======
 .vscode
->>>>>>> 41db7649a581fa1d8084cce8ced04e7a027212ec

@@ -1,5 +1,5 @@
 .tickerBar{
-  padding-top: 20px;
+  padding-top: 10px;
   padding-bottom: 20px;
   /* background-color: black */
 }
@@ -10,4 +10,18 @@
   display: inline-block;
   overflow: hidden;
   white-space: nowrap;
+}
+
+.green {
+  margin-left: 10px;
+  align-items: center;
+  display: inline-block;
+  color: green;
+}
+
+.red {
+  margin-left: 10px;
+  align-items: center;
+  display: inline-block;
+  color: red;
 }
