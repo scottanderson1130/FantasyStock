@@ -122,9 +122,60 @@ Return Ex.
         "id_user": 5
     },
 ]
+Get waivers info from leagueID
+route:
+http://localhost:3000/stock/waivers/:leagueID
+Input:
+leagueID in route
+Return Ex.
+[
+    {
+        "id": 1,
+        "ticker": "AAPL",
+        "company_name": "Apple, Inc.",
+        "current_price_per_share": 11215,
+        "date_updated": "2020-10-28T00:00:00.000Z",
+        "createdAt": "2020-10-30T09:12:14.974Z",
+        "updatedAt": "2020-10-30T09:12:14.974Z",
+        "sharesRemaining": 98
+    }, etc
+]
+Get User info from googleID
+route:
+http://localhost:3000/user/:userId
+Input:
+userID in route
+Return Ex.
+{
+    "id": 5,
+    "username": "Colt18",
+    "full_name": "Peyton Manning",
+    "phone_number": "(225) 999-1999",
+    "avatar": "https://utulsa.edu/wp-content/uploads/2018/08/generic-avatar.jpg",
+    "createdAt": "2020-10-30T09:12:14.840Z",
+    "updatedAt": "2020-10-30T09:12:14.840Z",
+    "leagueInfo": [
+        {
+            "bank_balance": 1000000,
+            "net_worth": 0,
+            "record": "0-2",
+            "createdAt": "2020-10-30T09:12:14.882Z",
+            "updatedAt": "2020-10-30T09:12:14.882Z",
+            "id_league": 1,
+            "id_user": 5
+        },
+        {
+            "bank_balance": 1000000,
+            "net_worth": 0,
+            "record": "1-1",
+            "createdAt": "2020-10-30T09:12:14.944Z",
+            "updatedAt": "2020-10-30T09:12:14.944Z",
+            "id_league": 2,
+            "id_user": 5
+        }
+    ]
+}
 
 - We need a matches table.
-- user route.
-- waivers route.
 - user stocks route.
 - Access the league and teams.
