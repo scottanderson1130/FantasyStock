@@ -53,6 +53,55 @@ stockRouter.get('/portfolio/:userID', (req, res) => {
     });
 });
 
+// get all stocks in a league for waiver
+// need to do axios subroutine to update stock folder
+// need to grab all stocks
+
+// axios call to update stock info
+// query stock to get the top 500
+// query Portfolio to get the correct share information
+// query League to get the number of Shares/stock for the league
+// calculate the shares available
+stockRouter.get('/waivers/:leagueID', (req, res) => {
+  const { leagueID } = req.params;
+  const waivers = [];
+  // axios call to update Stock first. then do the findall
+  Stock.findAll()
+    .then((allStocks) => {
+      // allStocks is an array of objects (stocks from stock) at this point
+      // need to calculate shares
+      Portfolio.findAll({
+        where: {
+          id_league: leagueID
+        }
+      })
+        .then((port) => {
+          // port is array of objects, each object is the port entry
+          // this is the point where I query the league to do the math.
+          // for now operating with all 100's for share
+          // do a map. subtract shares of portfolio that match id_stock and
+          // push an entry to waivers of Stock with added shares left
+          allStocks.map((indStock) => {
+            const updatedStock = { ...indStock.dataValues };
+            updatedStock.sharesRemaining = 100;
+            port.map((indPortEntry) => {
+              if (indStock.id === indPortEntry.id_stock) {
+                updatedStock.sharesRemaining -= indPortEntry.shares;
+              }
+            });
+            waivers.push(updatedStock);
+          });
+        })
+        .then(() => {
+          res.send(waivers);
+        });
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send(err);
+    });
+});
+
 module.exports = {
   stockRouter
 };
