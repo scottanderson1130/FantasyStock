@@ -14,6 +14,33 @@ const {
 
 const userRouter = Router();
 
+// get user's Info by user google id
+userRouter.get('/:userID', (req, res) => {
+  const { userID } = req.params;
+  User.findAll({
+    where: {
+      id: userID
+    }
+  })
+    .then((userInfo) => {
+      // tack on leagues?
+      const responseUserInfo = { ...userInfo[0].dataValues };
+      League_user.findAll({
+        where: {
+          id_user: userID
+        }
+      })
+        .then((leagueInfo) => {
+          responseUserInfo.leagueInfo = leagueInfo;
+          res.send(responseUserInfo);
+        });
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send(err);
+    });
+});
+
 // get all users in a league by userID
 userRouter.get('/league/user/:userID', (req, res) => {
   const { userID } = req.params;
@@ -41,46 +68,6 @@ userRouter.get('/league/user/:userID', (req, res) => {
       res.status(500).send(err);
     });
 });
-userRouter.get('/test', (req, res) => {
-  User.findAll({
-    where: {
-      id: 1
-    }
-  })
-    .then((result) => {
-      res.send(result);
-    });
-});
-
-// // get stock info by stock primary key id
-// stockRouter.get('/stock/:stockID', (req, res) => {
-//   const { stockID } = req.params;
-//   Stock.findByPk(stockID)
-//     .then((stock) => {
-//       res.send(stock);
-//     })
-//     .catch((err) => {
-//       console.error(err);
-//       res.status(500).send(err);
-//     });
-// });
-
-// // get user's portfolio info by user primary key id
-// stockRouter.get('/portfolio/:userID', (req, res) => {
-//   const { userID } = req.params;
-//   Portfolio.findAll({
-//     where: {
-//       id_user: userID
-//     }
-//   })
-//     .then((portfolio) => {
-//       res.send(portfolio);
-//     })
-//     .catch((err) => {
-//       console.error(err);
-//       res.status(500).send(err);
-//     });
-// });
 
 module.exports = {
   userRouter
