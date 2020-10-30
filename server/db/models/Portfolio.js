@@ -1,4 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
+  // user meets stock meets league
   const Portfolio = sequelize.define('portfolio', {
     shares: {
       type: DataTypes.INTEGER
