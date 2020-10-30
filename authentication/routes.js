@@ -17,7 +17,6 @@ authRouter.get(
 
 authRouter.get('/profile', (req, res) => {
   res.send(req.user);
-  console.log(req.user);
 });
 
 authRouter.get('/logout', (req, res) => {
