@@ -49,11 +49,8 @@ function primeDB() {
       where: {
         username: 'Spiderman',
         full_name: 'Peter Parker',
-        email: 'parker@DailyBugle.org',
         phone_number: '(225) 999-9999',
-        bank_balance: 1000000,
-        net_worth: 0
-        // edit these numbers
+        id: 1
       }
     }))
     .then((numberEffected) => {
@@ -66,11 +63,8 @@ function primeDB() {
       where: {
         username: 'Batman',
         full_name: 'Bruce Wayne',
-        email: 'Bdubs@WayneEnterprises.org',
         phone_number: '(225) 999-9998',
-        bank_balance: 815556,
-        net_worth: 0
-        // edit these numbers
+        id: 2
       }
     }))
     .then((numberEffected) => {
@@ -83,11 +77,8 @@ function primeDB() {
       where: {
         username: 'Superman',
         full_name: 'Clark Kent',
-        email: 'Kent@DailyPlanet.org',
         phone_number: '(225) 999-9997',
-        bank_balance: 1000000,
-        net_worth: 0
-        // edit these numbers
+        id: 3
       }
     }))
     .then((numberEffected) => {
@@ -100,11 +91,8 @@ function primeDB() {
       where: {
         username: 'StarLord',
         full_name: 'Peter Quill',
-        email: 'StarLord@guardians.org',
         phone_number: '(225) 999-9996',
-        bank_balance: 1000000,
-        net_worth: 0
-        // edit these numbers
+        id: 4
       }
     }))
     .then((numberEffected) => {
@@ -117,11 +105,8 @@ function primeDB() {
       where: {
         username: 'Colt18',
         full_name: 'Peyton Manning',
-        email: 'Omaha@Colts.org',
         phone_number: '(225) 999-1999',
-        bank_balance: 1000000,
-        net_worth: 0
-        // edit these numbers
+        id: 5
       }
     }))
     .then((numberEffected) => {
@@ -134,11 +119,8 @@ function primeDB() {
       where: {
         username: 'GOAT',
         full_name: 'Tom Brady',
-        email: 'TB@Pats.org',
         phone_number: '(225) 999-9918',
-        bank_balance: 1000000,
-        net_worth: 0
-        // edit these numbers
+        id: 6
       }
     }))
     .then((numberEffected) => {
@@ -151,11 +133,8 @@ function primeDB() {
       where: {
         username: 'ShortyJJ',
         full_name: 'Drew Brees',
-        email: 'NOLALOVER@Saints.org',
         phone_number: '(225) 991-9998',
-        bank_balance: 1000000,
-        net_worth: 0
-        // edit these numbers
+        id: 7
       }
     }))
     .then((numberEffected) => {
@@ -168,11 +147,8 @@ function primeDB() {
       where: {
         username: 'GreatestShowOnTurf',
         full_name: 'Kurt Warner',
-        email: 'RamsHero@Rams.org',
         phone_number: '(225) 999-7798',
-        bank_balance: 1000000,
-        net_worth: 0
-        // edit these numbers
+        id: 8
       }
     }))
     .then((numberEffected) => {
@@ -185,11 +161,8 @@ function primeDB() {
       where: {
         username: 'IronMan',
         full_name: 'Tony Stark',
-        email: 'BigMan@Avengers.org',
         phone_number: '(225) 999-7111',
-        bank_balance: 1000000,
-        net_worth: 0
-        // edit these numbers
+        id: 9
       }
     }))
     .then((numberEffected) => {
@@ -202,11 +175,8 @@ function primeDB() {
       where: {
         username: 'StrongestAvenger',
         full_name: 'Bruce Banner',
-        email: 'Green@Avengers.org',
         phone_number: '(225) 999-7398',
-        bank_balance: 1000000,
-        net_worth: 0
-        // edit these numbers
+        id: 10
       }
     }))
     .then((numberEffected) => {
@@ -215,12 +185,13 @@ function primeDB() {
       }
       return console.error('❌save undefined');
     })
-    // id_league
-    // id_user
     .then(() => League_user.findOrCreate({
       where: {
         id_league: 1,
-        id_user: 5
+        id_user: 5,
+        bank_balance: 1000000,
+        net_worth: 0,
+        record: '0-2'
       }
     }))
     .then((numberEffected) => {
@@ -232,7 +203,10 @@ function primeDB() {
     .then(() => League_user.findOrCreate({
       where: {
         id_league: 1,
-        id_user: 6
+        id_user: 6,
+        bank_balance: 815556,
+        net_worth: 0,
+        record: '2-0'
       }
     }))
     .then((numberEffected) => {
@@ -244,7 +218,10 @@ function primeDB() {
     .then(() => League_user.findOrCreate({
       where: {
         id_league: 1,
-        id_user: 7
+        id_user: 7,
+        bank_balance: 1000000,
+        net_worth: 0,
+        record: '1-1'
       }
     }))
     .then((numberEffected) => {
@@ -256,7 +233,10 @@ function primeDB() {
     .then(() => League_user.findOrCreate({
       where: {
         id_league: 1,
-        id_user: 8
+        id_user: 8,
+        bank_balance: 1000000,
+        net_worth: 0,
+        record: '0-2'
       }
     }))
     .then((numberEffected) => {
@@ -268,7 +248,10 @@ function primeDB() {
     .then(() => League_user.findOrCreate({
       where: {
         id_league: 2,
-        id_user: 1
+        id_user: 1,
+        bank_balance: 1000000,
+        net_worth: 0,
+        record: '2-0'
       }
     }))
     .then((numberEffected) => {
@@ -280,7 +263,10 @@ function primeDB() {
     .then(() => League_user.findOrCreate({
       where: {
         id_league: 2,
-        id_user: 2
+        id_user: 2,
+        bank_balance: 1000000,
+        net_worth: 0,
+        record: '1-1'
       }
     }))
     .then((numberEffected) => {
@@ -292,7 +278,10 @@ function primeDB() {
     .then(() => League_user.findOrCreate({
       where: {
         id_league: 2,
-        id_user: 3
+        id_user: 3,
+        bank_balance: 1000000,
+        net_worth: 0,
+        record: '1-1'
       }
     }))
     .then((numberEffected) => {
@@ -304,7 +293,10 @@ function primeDB() {
     .then(() => League_user.findOrCreate({
       where: {
         id_league: 2,
-        id_user: 4
+        id_user: 4,
+        bank_balance: 1000000,
+        net_worth: 0,
+        record: '1-1'
       }
     }))
     .then((numberEffected) => {
@@ -316,7 +308,10 @@ function primeDB() {
     .then(() => League_user.findOrCreate({
       where: {
         id_league: 2,
-        id_user: 9
+        id_user: 9,
+        bank_balance: 1000000,
+        net_worth: 0,
+        record: '1-1'
       }
     }))
     .then((numberEffected) => {
@@ -328,7 +323,10 @@ function primeDB() {
     .then(() => League_user.findOrCreate({
       where: {
         id_league: 2,
-        id_user: 10
+        id_user: 10,
+        bank_balance: 1000000,
+        net_worth: 0,
+        record: '1-1'
       }
     }))
     .then((numberEffected) => {
@@ -340,7 +338,10 @@ function primeDB() {
     .then(() => League_user.findOrCreate({
       where: {
         id_league: 2,
-        id_user: 5
+        id_user: 5,
+        bank_balance: 1000000,
+        net_worth: 0,
+        record: '1-1'
       }
     }))
     .then((numberEffected) => {
@@ -352,7 +353,10 @@ function primeDB() {
     .then(() => League_user.findOrCreate({
       where: {
         id_league: 2,
-        id_user: 6
+        id_user: 6,
+        bank_balance: 1000000,
+        net_worth: 0,
+        record: '1-1'
       }
     }))
     .then((numberEffected) => {
