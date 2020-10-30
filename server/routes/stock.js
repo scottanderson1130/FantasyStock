@@ -42,7 +42,8 @@ stockRouter.get('/portfolio/:userID', (req, res) => {
   Portfolio.findAll({
     where: {
       id_user: userID
-    }
+    },
+    include: [Stock]
   })
     .then((portfolio) => {
       res.send(portfolio);

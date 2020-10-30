@@ -15,6 +15,10 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'id_league'
     });
   };
-
+  Portfolio.associate = (models) => {
+    Portfolio.belongsTo(models.Stock, {
+      foreignKey: 'id_stock'
+    });
+  };
   return Portfolio;
 };
