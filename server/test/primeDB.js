@@ -370,8 +370,7 @@ function primeDB() {
         ticker: 'AAPL',
         company_name: 'Apple, Inc.',
         current_price_per_share: 11215,
-        date_updated: '2020-10-28',
-        shares_available: 98
+        date_updated: '2020-10-28'
       }
     }))
     .then((numberEffected) => {
@@ -385,8 +384,7 @@ function primeDB() {
         ticker: 'GOOGL',
         company_name: 'Alphabet, Inc.',
         current_price_per_share: 151959,
-        date_updated: '2020-10-28',
-        shares_available: 99
+        date_updated: '2020-10-28'
       }
     }))
     .then((numberEffected) => {
@@ -400,8 +398,7 @@ function primeDB() {
         ticker: 'MSFT',
         company_name: 'Microsoft Corp.',
         current_price_per_share: 20455,
-        date_updated: '2020-10-28',
-        shares_available: 100
+        date_updated: '2020-10-28'
       }
     }))
     .then((numberEffected) => {
@@ -415,8 +412,7 @@ function primeDB() {
         ticker: 'GE',
         company_name: 'General Electric Co.',
         current_price_per_share: 777,
-        date_updated: '2020-10-28',
-        shares_available: 100
+        date_updated: '2020-10-28'
       }
     }))
     .then((numberEffected) => {
@@ -430,8 +426,7 @@ function primeDB() {
         ticker: 'V',
         company_name: 'Visa, Inc.',
         current_price_per_share: 17986,
-        date_updated: '2020-10-28',
-        shares_available: 100
+        date_updated: '2020-10-28'
       }
     }))
     .then((numberEffected) => {
@@ -445,8 +440,7 @@ function primeDB() {
         ticker: 'BBBY',
         company_name: 'Bed Bath & Beyond, Inc.',
         current_price_per_share: 2127,
-        date_updated: '2020-10-28',
-        shares_available: 90
+        date_updated: '2020-10-28'
       }
     }))
     .then((numberEffected) => {
@@ -460,8 +454,7 @@ function primeDB() {
         ticker: 'SAM',
         company_name: 'Boston Beer Co., Inc.',
         current_price_per_share: 104364,
-        date_updated: '2020-10-28',
-        shares_available: 100
+        date_updated: '2020-10-28'
       }
     }))
     .then((numberEffected) => {
@@ -475,8 +468,7 @@ function primeDB() {
         ticker: 'UAA',
         company_name: 'Under Armour, Inc.',
         current_price_per_share: 1325,
-        date_updated: '2020-10-28',
-        shares_available: 100
+        date_updated: '2020-10-28'
       }
     }))
     .then((numberEffected) => {
@@ -490,8 +482,7 @@ function primeDB() {
         ticker: 'NKE',
         company_name: 'NIKE, Inc.',
         current_price_per_share: 12250,
-        date_updated: '2020-10-28',
-        shares_available: 100
+        date_updated: '2020-10-28'
       }
     }))
     .then((numberEffected) => {
@@ -505,8 +496,7 @@ function primeDB() {
         ticker: 'NVDA',
         company_name: 'NVIDIA Corp.',
         current_price_per_share: 51258,
-        date_updated: '2020-10-28',
-        shares_available: 100
+        date_updated: '2020-10-28'
       }
     }))
     .then((numberEffected) => {
