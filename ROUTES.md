@@ -87,6 +87,42 @@ Return Ex.
         "id_user": 1
     }
 ]
+Get all user/league info from single userID
+route:
+http://localhost:3000/user/league/user/:userID
+Input:
+userID in route
+Return Ex.
+[
+    {
+        "bank_balance": 1000000,
+        "net_worth": 0,
+        "record": "0-2",
+        "createdAt": "2020-10-29T10:09:51.445Z",
+        "updatedAt": "2020-10-29T10:09:51.445Z",
+        "id_league": 1,
+        "id_user": 5
+    },
+    {
+        "bank_balance": 1000000,
+        "net_worth": 0,
+        "record": "2-0",
+        "createdAt": "2020-10-29T10:09:51.478Z",
+        "updatedAt": "2020-10-29T10:09:51.478Z",
+        "id_league": 2,
+        "id_user": 1
+    },
+    {
+        "bank_balance": 1000000,
+        "net_worth": 0,
+        "record": "1-1",
+        "createdAt": "2020-10-29T10:09:51.521Z",
+        "updatedAt": "2020-10-29T10:09:51.521Z",
+        "id_league": 2,
+        "id_user": 5
+    },
+]
+
 - We need a matches table.
 - user route.
 - waivers route.
