@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
   });
   Stock.associate = (models) => {
     Stock.belongsToMany(models.User, {
-      through: models.Portfolio,
+      through: models.Stock_user,
       foreignKey: 'id_stock'
     });
   };
