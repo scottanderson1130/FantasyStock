@@ -6,6 +6,39 @@ what to input
 
 also wish list of what you want/what to input
 
+LOGIN:
+POST http://localhost:3000/user/
+Ex Body { "id": "1012898963321920383431", "full_name": "myName", "username": "lastname?"}
+EX Response:
+{
+    "avatar": "https://utulsa.edu/wp-content/uploads/2018/08/generic-avatar.jpg",
+    "full_name": "my",
+    "username": "emassil",
+    "id": "1012898963321920383431",
+    "updatedAt": "2020-10-31T22:41:52.462Z",
+    "createdAt": "2020-10-31T22:41:52.462Z",
+    "leagueInfo": []
+} 
+NOTE: New user has no leagueInfo
+
+WAIVERS ADD AND DROP:
+POST http://localhost:3000/stock/waivers
+Ex Body: { "id_stock": 8, "id_league": 2, "id_user": "6", "portfolio": {
+    "price_per_share_at_purchase": 10,
+    "shares": -5
+    }
+}
+Ex Response:
+{
+    "id_stock": 8,
+    "id_league": 2,
+    "id_user": "6",
+    "portfolio": {
+        "shares": 25,
+        "price_per_share_at_purchase": 30
+    }
+}
+
 Get all stock Info
 route:
 http://localhost:3000/stock/
