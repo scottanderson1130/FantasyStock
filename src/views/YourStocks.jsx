@@ -38,7 +38,7 @@ function YourStocks() {
           <h2>Team Name</h2>
           <Avatar
             className='yourStocks_logo'
-            alt=''
+            alt='logo'
             src='https://i.redd.it/gz311zrrcwi11.png'
           />
         </div>
