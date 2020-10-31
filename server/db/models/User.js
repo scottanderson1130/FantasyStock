@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       autoIncrement: false,
       primaryKey: true,
-      type: DataTypes.INTEGER
+      type: DataTypes.STRING
     },
     // use email for now
     username: {
@@ -32,7 +32,7 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'id_user'
     });
     User.belongsToMany(models.Stock, {
-      through: models.Portfolio,
+      through: models.Stock_user,
       foreignKey: 'id_user'
     });
   };
