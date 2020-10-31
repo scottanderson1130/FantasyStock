@@ -15,7 +15,6 @@ import '../css/Nav.css';
 import { useSelector } from 'react-redux';
 import { selectLogIn } from '../features/userSlice.js';
 
-// eslint-disable-next-line react/prop-types
 function Nav() {
   const [open, setOpen] = useState(false);
 

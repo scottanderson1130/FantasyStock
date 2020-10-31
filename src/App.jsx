@@ -18,17 +18,18 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    axios.get('/auth/profile')
-      .then((response) => {
-        if (response.data !== '') {
-          dispatch(setUser(response.data));
-          dispatch(setLogIn(true));
-        } else {
-          dispatch(setLogIn(false));
-        }
-      });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    async function fetchUser() {
+      const response = await axios.get('/auth/profile');
+      if (response.data !== '') {
+        dispatch(setUser(response.data));
+        dispatch(setLogIn(true));
+      } else {
+        dispatch(setLogIn(false));
+      }
+      return response;
+    }
+    fetchUser();
+  }, [dispatch]);
 
   return (
     <Router>
