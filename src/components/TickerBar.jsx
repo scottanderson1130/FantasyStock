@@ -5,31 +5,62 @@ import { useSelector } from 'react-redux';
 import { selectLogIn } from '../features/userSlice.js';
 import { selectYourStock } from '../features/yourStockSlice.js';
 
-// eslint-disable-next-line react/prop-types
 function TickerBar() {
   const ticker = useSelector(selectYourStock);
   const logIn = useSelector(selectLogIn);
+
+  function tickerColor(a, b) {
+    let color = '';
+    if (a > b) {
+      color = 'green';
+    } else if (a === b) {
+      color = 'gray';
+    } else {
+      color = 'red';
+    }
+    return color;
+  }
+
+  function tickerDisplay(a, b) {
+    let result = '';
+    if (a > b) {
+      result = `⬆️ ${a * 0.01}`;
+    } else if (a === b) {
+      result = `${a * 0.01}`;
+    } else {
+      result = `⬇️ ${a * 0.01}`;
+    }
+    return result;
+  }
 
   return (
     (!logIn) ? <div />
       : (ticker.length
         && (
-        <div className='tickerBar'>
-          <Ticker mode='smooth' className='tickerBar_ticker'>
-            {() => (
-              <>
-                {ticker.map((example) => (
-                  <h3 key={example.ticker} className='tickerBar_text'>
-                    {example.ticker}
-                    <div className={example.current_price_per_share * 0.01 > 0 ? 'green' : 'red'}>
-                      {example.current_price_per_share * 0.01 > 0 ? `+${example.current_price_per_share * 0.01}` : example.current_price_per_share * 0.01}
+          <div className='tickerBar'>
+            <Ticker mode='smooth' className='tickerBar_ticker'>
+              {() => (
+                <>
+                  {ticker.map((example) => (
+                    <div key={example.ticker} className='tickerBar_line'>
+                      <p>
+                        {example.ticker}
+                        <span
+                          className={
+                            tickerColor(example.current_price_per_share,
+                              example.price_per_share_at_purchase)
+                          }
+                        >
+                          {tickerDisplay(example.current_price_per_share,
+                            example.price_per_share_at_purchase)}
+                        </span>
+                      </p>
                     </div>
-                  </h3>
-                ))}
-              </>
-            )}
-          </Ticker>
-        </div>
+                  ))}
+                </>
+              )}
+            </Ticker>
+          </div>
         )
 
       )

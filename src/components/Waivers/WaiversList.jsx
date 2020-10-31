@@ -39,6 +39,7 @@ function WaiversList({ row, index }) {
   return (
     <>
       <TableRow
+        onClick={handleOpen}
         className='basicTable_row'
         hover
         role='checkbox'
@@ -46,7 +47,7 @@ function WaiversList({ row, index }) {
         key={index}
       >
         <TableCell padding='checkbox' />
-        <TableCell onClick={handleOpen} component='th' id={index} scope='row' padding='none'>
+        <TableCell component='th' id={index} scope='row' padding='none'>
           {row.ticker}
         </TableCell>
         <TableCell align='right'>{row.company_name}</TableCell>
@@ -63,7 +64,7 @@ function WaiversList({ row, index }) {
             {row.ticker}
           </DialogContentText>
           <p>
-            shares available:
+            shares owned:
             {' '}
             {row.sharesRemaining - sharesInput}
           </p>
