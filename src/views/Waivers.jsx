@@ -13,15 +13,6 @@ function Waivers() {
 
   const [search, setSearch] = useState('');
 
-  useEffect(() => {
-    async function fetchWaivers() {
-      const response = await axios.get('/stock/waivers/1');
-      dispatch(setWaivers(response.data));
-      return response;
-    }
-    fetchWaivers();
-  }, [dispatch]);
-
   const handleSearch = (e) => {
     setSearch(e.target.value);
   };
