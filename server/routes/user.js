@@ -24,6 +24,7 @@ userRouter.get('/:userID', (req, res) => {
   })
     .then((userInfo) => {
       // tack on leagues?
+      // const exist = true;
       const responseUserInfo = { ...userInfo[0].dataValues };
       League_user.findAll({
         where: {
@@ -34,6 +35,59 @@ userRouter.get('/:userID', (req, res) => {
           responseUserInfo.leagueInfo = leagueInfo;
           res.send(responseUserInfo);
         });
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send(err);
+    });
+});
+
+// user route.
+userRouter.post('/', (req, res) => {
+  const {
+    id, username, full_name, avatar
+  } = req.body;
+  User.findOrCreate({
+    where: {
+      id
+    },
+    defaults: {
+      full_name, username, avatar
+    }
+  })
+    .then((userInfo) => {
+      // const exist = true;
+      const responseUserInfo = { ...userInfo[0].dataValues };
+      League_user.findAll({
+        where: {
+          id_user: id
+        }
+      })
+        .then((leagueInfo) => {
+          responseUserInfo.leagueInfo = leagueInfo;
+          res.send(responseUserInfo);
+        });
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send(err);
+    });
+});
+// don't use yet.
+userRouter.put('/', (req, res) => {
+  const {
+    id, username, full_name, avatar
+  } = req.body;
+  User.update({
+    full_name, username, avatar
+  },
+  {
+    where: {
+      id
+    }
+  })
+    .then((newUser) => {
+      res.status(201).send(newUser);
     })
     .catch((err) => {
       console.error(err);

@@ -103,6 +103,45 @@ stockRouter.get('/waivers/:leagueID', (req, res) => {
     });
 });
 
+stockRouter.post('/waivers', (req, res) => {
+  const {
+    id_stock, price_per_share_at_purchase, id_league, id_user, shares
+  } = req.body;
+  // need to do a standard find. and then if block. if exists count shares and a
+  Portfolio.create({
+    id_stock, price_per_share_at_purchase, id_league, id_user, shares
+  })
+    .then((entry) => {
+      res.send(entry);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send(err);
+    });
+});
+
+// need a sell option
+// do I need an additional field? no. maybe a negative for the shares to indicate sell?
+
+// can't do multiple entries with same user and stock id.
+// This is a problem for multiple purchases at different prices....
+stockRouter.post('/waivers', (req, res) => {
+  const {
+    id_stock, price_per_share_at_purchase, id_league, id_user, shares
+  } = req.body;
+  // need to do a standard find. and then if block. if exists count shares and a
+  Portfolio.create({
+    id_stock, price_per_share_at_purchase, id_league, id_user, shares
+  })
+    .then((entry) => {
+      res.send(entry);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send(err);
+    });
+});
+
 module.exports = {
   stockRouter
 };

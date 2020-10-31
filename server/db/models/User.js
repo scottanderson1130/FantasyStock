@@ -8,17 +8,17 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       type: DataTypes.INTEGER
     },
+    // use email for now
     username: {
       type: DataTypes.STRING,
-      unique: true,
-      allowNull: false
+      unique: true
     },
     full_name: {
       type: DataTypes.STRING
     },
-    phone_number: {
-      type: DataTypes.STRING
-    },
+    // phone_number: {
+    //   type: DataTypes.STRING
+    // },
     avatar: {
       type: DataTypes.STRING,
       defaultValue: 'https://utulsa.edu/wp-content/uploads/2018/08/generic-avatar.jpg'

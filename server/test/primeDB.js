@@ -49,7 +49,6 @@ function primeDB() {
       where: {
         username: 'Spiderman',
         full_name: 'Peter Parker',
-        phone_number: '(225) 999-9999',
         id: 1
       }
     }))
@@ -63,7 +62,6 @@ function primeDB() {
       where: {
         username: 'Batman',
         full_name: 'Bruce Wayne',
-        phone_number: '(225) 999-9998',
         id: 2
       }
     }))
@@ -77,7 +75,6 @@ function primeDB() {
       where: {
         username: 'Superman',
         full_name: 'Clark Kent',
-        phone_number: '(225) 999-9997',
         id: 3
       }
     }))
@@ -91,7 +88,6 @@ function primeDB() {
       where: {
         username: 'StarLord',
         full_name: 'Peter Quill',
-        phone_number: '(225) 999-9996',
         id: 4
       }
     }))
@@ -105,7 +101,6 @@ function primeDB() {
       where: {
         username: 'Colt18',
         full_name: 'Peyton Manning',
-        phone_number: '(225) 999-1999',
         id: 5
       }
     }))
@@ -119,7 +114,6 @@ function primeDB() {
       where: {
         username: 'GOAT',
         full_name: 'Tom Brady',
-        phone_number: '(225) 999-9918',
         id: 6
       }
     }))
@@ -133,7 +127,6 @@ function primeDB() {
       where: {
         username: 'ShortyJJ',
         full_name: 'Drew Brees',
-        phone_number: '(225) 991-9998',
         id: 7
       }
     }))
@@ -147,7 +140,6 @@ function primeDB() {
       where: {
         username: 'GreatestShowOnTurf',
         full_name: 'Kurt Warner',
-        phone_number: '(225) 999-7798',
         id: 8
       }
     }))
@@ -161,7 +153,6 @@ function primeDB() {
       where: {
         username: 'IronMan',
         full_name: 'Tony Stark',
-        phone_number: '(225) 999-7111',
         id: 9
       }
     }))
@@ -175,7 +166,6 @@ function primeDB() {
       where: {
         username: 'StrongestAvenger',
         full_name: 'Bruce Banner',
-        phone_number: '(225) 999-7398',
         id: 10
       }
     }))
@@ -507,6 +497,7 @@ function primeDB() {
     })
     .then(() => Portfolio.findOrCreate({
       where: {
+        // id: 1,
         id_user: 1,
         id_stock: 1,
         id_league: 2,
@@ -522,6 +513,7 @@ function primeDB() {
     })
     .then(() => Portfolio.findOrCreate({
       where: {
+        // id: 2,
         id_user: 1,
         id_stock: 2,
         id_league: 2,
@@ -537,6 +529,7 @@ function primeDB() {
     })
     .then(() => Portfolio.findOrCreate({
       where: {
+        // id: 3,
         id_user: 1,
         id_stock: 6,
         id_league: 2,
