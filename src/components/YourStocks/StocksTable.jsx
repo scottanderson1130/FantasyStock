@@ -51,16 +51,16 @@ function stableSort(array, comparator) {
 
 const headCells = [
   {
-    id: 'name', numeric: false, disablePadding: true, label: 'Dessert (100g serving)'
+    id: 'ticker', numeric: false, disablePadding: true, label: 'Ticker'
   },
   {
-    id: 'calories', numeric: true, disablePadding: false, label: 'Calories'
+    id: 'company_name', numeric: true, disablePadding: false, label: 'Company Name'
   },
   {
-    id: 'fat', numeric: true, disablePadding: false, label: 'Fat (g)'
+    id: 'price_per_share_at_purchase', numeric: true, disablePadding: false, label: 'Price Per Share'
   },
   {
-    id: 'carbs', numeric: true, disablePadding: false, label: 'Carbs (g)'
+    id: 'shares', numeric: true, disablePadding: false, label: 'Shares Available'
   },
   {
     id: 'protein', numeric: true, disablePadding: false, label: 'Protein (g)'
@@ -110,7 +110,6 @@ EnhancedTableHead.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   classes: PropTypes.object.isRequired,
   onRequestSort: PropTypes.func.isRequired,
-  // onSelectAllClick: PropTypes.func.isRequired,
   order: PropTypes.oneOf(['asc', 'desc']).isRequired,
   orderBy: PropTypes.string.isRequired
 };
@@ -139,8 +138,9 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-// eslint-disable-next-line react/prop-types
 function BasicTable({ rows }) {
+  BasicTable.propTypes = rows;
+
   const classes = useStyles();
   const [order, setOrder] = useState('asc');
   const [orderBy, setOrderBy] = useState('calories');
@@ -162,8 +162,6 @@ function BasicTable({ rows }) {
     setPage(0);
   };
 
-  // eslint-disable-next-line react/prop-types
-  // eslint-disable-next-line max-len
   const ControllingRowsPerPage = page * rowsPerPage;
 
   return (
@@ -193,7 +191,6 @@ function BasicTable({ rows }) {
         <TablePagination
           rowsPerPageOptions={[5, 15, 30]}
           component='div'
-          // eslint-disable-next-line react/prop-types
           count={rows.length}
           rowsPerPage={rowsPerPage}
           page={page}

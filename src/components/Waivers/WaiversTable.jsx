@@ -62,9 +62,6 @@ const headCells = [
   },
   {
     id: 'shares_available', numeric: true, disablePadding: false, label: 'Shares Available'
-  },
-  {
-    id: 'protein', numeric: true, disablePadding: false, label: 'Protein (g)'
   }
 ];
 
@@ -108,10 +105,8 @@ function EnhancedTableHead(props) {
 }
 
 EnhancedTableHead.propTypes = {
-  // eslint-disable-next-line react/forbid-prop-types
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.shape({ subProp: PropTypes.string }).isRequired,
   onRequestSort: PropTypes.func.isRequired,
-  // onSelectAllClick: PropTypes.func.isRequired,
   order: PropTypes.oneOf(['asc', 'desc']).isRequired,
   orderBy: PropTypes.string.isRequired
 };
@@ -140,7 +135,6 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-// eslint-disable-next-line react/prop-types
 function WaiversTable({ rows, search }) {
   const classes = useStyles();
   const [order, setOrder] = useState('asc');
@@ -163,9 +157,10 @@ function WaiversTable({ rows, search }) {
     setPage(0);
   };
 
-  // eslint-disable-next-line react/prop-types
-  // eslint-disable-next-line max-len
-  const filteredStocks = rows.filter((row) => row.company_name.toLowerCase().indexOf(search.toLowerCase()) !== -1);
+  const filteredStocks = rows
+    .filter((row) => row
+      .company_name.toLowerCase()
+      .indexOf(search.toLowerCase()) !== -1);
   const ControllingRowsPerPage = page * rowsPerPage;
 
   return (

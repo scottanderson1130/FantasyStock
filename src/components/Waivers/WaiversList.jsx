@@ -11,7 +11,6 @@ import {
   TextField
 } from '@material-ui/core';
 import React, { useState } from 'react';
-// import WaiversPopUp from './WaiversPopUp.jsx';
 
 function WaiversList({ row, index }) {
   const [open, setOpen] = useState(false);
@@ -25,11 +24,12 @@ function WaiversList({ row, index }) {
 
   const handleClose = () => {
     setOpen(false);
-    setTimeout(() => setSharesInput(''), 2000);
+    setTimeout(() => setSharesInput(''), 1000);
   };
 
   const handleSubmit = () => {
     setOpen(false);
+    setTimeout(() => setSharesInput(''), 1000);
   };
 
   const handleSharesSubmit = (e) => {
@@ -54,8 +54,7 @@ function WaiversList({ row, index }) {
           $
           {((1 / 100) * row.current_price_per_share).toFixed(2)}
         </TableCell>
-        <TableCell align='right'>{row.shares_available}</TableCell>
-        <TableCell align='right'>{row.protein}</TableCell>
+        <TableCell align='right'>{row.sharesRemaining}</TableCell>
       </TableRow>
       <Dialog open={open} onClose={handleClose} aria-labelledby='form-dialog-title'>
         <DialogTitle id='form-dialog-title'>{waiver.company_name}</DialogTitle>
@@ -66,7 +65,7 @@ function WaiversList({ row, index }) {
           <p>
             shares available:
             {' '}
-            {row.shares_available - sharesInput}
+            {row.sharesRemaining - sharesInput}
           </p>
           <p>
             Price per Share: $

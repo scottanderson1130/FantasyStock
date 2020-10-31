@@ -1,12 +1,16 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
 import MatchupCard from '../components/Home/MatchupCard.jsx';
 import CreateNewLeague from '../components/Home/CreateNewLeague.jsx';
 import '../css/YourStocks.css';
+import { selectLogIn } from '../features/userSlice.js';
 import Stocknews from '../components/Home/Stocknews.jsx';
 
 // eslint-disable-next-line react/prop-types
-function Home(logIn) {
+function Home() {
+  const logIn = useSelector(selectLogIn);
+
   return (
     (!logIn)
       ? (

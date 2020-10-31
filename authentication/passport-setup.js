@@ -17,6 +17,6 @@ passport.use(
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       callbackURL: 'http://localhost:3000/auth/google/callback'
     },
-    (accessToken, refreshToken, profile, done) => { console.log(profile); done(null, profile); }
+    (accessToken, refreshToken, profile, done) => { done(null, profile); }
   )
 );
