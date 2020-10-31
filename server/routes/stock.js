@@ -7,8 +7,13 @@ const { Router } = require('express');
 
 const {
   Stock,
-  Portfolio
+  Stock_user,
+  League_user
 } = require('../db/index');
+const {
+  checkSharesAvailable,
+  checkMoneyAvailable
+} = require('./helpers');
 
 const stockRouter = Router();
 
@@ -39,7 +44,7 @@ stockRouter.get('/stock/:stockID', (req, res) => {
 // get user's portfolio info by user primary key id
 stockRouter.get('/portfolio/:userID', (req, res) => {
   const { userID } = req.params;
-  Portfolio.findAll({
+  Stock_user.findAll({
     where: {
       id_user: userID
     },
@@ -71,7 +76,7 @@ stockRouter.get('/waivers/:leagueID', (req, res) => {
     .then((allStocks) => {
       // allStocks is an array of objects (stocks from stock) at this point
       // need to calculate shares
-      Portfolio.findAll({
+      Stock_user.findAll({
         where: {
           id_league: leagueID
         }
@@ -103,38 +108,85 @@ stockRouter.get('/waivers/:leagueID', (req, res) => {
     });
 });
 
-stockRouter.post('/waivers', (req, res) => {
+stockRouter.post('/waivers', async (req, res) => {
   const {
-    id_stock, price_per_share_at_purchase, id_league, id_user, shares
+    id_stock, id_league, id_user, portfolio
   } = req.body;
-  // need to do a standard find. and then if block. if exists count shares and a
-  Portfolio.create({
-    id_stock, price_per_share_at_purchase, id_league, id_user, shares
+  const {
+    shares, price_per_share_at_purchase
+  } = portfolio;
+  const cost = shares * price_per_share_at_purchase;
+  const moneyAvailable = await checkMoneyAvailable(id_league, id_user);
+  const sharesAvailable = checkSharesAvailable(id_stock, id_league, id_user);
+  if (moneyAvailable < cost) {
+    res.send('not enough money');
+  }
+  const newBankBalance = moneyAvailable - cost;
+  if (sharesAvailable < shares) {
+    res.send('not enough shares available');
+  }
+  // add history aspect
+  Stock_user.findAll({
+    where: {
+      id_stock, id_league, id_user
+    }
   })
     .then((entry) => {
-      res.send(entry);
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).send(err);
-    });
-});
-
-// need a sell option
-// do I need an additional field? no. maybe a negative for the shares to indicate sell?
-
-// can't do multiple entries with same user and stock id.
-// This is a problem for multiple purchases at different prices....
-stockRouter.post('/waivers', (req, res) => {
-  const {
-    id_stock, price_per_share_at_purchase, id_league, id_user, shares
-  } = req.body;
-  // need to do a standard find. and then if block. if exists count shares and a
-  Portfolio.create({
-    id_stock, price_per_share_at_purchase, id_league, id_user, shares
-  })
-    .then((entry) => {
-      res.send(entry);
+      if (entry.length === 0) {
+        Stock_user.create({
+          id_stock, id_league, id_user, portfolio
+        })
+          .then(() => {
+            League_user.update({
+              bank_balance: newBankBalance
+            },
+            {
+              where: {
+                id_league, id_user
+              }
+            });
+          })
+          .then(() => {
+            const data = {
+              id_stock, id_league, id_user, portfolio
+            };
+            res.send(data);
+          });
+      } else {
+        const currentShares = entry[0].dataValues.portfolio.shares;
+        // round this
+        const updatedPriceperShare = ((shares * price_per_share_at_purchase)
+        + (currentShares * entry[0].dataValues.portfolio.price_per_share_at_purchase))
+        / (currentShares + shares);
+        const updatedPortfolio = {
+          shares: currentShares + shares,
+          price_per_share_at_purchase: updatedPriceperShare
+        };
+        League_user.update({
+          bank_balance: newBankBalance
+        },
+        {
+          where: {
+            id_league, id_user
+          }
+        })
+          .then(() => {
+            console.log(204);
+            Stock_user.update({ portfolio: updatedPortfolio },
+              {
+                where: {
+                  id_league, id_user, id_stock
+                }
+              })
+              .then(() => {
+                console.log(214);
+                const data = {
+                  id_stock, id_league, id_user, portfolio: updatedPortfolio
+                };
+                res.send(data);
+              });
+          });
+      }
     })
     .catch((err) => {
       console.error(err);

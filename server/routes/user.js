@@ -14,33 +14,33 @@ const {
 
 const userRouter = Router();
 
-// get user's Info by user google id
-userRouter.get('/:userID', (req, res) => {
-  const { userID } = req.params;
-  User.findAll({
-    where: {
-      id: userID
-    }
-  })
-    .then((userInfo) => {
-      // tack on leagues?
-      // const exist = true;
-      const responseUserInfo = { ...userInfo[0].dataValues };
-      League_user.findAll({
-        where: {
-          id_user: userID
-        }
-      })
-        .then((leagueInfo) => {
-          responseUserInfo.leagueInfo = leagueInfo;
-          res.send(responseUserInfo);
-        });
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).send(err);
-    });
-});
+// // get user's Info by user google id
+// userRouter.get('/:userID', (req, res) => {
+//   const { userID } = req.params;
+//   User.findAll({
+//     where: {
+//       id: userID
+//     }
+//   })
+//     .then((userInfo) => {
+//       // tack on leagues?
+//       // const exist = true;
+//       const responseUserInfo = { ...userInfo[0].dataValues };
+//       League_user.findAll({
+//         where: {
+//           id_user: userID
+//         }
+//       })
+//         .then((leagueInfo) => {
+//           responseUserInfo.leagueInfo = leagueInfo;
+//           res.send(responseUserInfo);
+//         });
+//     })
+//     .catch((err) => {
+//       console.error(err);
+//       res.status(500).send(err);
+//     });
+// });
 
 // user route.
 userRouter.post('/', (req, res) => {
@@ -56,7 +56,6 @@ userRouter.post('/', (req, res) => {
     }
   })
     .then((userInfo) => {
-      // const exist = true;
       const responseUserInfo = { ...userInfo[0].dataValues };
       League_user.findAll({
         where: {
@@ -73,7 +72,7 @@ userRouter.post('/', (req, res) => {
       res.status(500).send(err);
     });
 });
-// don't use yet.
+// don't use yet. Not done
 userRouter.put('/', (req, res) => {
   const {
     id, username, full_name, avatar

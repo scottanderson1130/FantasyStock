@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING
     },
     settings: {
-      type: DataTypes.JSON
+      type: DataTypes.JSONB
     }
   }, {
     freezeTableName: true
