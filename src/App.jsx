@@ -21,7 +21,7 @@ function App() {
 
   useEffect(() => {
     async function fetchYourStocks() {
-      const yourStockResponse = await axios.get('/stock/portfolio/1').then((response) => {
+      await axios.get('/stock/portfolio/1').then((response) => {
         const responseCopy = { ...response };
         response.data.map((stock, ind) => {
           if (stock.stock.company_name) {

@@ -1,14 +1,12 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import axios from 'axios';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import { Avatar } from '@material-ui/core/';
 import BasicTable from '../components/YourStocks/StocksTable.jsx';
 import '../css/YourStocks.css';
 import CardStats from '../components/YourStocks/CardStats.jsx';
-import { setYourStock, selectYourStock } from '../features/yourStockSlice.js';
+import { selectYourStock } from '../features/yourStockSlice.js';
 
 function YourStocks() {
-  const dispatch = useDispatch();
   const rows = useSelector(selectYourStock);
 
   return (

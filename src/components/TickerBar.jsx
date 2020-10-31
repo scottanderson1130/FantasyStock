@@ -10,8 +10,6 @@ function TickerBar() {
   const ticker = useSelector(selectYourStock);
   const logIn = useSelector(selectLogIn);
 
-  console.log(ticker);
-
   return (
     (!logIn) ? <div />
       : (ticker.length

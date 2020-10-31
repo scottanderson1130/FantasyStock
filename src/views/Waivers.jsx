@@ -1,14 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { TextField } from '@material-ui/core';
-import axios from 'axios';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import WaiversTable from '../components/Waivers/WaiversTable.jsx';
 import '../css/Waivers.css';
-import { setWaivers, selectWaivers } from '../features/waiversSlice.js';
+import { selectWaivers } from '../features/waiversSlice.js';
 
 function Waivers() {
-  const dispatch = useDispatch();
-
   const rows = useSelector(selectWaivers);
 
   const [search, setSearch] = useState('');
