@@ -18,7 +18,7 @@ const sequelize = new Sequelize(database, user, password, {
 // const HistoryModel = require('./models/History');
 const LeagueModel = require('./models/League');
 const MessageModel = require('./models/Message');
-const PortfolioModel = require('./models/Portfolio');
+const Stock_userModel = require('./models/Stock_user');
 const StockModel = require('./models/Stock');
 const UserModel = require('./models/User');
 const League_userModel = require('./models/League_user');
@@ -26,7 +26,7 @@ const League_userModel = require('./models/League_user');
 // const History = HistoryModel(sequelize, Sequelize);
 const League = LeagueModel(sequelize, Sequelize);
 const Message = MessageModel(sequelize, Sequelize);
-const Portfolio = PortfolioModel(sequelize, Sequelize);
+const Stock_user = Stock_userModel(sequelize, Sequelize);
 const Stock = StockModel(sequelize, Sequelize);
 const User = UserModel(sequelize, Sequelize);
 const League_user = League_userModel(sequelize, Sequelize);
@@ -35,7 +35,7 @@ const models = {
   // History,
   League,
   Message,
-  Portfolio,
+  Stock_user,
   Stock,
   User,
   League_user
