@@ -6,9 +6,9 @@ const {
   League,
   League_user,
   // Message,
-  Portfolio,
   Stock,
-  User
+  User,
+  Stock_user
 } = require('../db/index.js');
 // messages req
 // history req
@@ -49,7 +49,7 @@ function primeDB() {
       where: {
         username: 'Spiderman',
         full_name: 'Peter Parker',
-        id: 1
+        id: '1'
       }
     }))
     .then((numberEffected) => {
@@ -62,7 +62,7 @@ function primeDB() {
       where: {
         username: 'Batman',
         full_name: 'Bruce Wayne',
-        id: 2
+        id: '2'
       }
     }))
     .then((numberEffected) => {
@@ -75,7 +75,7 @@ function primeDB() {
       where: {
         username: 'Superman',
         full_name: 'Clark Kent',
-        id: 3
+        id: '3'
       }
     }))
     .then((numberEffected) => {
@@ -88,7 +88,7 @@ function primeDB() {
       where: {
         username: 'StarLord',
         full_name: 'Peter Quill',
-        id: 4
+        id: '4'
       }
     }))
     .then((numberEffected) => {
@@ -101,7 +101,7 @@ function primeDB() {
       where: {
         username: 'Colt18',
         full_name: 'Peyton Manning',
-        id: 5
+        id: '5'
       }
     }))
     .then((numberEffected) => {
@@ -114,7 +114,7 @@ function primeDB() {
       where: {
         username: 'GOAT',
         full_name: 'Tom Brady',
-        id: 6
+        id: '6'
       }
     }))
     .then((numberEffected) => {
@@ -127,7 +127,7 @@ function primeDB() {
       where: {
         username: 'ShortyJJ',
         full_name: 'Drew Brees',
-        id: 7
+        id: '7'
       }
     }))
     .then((numberEffected) => {
@@ -140,7 +140,7 @@ function primeDB() {
       where: {
         username: 'GreatestShowOnTurf',
         full_name: 'Kurt Warner',
-        id: 8
+        id: '8'
       }
     }))
     .then((numberEffected) => {
@@ -153,7 +153,7 @@ function primeDB() {
       where: {
         username: 'IronMan',
         full_name: 'Tony Stark',
-        id: 9
+        id: '9'
       }
     }))
     .then((numberEffected) => {
@@ -166,7 +166,7 @@ function primeDB() {
       where: {
         username: 'StrongestAvenger',
         full_name: 'Bruce Banner',
-        id: 10
+        id: '10'
       }
     }))
     .then((numberEffected) => {
@@ -178,7 +178,7 @@ function primeDB() {
     .then(() => League_user.findOrCreate({
       where: {
         id_league: 1,
-        id_user: 5,
+        id_user: '5',
         bank_balance: 1000000,
         net_worth: 0,
         record: '0-2'
@@ -193,7 +193,7 @@ function primeDB() {
     .then(() => League_user.findOrCreate({
       where: {
         id_league: 1,
-        id_user: 6,
+        id_user: '6',
         bank_balance: 815556,
         net_worth: 0,
         record: '2-0'
@@ -208,7 +208,7 @@ function primeDB() {
     .then(() => League_user.findOrCreate({
       where: {
         id_league: 1,
-        id_user: 7,
+        id_user: '7',
         bank_balance: 1000000,
         net_worth: 0,
         record: '1-1'
@@ -223,7 +223,7 @@ function primeDB() {
     .then(() => League_user.findOrCreate({
       where: {
         id_league: 1,
-        id_user: 8,
+        id_user: '8',
         bank_balance: 1000000,
         net_worth: 0,
         record: '0-2'
@@ -238,7 +238,7 @@ function primeDB() {
     .then(() => League_user.findOrCreate({
       where: {
         id_league: 2,
-        id_user: 1,
+        id_user: '1',
         bank_balance: 1000000,
         net_worth: 0,
         record: '2-0'
@@ -253,7 +253,7 @@ function primeDB() {
     .then(() => League_user.findOrCreate({
       where: {
         id_league: 2,
-        id_user: 2,
+        id_user: '2',
         bank_balance: 1000000,
         net_worth: 0,
         record: '1-1'
@@ -268,7 +268,7 @@ function primeDB() {
     .then(() => League_user.findOrCreate({
       where: {
         id_league: 2,
-        id_user: 3,
+        id_user: '3',
         bank_balance: 1000000,
         net_worth: 0,
         record: '1-1'
@@ -283,7 +283,7 @@ function primeDB() {
     .then(() => League_user.findOrCreate({
       where: {
         id_league: 2,
-        id_user: 4,
+        id_user: '4',
         bank_balance: 1000000,
         net_worth: 0,
         record: '1-1'
@@ -298,7 +298,7 @@ function primeDB() {
     .then(() => League_user.findOrCreate({
       where: {
         id_league: 2,
-        id_user: 9,
+        id_user: '9',
         bank_balance: 1000000,
         net_worth: 0,
         record: '1-1'
@@ -313,7 +313,7 @@ function primeDB() {
     .then(() => League_user.findOrCreate({
       where: {
         id_league: 2,
-        id_user: 10,
+        id_user: '10',
         bank_balance: 1000000,
         net_worth: 0,
         record: '1-1'
@@ -328,7 +328,7 @@ function primeDB() {
     .then(() => League_user.findOrCreate({
       where: {
         id_league: 2,
-        id_user: 5,
+        id_user: '5',
         bank_balance: 1000000,
         net_worth: 0,
         record: '1-1'
@@ -343,7 +343,7 @@ function primeDB() {
     .then(() => League_user.findOrCreate({
       where: {
         id_league: 2,
-        id_user: 6,
+        id_user: '6',
         bank_balance: 1000000,
         net_worth: 0,
         record: '1-1'
@@ -495,14 +495,15 @@ function primeDB() {
       }
       return console.error('❌save undefined');
     })
-    .then(() => Portfolio.findOrCreate({
+    .then(() => Stock_user.findOrCreate({
       where: {
-        // id: 1,
-        id_user: 1,
-        id_stock: 1,
+        id_user: '6',
+        id_stock: 9,
         id_league: 2,
-        shares: 2,
-        price_per_share_at_purchase: 11215
+        portfolio: {
+          shares: '2',
+          price_per_share_at_purchase: '11215'
+        }
       }
     }))
     .then((numberEffected) => {
@@ -511,38 +512,38 @@ function primeDB() {
       }
       return console.error('❌save undefined');
     })
-    .then(() => Portfolio.findOrCreate({
-      where: {
-        // id: 2,
-        id_user: 1,
-        id_stock: 2,
-        id_league: 2,
-        shares: 1,
-        price_per_share_at_purchase: 151959
-      }
-    }))
-    .then((numberEffected) => {
-      if (numberEffected) {
-        return console.log('✅ Portfolio2 Created');
-      }
-      return console.error('❌save undefined');
-    })
-    .then(() => Portfolio.findOrCreate({
-      where: {
-        // id: 3,
-        id_user: 1,
-        id_stock: 6,
-        id_league: 2,
-        shares: 10,
-        price_per_share_at_purchase: 2127
-      }
-    }))
-    .then((numberEffected) => {
-      if (numberEffected) {
-        return console.log('✅ Portfolio3 Created');
-      }
-      return console.error('❌save undefined');
-    })
+    // .then(() => Portfolio.findOrCreate({
+    //   where: {
+    //     // id: 2,
+    //     id_user: 1,
+    //     id_stock: 2,
+    //     id_league: 2,
+    //     shares: 1,
+    //     price_per_share_at_purchase: 151959
+    //   }
+    // }))
+    // .then((numberEffected) => {
+    //   if (numberEffected) {
+    //     return console.log('✅ Portfolio2 Created');
+    //   }
+    //   return console.error('❌save undefined');
+    // })
+    // .then(() => Portfolio.findOrCreate({
+    //   where: {
+    //     // id: 3,
+    //     id_user: 1,
+    //     id_stock: 6,
+    //     id_league: 2,
+    //     shares: 10,
+    //     price_per_share_at_purchase: 2127
+    //   }
+    // }))
+    // .then((numberEffected) => {
+    //   if (numberEffected) {
+    //     return console.log('✅ Portfolio3 Created');
+    //   }
+    //   return console.error('❌save undefined');
+    // })
     .catch((err) => {
       console.error(`❌${err}`);
     });
