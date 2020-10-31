@@ -55,13 +55,13 @@ const headCells = [
     id: 'ticker', numeric: false, disablePadding: true, label: 'Ticker'
   },
   {
-    id: 'company_name', numeric: true, disablePadding: false, label: 'Company Name'
+    id: 'company_name', numeric: true, disablePadding: false, label: 'Company'
   },
   {
     id: 'current_price_per_share', numeric: true, disablePadding: false, label: 'Price Per Share'
   },
   {
-    id: 'shares_available', numeric: true, disablePadding: false, label: 'Shares Available'
+    id: 'shares_available', numeric: true, disablePadding: false, label: 'Available'
   }
 ];
 
@@ -120,7 +120,8 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(2)
   },
   table: {
-    minWidth: 750
+    width: '45%',
+    margin: 'auto'
   },
   visuallyHidden: {
     border: 0,

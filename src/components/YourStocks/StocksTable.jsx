@@ -54,16 +54,13 @@ const headCells = [
     id: 'ticker', numeric: false, disablePadding: true, label: 'Ticker'
   },
   {
-    id: 'company_name', numeric: true, disablePadding: false, label: 'Company Name'
+    id: 'company_name', numeric: true, disablePadding: false, label: 'Company'
   },
   {
     id: 'price_per_share_at_purchase', numeric: true, disablePadding: false, label: 'Price Per Share'
   },
   {
-    id: 'shares', numeric: true, disablePadding: false, label: 'Shares Available'
-  },
-  {
-    id: 'protein', numeric: true, disablePadding: false, label: 'Protein (g)'
+    id: 'shares', numeric: true, disablePadding: false, label: 'Shares'
   }
 ];
 
@@ -123,7 +120,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(2)
   },
   table: {
-    minWidth: 750
+    width: '45%'
   },
   visuallyHidden: {
     border: 0,
@@ -183,7 +180,7 @@ function BasicTable({ rows }) {
               {stableSort(rows, getComparator(order, orderBy))
                 .slice(ControllingRowsPerPage, ControllingRowsPerPage + rowsPerPage)
                 .map((row, index) => (
-                  <StocksList row={row} index={index} key={row.name} />
+                  <StocksList row={row} index={index} key={row.stock.id} />
                 ))}
             </TableBody>
           </Table>
