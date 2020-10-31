@@ -176,6 +176,56 @@ Return Ex.
     ]
 }
 
+Login with user: (id is google id)
+POST http://localhost:3000/user/
+{ "id": 1, "full_name": "me", "username": "email"}
+res:
+{
+    "id": 1,
+    "username": "Spiderman",
+    "full_name": "Peter Parker",
+    "avatar": "https://utulsa.edu/wp-content/uploads/2018/08/generic-avatar.jpg",
+    "createdAt": "2020-10-31T15:58:27.250Z",
+    "updatedAt": "2020-10-31T15:58:27.250Z",
+    "leagueInfo": [
+        {
+            "bank_balance": 1000000,
+            "net_worth": 0,
+            "record": "2-0",
+            "createdAt": "2020-10-31T15:58:27.354Z",
+            "updatedAt": "2020-10-31T15:58:27.354Z",
+            "id_league": 2,
+            "id_user": 1
+        }
+    ]
+}
+
+
+
+
+
+
+
+
+/////////don't use this yet
+Update a user's info
+put: http://localhost:3000/user/
+{ id, username, full_name, phone_number, avatar } = req.body;
+
+purchase stock:
+Post: http://localhost:3000/stock/waivers
+{ "id_stock": 5, "price_per_share_at_purchase": 1500, "id_league": 2, "id_user": 5, "shares": 10}
+res:
+{
+    "id_stock": 5,
+    "price_per_share_at_purchase": 1500,
+    "id_league": 2,
+    "id_user": 5,
+    "shares": 10,
+    "updatedAt": "2020-10-31T09:34:34.264Z",
+    "createdAt": "2020-10-31T09:34:34.264Z"
+}
+
 - We need a matches table.
 - user stocks route.
 - Access the league and teams.
