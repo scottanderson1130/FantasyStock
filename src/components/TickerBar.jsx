@@ -3,34 +3,26 @@ import '../css/TickerBar.css';
 import Ticker from 'react-ticker';
 import { useSelector } from 'react-redux';
 import { selectLogIn } from '../features/userSlice.js';
-
-const examples = [
-  {
-    ticker: 'AAC',
-    price: 574
-  },
-  {
-    ticker: 'ALV',
-    price: -465
-  }
-];
+import { selectYourStock } from '../features/yourStockSlice.js';
 
 // eslint-disable-next-line react/prop-types
 function TickerBar() {
+  const ticker = useSelector(selectYourStock);
   const logIn = useSelector(selectLogIn);
 
   return (
     (!logIn) ? <div />
-      : (
+      : (ticker.length
+        && (
         <div className='tickerBar'>
           <Ticker mode='smooth' className='tickerBar_ticker'>
             {() => (
               <>
-                {examples.map((example) => (
+                {ticker.map((example) => (
                   <h3 key={example.ticker} className='tickerBar_text'>
                     {example.ticker}
-                    <div className={example.price > 0 ? 'green' : 'red'}>
-                      {example.price > 0 ? `+${example.price}` : example.price}
+                    <div className={example.current_price_per_share * 0.01 > 0 ? 'green' : 'red'}>
+                      {example.current_price_per_share * 0.01 > 0 ? `+${example.current_price_per_share * 0.01}` : example.current_price_per_share * 0.01}
                     </div>
                   </h3>
                 ))}
@@ -38,6 +30,8 @@ function TickerBar() {
             )}
           </Ticker>
         </div>
+        )
+
       )
 
   );
