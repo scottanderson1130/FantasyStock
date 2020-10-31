@@ -29,11 +29,8 @@ const checkMoneyAvailable = async (id_league, id_user) => {
     }
   })
     .then((joint) => {
-      console.log('joint', joint[0].dataValues.bank_balance);
       moneyAvailable = joint[0].dataValues.bank_balance;
-      console.log(32, moneyAvailable);
     });
-  console.log(33, moneyAvailable);
   return moneyAvailable;
 };
 
