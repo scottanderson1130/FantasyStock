@@ -51,16 +51,16 @@ function stableSort(array, comparator) {
 
 const headCells = [
   {
-    id: 'name', numeric: false, disablePadding: true, label: 'Dessert (100g serving)'
+    id: 'ticker', numeric: false, disablePadding: true, label: 'Ticker'
   },
   {
-    id: 'calories', numeric: true, disablePadding: false, label: 'Calories'
+    id: 'company_name', numeric: true, disablePadding: false, label: 'Company Name'
   },
   {
-    id: 'fat', numeric: true, disablePadding: false, label: 'Fat (g)'
+    id: 'price_per_share_at_purchase', numeric: true, disablePadding: false, label: 'Price Per Share'
   },
   {
-    id: 'carbs', numeric: true, disablePadding: false, label: 'Carbs (g)'
+    id: 'shares', numeric: true, disablePadding: false, label: 'Shares Available'
   },
   {
     id: 'protein', numeric: true, disablePadding: false, label: 'Protein (g)'

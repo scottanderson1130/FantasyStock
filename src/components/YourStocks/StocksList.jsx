@@ -37,11 +37,11 @@ function StocksList({ row, index }) {
       >
         <TableCell padding='checkbox' />
         <TableCell onClick={handleOpen} component='th' id={index} scope='row' padding='none'>
-          {row.name}
+          {row.ticker}
         </TableCell>
-        <TableCell align='right'>{row.calories}</TableCell>
-        <TableCell align='right'>{row.fat}</TableCell>
-        <TableCell align='right'>{row.carbs}</TableCell>
+        <TableCell align='right'>{row.company_name}</TableCell>
+        <TableCell align='right'>{row.price_per_share_at_purchase}</TableCell>
+        <TableCell align='right'>{row.shares}</TableCell>
         <TableCell align='right'>{row.protein}</TableCell>
       </TableRow>
       <Dialog open={open} onClose={handleClose} aria-labelledby='form-dialog-title'>
