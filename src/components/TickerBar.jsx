@@ -2,7 +2,6 @@ import React from 'react';
 import '../css/TickerBar.css';
 import Ticker from 'react-ticker';
 import { useSelector } from 'react-redux';
-import { green } from '@material-ui/core/colors';
 import { selectLogIn } from '../features/userSlice.js';
 import { selectYourStock } from '../features/yourStockSlice.js';
 
