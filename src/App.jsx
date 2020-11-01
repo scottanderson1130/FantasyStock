@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import './css/App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import axios from 'axios';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import ScoreBoard from './views/ScoreBoard.jsx';
 import YourStocks from './views/YourStocks.jsx';
 import Waivers from './views/Waivers.jsx';
@@ -10,7 +10,7 @@ import Home from './views/Home.jsx';
 import Nav from './components/Nav.jsx';
 import TickerBar from './components/TickerBar.jsx';
 import LeagueInfo from './views/LeagueInfo.jsx';
-import { setLogIn, setUser } from './features/userSlice.js';
+import { selectUser, setLogIn, setUser } from './features/userSlice.js';
 import { setYourStock } from './features/yourStockSlice.js';
 import { setWaivers } from './features/waiversSlice.js';
 
@@ -20,8 +20,24 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    async function fetchUser() {
+      const userResponse = await axios.get('/auth/profile');
+      if (userResponse.data !== '') {
+        dispatch(setUser(userResponse.data));
+        dispatch(setLogIn(true));
+      } else {
+        dispatch(setLogIn(false));
+      }
+      return userResponse;
+    }
+    fetchUser();
+  }, [dispatch]);
+
+  const user = useSelector(selectUser);
+
+  useEffect(() => {
     async function fetchYourStocks() {
-      await axios.get('/stock/portfolio/1').then((response) => {
+      await axios.get(`/stock/portfolio/${user?.id}`).then((response) => {
         const responseCopy = { ...response };
         response.data.map((stock, ind) => {
           if (stock.stock.company_name) {
@@ -39,30 +55,16 @@ function App() {
       });
     }
     fetchYourStocks();
-  }, [dispatch]);
-
-  useEffect(() => {
-    async function fetchUser() {
-      const userResponse = await axios.get('/auth/profile');
-      if (userResponse.data !== '') {
-        dispatch(setUser(userResponse.data));
-        dispatch(setLogIn(true));
-      } else {
-        dispatch(setLogIn(false));
-      }
-      return userResponse;
-    }
-    fetchUser();
-  }, [dispatch]);
+  }, [dispatch, user]);
 
   useEffect(() => {
     async function fetchWaivers() {
-      const waiversResponse = await axios.get('/stock/waivers/1');
+      const waiversResponse = await axios.get(`/stock/waivers/${user?.leagueInfo[0].id_league}`);
       dispatch(setWaivers(waiversResponse.data));
       return waiversResponse;
     }
     fetchWaivers();
-  }, [dispatch]);
+  }, [dispatch, user]);
 
   return (
     <Router>
