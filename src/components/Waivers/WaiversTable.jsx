@@ -136,7 +136,9 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function WaiversTable({ rows, search }) {
+function WaiversTable({
+  rows, search, user, bankBalance
+}) {
   const classes = useStyles();
   const [order, setOrder] = useState('asc');
   const [orderBy, setOrderBy] = useState('calories');
@@ -184,7 +186,13 @@ function WaiversTable({ rows, search }) {
               {stableSort(filteredStocks, getComparator(order, orderBy))
                 .slice(ControllingRowsPerPage, ControllingRowsPerPage + rowsPerPage)
                 .map((row, index) => (
-                  <WaiversList row={row} index={index} key={row.ticker} />
+                  <WaiversList
+                    row={row}
+                    index={index}
+                    key={row.ticker}
+                    user={user}
+                    bankBalance={bankBalance}
+                  />
                 ))}
             </TableBody>
           </Table>
