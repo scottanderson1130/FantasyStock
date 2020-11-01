@@ -42,16 +42,30 @@ stockRouter.get('/stock/:stockID', (req, res) => {
 });
 
 // get user's portfolio info by user primary key id
-stockRouter.get('/portfolio/:userID', (req, res) => {
+// add stock info to each portfolio instance
+stockRouter.get('/portfolio/:userID', async (req, res) => {
   const { userID } = req.params;
-  Stock_user.findAll({
+  await Stock_user.findAll({
     where: {
       id_user: userID
-    },
-    include: [Stock]
+    }
   })
-    .then((portfolio) => {
-      res.send(portfolio);
+    .then(async (arrayOfPortfolios) => {
+      const response = [];
+      const test = await arrayOfPortfolios.map(async (portfolio) => {
+        const detailedInfo = await { ...portfolio.dataValues };
+        Stock.findByPk(portfolio.dataValues.id_stock)
+          .then(async (stock) => {
+            detailedInfo.stock = await { ...stock.dataValues };
+            console.log('detailedInfo', detailedInfo);
+            response.push(detailedInfo);
+          });
+      });
+      console.log(test);
+      // un-ghetto later
+      setTimeout(() => {
+        res.send(response);
+      }, 50);
     })
     .catch((err) => {
       console.error(err);
@@ -91,8 +105,8 @@ stockRouter.get('/waivers/:leagueID', (req, res) => {
             const updatedStock = { ...indStock.dataValues };
             updatedStock.sharesRemaining = 100;
             port.map((indPortEntry) => {
-              if (indStock.id === indPortEntry.id_stock) {
-                updatedStock.sharesRemaining -= indPortEntry.shares;
+              if (indStock.dataValues.id === indPortEntry.dataValues.id_stock) {
+                updatedStock.sharesRemaining -= indPortEntry.dataValues.portfolio.shares;
               }
             });
             waivers.push(updatedStock);
@@ -107,7 +121,8 @@ stockRouter.get('/waivers/:leagueID', (req, res) => {
       res.status(500).send(err);
     });
 });
-
+// need to add block from negative shares
+// also make sure it caps at 100 stocks? think it is tho.
 stockRouter.post('/waivers', async (req, res) => {
   const {
     id_stock, id_league, id_user, portfolio
@@ -171,7 +186,6 @@ stockRouter.post('/waivers', async (req, res) => {
           }
         })
           .then(() => {
-            console.log(204);
             Stock_user.update({ portfolio: updatedPortfolio },
               {
                 where: {
@@ -179,7 +193,6 @@ stockRouter.post('/waivers', async (req, res) => {
                 }
               })
               .then(() => {
-                console.log(214);
                 const data = {
                   id_stock, id_league, id_user, portfolio: updatedPortfolio
                 };
