@@ -9,6 +9,8 @@ function TickerBar() {
   const ticker = useSelector(selectYourStock);
   const logIn = useSelector(selectLogIn);
 
+  console.log(ticker);
+
   function tickerColor(a, b) {
     let color = '';
     if (a > b) {
@@ -48,11 +50,11 @@ function TickerBar() {
                         <span
                           className={
                             tickerColor(example.current_price_per_share,
-                              example.price_per_share_at_purchase)
+                              example.portfolio.price_per_share_at_purchase)
                           }
                         >
                           {tickerDisplay(example.current_price_per_share,
-                            example.price_per_share_at_purchase)}
+                            example.portfolio.price_per_share_at_purchase)}
                         </span>
                       </p>
                     </div>
