@@ -173,11 +173,11 @@ stockRouter.post('/waivers', async (req, res) => {
             League_user.update({
               bank_balance: newBankBalance
             },
-              {
-                where: {
-                  id_league, id_user
-                }
-              });
+            {
+              where: {
+                id_league, id_user
+              }
+            });
           })
           .then(() => {
             const data = {
@@ -198,11 +198,11 @@ stockRouter.post('/waivers', async (req, res) => {
         League_user.update({
           bank_balance: newBankBalance
         },
-          {
-            where: {
-              id_league, id_user
-            }
-          })
+        {
+          where: {
+            id_league, id_user
+          }
+        })
           .then(() => {
             Stock_user.update({ portfolio: updatedPortfolio },
               {
