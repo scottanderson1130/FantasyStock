@@ -4,3 +4,9 @@
   text-align: center;
   padding-bottom: 10px;
 }
+
+.waivers_bank-balance {
+  float: right;
+  padding-right: 40px;
+  text-align: center;
+}

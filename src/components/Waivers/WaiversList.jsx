@@ -11,28 +11,17 @@ import {
   TextField
 } from '@material-ui/core';
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
 import axios from 'axios';
-import { selectUser } from '../../features/userSlice.js';
+import { useDispatch } from 'react-redux';
+import { setWaivers } from '../../features/waiversSlice.js';
 
-function WaiversList({ row, index }) {
-  const user = useSelector(selectUser);
-
+function WaiversList({
+  row, index, user, bankBalance, setBankBalance
+}) {
+  const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const [waiver, setWaiver] = useState({});
   const [sharesInput, setSharesInput] = useState(0);
-  // const [bankBalance, setBankBalance] = useState(0);
-
-  // useEffect(() => {
-  //   async function fetchLeagueInfo() {
-  //     const response = await axios.get(`/user/league/user/=${user.id}`);
-  //     setBankBalance(response.data.bank_balance);
-  //     console.log(response);
-
-  //     return response;
-  //   }
-  //   fetchLeagueInfo();
-  // }, []);
 
   const onSubmit = () => {
     axios.post('/stock/waivers', {
@@ -41,14 +30,15 @@ function WaiversList({ row, index }) {
       id_user: user.leagueInfo[0].id_user,
       portfolio: {
         price_per_share_at_purchase: row.current_price_per_share,
-        shares: sharesInput
+        shares: Number(sharesInput)
       }
-    })
-      .then((response) => response.data)
-      .catch((err) => console.error(err));
+    }).then(() => axios.get(`/stock/bank/${user?.id}`)
+      .then((response) => setBankBalance(response.data)))
+      .then(() => axios.get(`/stock/waivers/${user?.leagueInfo[0].id_league}`)
+        .then((res) => dispatch(setWaivers(res.data)))).catch((err) => console.error(err));
 
     setOpen(false);
-    setTimeout(() => setSharesInput(''), 1000);
+    setSharesInput(0);
   };
 
   const handleOpen = () => {
@@ -58,7 +48,7 @@ function WaiversList({ row, index }) {
 
   const handleClose = () => {
     setOpen(false);
-    setTimeout(() => setSharesInput(''), 1000);
+    setTimeout(() => setSharesInput(0), 1000);
   };
 
   const handleSharesSubmit = (e) => {
@@ -91,15 +81,15 @@ function WaiversList({ row, index }) {
         Bank Balance:  $
         {' '}
         {
-          user.leagueInfo[0].bank_balance * 0.01 - (((1 / 100)
-            * row.current_price_per_share) * sharesInput).toFixed(2)
+          bankBalance.bank_balance * 0.01 - (
+            (row.current_price_per_share * 0.01).toFixed(2) * sharesInput).toFixed(2)
         }
         <DialogContent>
           <DialogContentText>
             {row.ticker}
           </DialogContentText>
           <p>
-            shares owned:
+            Shares Available:
             {' '}
             {row.sharesRemaining - sharesInput}
           </p>
@@ -115,9 +105,8 @@ function WaiversList({ row, index }) {
             autoFocus
             margin='dense'
             id='name'
-            label='shares'
+            label='buy stocks'
             type='number'
-            fullWidth
             onChange={(e) => handleSharesSubmit(e)}
           />
         </DialogContent>

@@ -41,6 +41,24 @@ stockRouter.get('/stock/:stockID', (req, res) => {
     });
 });
 
+// get league_user by user id
+
+stockRouter.get('/bank/:userID', (req, res) => {
+  const { userID } = req.params;
+  League_user.findOne({
+    where: {
+      id_user: userID
+    }
+  })
+    .then((bank) => {
+      res.send(bank);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send(err);
+    });
+});
+
 // get user's portfolio info by user primary key id
 // add stock info to each portfolio instance
 stockRouter.get('/portfolio/:userID', async (req, res) => {
@@ -105,8 +123,8 @@ stockRouter.get('/waivers/:leagueID', (req, res) => {
             const updatedStock = { ...indStock.dataValues };
             updatedStock.sharesRemaining = 100;
             port.map((indPortEntry) => {
-              if (indStock.dataValues.id === indPortEntry.dataValues.id_stock) {
-                updatedStock.sharesRemaining -= indPortEntry.dataValues.portfolio.shares;
+              if (indStock.id === indPortEntry.id_stock) {
+                updatedStock.sharesRemaining -= indPortEntry.portfolio.shares;
               }
             });
             waivers.push(updatedStock);
@@ -171,8 +189,8 @@ stockRouter.post('/waivers', async (req, res) => {
         const currentShares = entry[0].dataValues.portfolio.shares;
         // round this
         const updatedPriceperShare = ((shares * price_per_share_at_purchase)
-        + (currentShares * entry[0].dataValues.portfolio.price_per_share_at_purchase))
-        / (currentShares + shares);
+          + (currentShares * entry[0].dataValues.portfolio.price_per_share_at_purchase))
+          / (currentShares + shares);
         const updatedPortfolio = {
           shares: currentShares + shares,
           price_per_share_at_purchase: updatedPriceperShare

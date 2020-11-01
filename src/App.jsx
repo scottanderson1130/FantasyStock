@@ -64,7 +64,7 @@ function App() {
       return waiversResponse;
     }
     fetchWaivers();
-  }, [dispatch, user]);
+  }, [dispatch, user?.leagueInfo]);
 
   return (
     <Router>
