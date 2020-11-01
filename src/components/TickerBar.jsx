@@ -9,8 +9,6 @@ function TickerBar() {
   const ticker = useSelector(selectYourStock);
   const logIn = useSelector(selectLogIn);
 
-  console.log(ticker);
-
   function tickerColor(a, b) {
     let color = '';
     if (a > b) {
