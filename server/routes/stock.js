@@ -67,6 +67,10 @@ stockRouter.get('/portfolio/:userID', async (req, res) => {
     where: {
       id_user: userID
     }
+<<<<<<< HEAD
+=======
+    // include: [Stock]
+>>>>>>> f427bf4... (settings) Turn on news for testing
   })
     .then(async (arrayOfPortfolios) => {
       const response = [];
@@ -75,7 +79,6 @@ stockRouter.get('/portfolio/:userID', async (req, res) => {
         Stock.findByPk(portfolio.dataValues.id_stock)
           .then(async (stock) => {
             detailedInfo.stock = await { ...stock.dataValues };
-            console.log('detailedInfo', detailedInfo);
             response.push(detailedInfo);
           });
       });
