@@ -13,12 +13,10 @@ function Waivers() {
   const [search, setSearch] = useState('');
   const [bankBalance, setBankBalance] = useState({});
 
-  console.log(rows, 'waivers');
-
   useEffect(() => {
     axios.get(`/stock/bank/${user?.id}`)
-      .then((response) => setBankBalance(response.data))
-  }, []);
+      .then((response) => setBankBalance(response.data));
+  }, [user?.id]);
 
   const handleSearch = (e) => {
     setSearch(e.target.value);

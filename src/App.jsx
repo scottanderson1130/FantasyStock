@@ -31,7 +31,7 @@ function App() {
       return userResponse;
     }
     fetchUser();
-  }, []);
+  }, [dispatch]);
 
   const user = useSelector(selectUser);
 
@@ -64,7 +64,7 @@ function App() {
       return waiversResponse;
     }
     fetchWaivers();
-  }, [user?.leagueInfo[0].id_league]);
+  }, [dispatch, user?.leagueInfo]);
 
   return (
     <Router>

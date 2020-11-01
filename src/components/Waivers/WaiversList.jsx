@@ -12,8 +12,8 @@ import {
 } from '@material-ui/core';
 import React, { useState } from 'react';
 import axios from 'axios';
-import { setWaivers } from '../../features/waiversSlice';
 import { useDispatch } from 'react-redux';
+import { setWaivers } from '../../features/waiversSlice.js';
 
 function WaiversList({
   row, index, user, bankBalance, setBankBalance
@@ -35,8 +35,7 @@ function WaiversList({
     }).then(() => axios.get(`/stock/bank/${user?.id}`)
       .then((response) => setBankBalance(response.data)))
       .then(() => axios.get(`/stock/waivers/${user?.leagueInfo[0].id_league}`)
-        .then((res) => dispatch(setWaivers(res.data))
-        )).catch((err) => console.error(err))
+        .then((res) => dispatch(setWaivers(res.data)))).catch((err) => console.error(err));
 
     setOpen(false);
     setSharesInput(0);

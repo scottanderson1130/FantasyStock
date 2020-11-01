@@ -160,10 +160,11 @@ function WaiversTable({
     setPage(0);
   };
 
-  const filteredStocks =
-    rows?.filter((row) => row
+  const filteredStocks = rows?.filter(
+    (row) => row
       .company_name.toLowerCase()
-      .indexOf(search.toLowerCase()) !== -1);
+      .indexOf(search.toLowerCase()) !== -1
+  );
   const ControllingRowsPerPage = page * rowsPerPage;
 
   return (
