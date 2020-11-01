@@ -123,13 +123,8 @@ stockRouter.get('/waivers/:leagueID', (req, res) => {
             const updatedStock = { ...indStock.dataValues };
             updatedStock.sharesRemaining = 100;
             port.map((indPortEntry) => {
-<<<<<<< HEAD
-              if (indStock.dataValues.id === indPortEntry.dataValues.id_stock) {
-                updatedStock.sharesRemaining -= indPortEntry.dataValues.portfolio.shares;
-=======
               if (indStock.id === indPortEntry.id_stock) {
                 updatedStock.sharesRemaining -= indPortEntry.portfolio.shares;
->>>>>>> 12ceb6d... (fix) share remainings route
               }
             });
             waivers.push(updatedStock);
