@@ -41,6 +41,24 @@ stockRouter.get('/stock/:stockID', (req, res) => {
     });
 });
 
+// get league_user by user id
+
+stockRouter.get('/bank/:userID', (req, res) => {
+  const { userID } = req.params;
+  League_user.findOne({
+    where: {
+      id_user: userID
+    }
+  })
+    .then((bank) => {
+      res.send(bank);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send(err);
+    });
+});
+
 // get user's portfolio info by user primary key id
 // add stock info to each portfolio instance
 stockRouter.get('/portfolio/:userID', async (req, res) => {
@@ -155,11 +173,11 @@ stockRouter.post('/waivers', async (req, res) => {
             League_user.update({
               bank_balance: newBankBalance
             },
-            {
-              where: {
-                id_league, id_user
-              }
-            });
+              {
+                where: {
+                  id_league, id_user
+                }
+              });
           })
           .then(() => {
             const data = {
@@ -171,8 +189,8 @@ stockRouter.post('/waivers', async (req, res) => {
         const currentShares = entry[0].dataValues.portfolio.shares;
         // round this
         const updatedPriceperShare = ((shares * price_per_share_at_purchase)
-        + (currentShares * entry[0].dataValues.portfolio.price_per_share_at_purchase))
-        / (currentShares + shares);
+          + (currentShares * entry[0].dataValues.portfolio.price_per_share_at_purchase))
+          / (currentShares + shares);
         const updatedPortfolio = {
           shares: currentShares + shares,
           price_per_share_at_purchase: updatedPriceperShare
@@ -180,11 +198,11 @@ stockRouter.post('/waivers', async (req, res) => {
         League_user.update({
           bank_balance: newBankBalance
         },
-        {
-          where: {
-            id_league, id_user
-          }
-        })
+          {
+            where: {
+              id_league, id_user
+            }
+          })
           .then(() => {
             Stock_user.update({ portfolio: updatedPortfolio },
               {
