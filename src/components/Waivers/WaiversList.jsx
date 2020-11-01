@@ -14,6 +14,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { setWaivers } from '../../features/waiversSlice.js';
+import { setYourStock } from '../../features/yourStockSlice.js';
 
 function WaiversList({
   row, index, user, bankBalance, setBankBalance
@@ -35,7 +36,26 @@ function WaiversList({
     }).then(() => axios.get(`/stock/bank/${user?.id}`)
       .then((response) => setBankBalance(response.data)))
       .then(() => axios.get(`/stock/waivers/${user?.leagueInfo[0].id_league}`)
-        .then((res) => dispatch(setWaivers(res.data)))).catch((err) => console.error(err));
+        .then((waivers) => dispatch(setWaivers(waivers.data))))
+      .then(() => axios.get(`/stock/portfolio/${user?.id}`)
+        .then((stocks) => {
+          const stocksCopy = { ...stocks };
+          stocks.data.map((stock, ind) => {
+            if (stock.stock.company_name) {
+              (stocksCopy.data[ind].company_name = stock.stock.company_name);
+            }
+            if (stock.stock.ticker) {
+              (stocksCopy.data[ind].ticker = stock.stock.ticker);
+            }
+            if (stock.stock.current_price_per_share) {
+              (stocksCopy.data[ind].current_price_per_share = stock.stock.current_price_per_share);
+            }
+            return (stocksCopy.data);
+          });
+          dispatch(setYourStock(stocksCopy.data));
+        }))
+
+      .catch((err) => console.error(err));
 
     setOpen(false);
     setSharesInput(0);
