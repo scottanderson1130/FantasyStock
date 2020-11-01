@@ -9,6 +9,12 @@ module.exports = (sequelize, DataTypes) => {
     },
     record: {
       type: DataTypes.STRING
+    },
+    team_name: {
+      type: DataTypes.INTEGER
+    },
+    team_logo: {
+      type: DataTypes.STRING
     }
   }, {
     freezeTableName: true
