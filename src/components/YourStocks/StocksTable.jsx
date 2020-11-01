@@ -120,7 +120,8 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(2)
   },
   table: {
-    width: '45%'
+    width: '45%',
+    margin: 'auto'
   },
   visuallyHidden: {
     border: 0,

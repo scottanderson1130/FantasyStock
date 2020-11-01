@@ -52,8 +52,8 @@ function StocksList({ row, index }) {
           {row.ticker}
         </TableCell>
         <TableCell align='right'>{row.company_name}</TableCell>
-        <TableCell align='right'>{row.price_per_share_at_purchase}</TableCell>
-        <TableCell align='right'>{row.shares}</TableCell>
+        <TableCell align='right'>{((1 / 100) * row.portfolio.price_per_share_at_purchase).toFixed(2)}</TableCell>
+        <TableCell align='right'>{row.portfolio.shares}</TableCell>
       </TableRow>
       <Dialog open={open} onClose={handleClose} aria-labelledby='form-dialog-title'>
         <DialogTitle id='form-dialog-title'>{myStocks.company_name}</DialogTitle>

@@ -48,11 +48,11 @@ function TickerBar() {
                         <span
                           className={
                             tickerColor(example.current_price_per_share,
-                              example.price_per_share_at_purchase)
+                              example.portfolio.price_per_share_at_purchase)
                           }
                         >
                           {tickerDisplay(example.current_price_per_share,
-                            example.price_per_share_at_purchase)}
+                            example.portfolio.price_per_share_at_purchase)}
                         </span>
                       </p>
                     </div>
