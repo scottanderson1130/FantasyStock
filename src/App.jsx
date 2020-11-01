@@ -31,7 +31,7 @@ function App() {
       return userResponse;
     }
     fetchUser();
-  }, [dispatch]);
+  }, []);
 
   const user = useSelector(selectUser);
 

@@ -11,28 +11,14 @@ import {
   TextField
 } from '@material-ui/core';
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
 import axios from 'axios';
-import { selectUser } from '../../features/userSlice.js';
 
-function WaiversList({ row, index }) {
-  const user = useSelector(selectUser);
-
+function WaiversList({
+  row, index, user, bankBalance
+}) {
   const [open, setOpen] = useState(false);
   const [waiver, setWaiver] = useState({});
   const [sharesInput, setSharesInput] = useState(0);
-  // const [bankBalance, setBankBalance] = useState(0);
-
-  // useEffect(() => {
-  //   async function fetchLeagueInfo() {
-  //     const response = await axios.get(`/user/league/user/=${user.id}`);
-  //     setBankBalance(response.data.bank_balance);
-  //     console.log(response);
-
-  //     return response;
-  //   }
-  //   fetchLeagueInfo();
-  // }, []);
 
   const onSubmit = () => {
     axios.post('/stock/waivers', {
@@ -91,15 +77,15 @@ function WaiversList({ row, index }) {
         Bank Balance:  $
         {' '}
         {
-          user.leagueInfo[0].bank_balance * 0.01 - (((1 / 100)
-            * row.current_price_per_share) * sharesInput).toFixed(2)
+          bankBalance.bank_balance * 0.01 - (
+            (row.current_price_per_share * 0.01) * sharesInput).toFixed(2)
         }
         <DialogContent>
           <DialogContentText>
             {row.ticker}
           </DialogContentText>
           <p>
-            shares owned:
+            Shares Available:
             {' '}
             {row.sharesRemaining - sharesInput}
           </p>
