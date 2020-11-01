@@ -123,8 +123,18 @@ stockRouter.get('/waivers/:leagueID', (req, res) => {
             const updatedStock = { ...indStock.dataValues };
             updatedStock.sharesRemaining = 100;
             port.map((indPortEntry) => {
+<<<<<<< HEAD
               if (indStock.id === indPortEntry.id_stock) {
                 updatedStock.sharesRemaining -= indPortEntry.portfolio.shares;
+=======
+<<<<<<< HEAD
+              if (indStock.dataValues.id === indPortEntry.dataValues.id_stock) {
+                updatedStock.sharesRemaining -= indPortEntry.dataValues.portfolio.shares;
+=======
+              if (indStock.id === indPortEntry.id_stock) {
+                updatedStock.sharesRemaining -= indPortEntry.portfolio.shares;
+>>>>>>> fbab328... (fix) Comment out part of db until update is merged
+>>>>>>> 8645aea... (fix) Comment out part of db until update is merged
               }
             });
             waivers.push(updatedStock);
