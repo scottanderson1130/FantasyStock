@@ -12,10 +12,13 @@ import {
 } from '@material-ui/core';
 import React, { useState } from 'react';
 import axios from 'axios';
+import { setWaivers } from '../../features/waiversSlice';
+import { useDispatch } from 'react-redux';
 
 function WaiversList({
-  row, index, user, bankBalance
+  row, index, user, bankBalance, setBankBalance
 }) {
+  const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const [waiver, setWaiver] = useState({});
   const [sharesInput, setSharesInput] = useState(0);
@@ -27,14 +30,16 @@ function WaiversList({
       id_user: user.leagueInfo[0].id_user,
       portfolio: {
         price_per_share_at_purchase: row.current_price_per_share,
-        shares: sharesInput
+        shares: Number(sharesInput)
       }
-    })
-      .then((response) => response.data)
-      .catch((err) => console.error(err));
+    }).then(() => axios.get(`/stock/bank/${user?.id}`)
+      .then((response) => setBankBalance(response.data)))
+      .then(() => axios.get(`/stock/waivers/${user?.leagueInfo[0].id_league}`)
+        .then((res) => dispatch(setWaivers(res.data))
+        )).catch((err) => console.error(err))
 
     setOpen(false);
-    setTimeout(() => setSharesInput(''), 1000);
+    setSharesInput(0);
   };
 
   const handleOpen = () => {
@@ -44,7 +49,7 @@ function WaiversList({
 
   const handleClose = () => {
     setOpen(false);
-    setTimeout(() => setSharesInput(''), 1000);
+    setTimeout(() => setSharesInput(0), 1000);
   };
 
   const handleSharesSubmit = (e) => {
@@ -78,7 +83,7 @@ function WaiversList({
         {' '}
         {
           bankBalance.bank_balance * 0.01 - (
-            (row.current_price_per_share * 0.01) * sharesInput).toFixed(2)
+            (row.current_price_per_share * 0.01).toFixed(2) * sharesInput).toFixed(2)
         }
         <DialogContent>
           <DialogContentText>
@@ -101,9 +106,8 @@ function WaiversList({
             autoFocus
             margin='dense'
             id='name'
-            label='shares'
+            label='buy stocks'
             type='number'
-            fullWidth
             onChange={(e) => handleSharesSubmit(e)}
           />
         </DialogContent>

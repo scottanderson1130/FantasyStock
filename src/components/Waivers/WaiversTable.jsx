@@ -137,7 +137,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function WaiversTable({
-  rows, search, user, bankBalance
+  rows, search, user, bankBalance, setBankBalance
 }) {
   const classes = useStyles();
   const [order, setOrder] = useState('asc');
@@ -160,8 +160,8 @@ function WaiversTable({
     setPage(0);
   };
 
-  const filteredStocks = rows
-    .filter((row) => row
+  const filteredStocks =
+    rows?.filter((row) => row
       .company_name.toLowerCase()
       .indexOf(search.toLowerCase()) !== -1);
   const ControllingRowsPerPage = page * rowsPerPage;
@@ -192,6 +192,7 @@ function WaiversTable({
                     key={row.ticker}
                     user={user}
                     bankBalance={bankBalance}
+                    setBankBalance={setBankBalance}
                   />
                 ))}
             </TableBody>

@@ -16,13 +16,9 @@ function Waivers() {
   console.log(rows, 'waivers');
 
   useEffect(() => {
-    async function fetchBank() {
-      const response = await axios.get(`/stock/bank/${user?.id}`);
-      setBankBalance(response.data);
-      return response;
-    }
-    fetchBank();
-  }, [user?.id]);
+    axios.get(`/stock/bank/${user?.id}`)
+      .then((response) => setBankBalance(response.data))
+  }, []);
 
   const handleSearch = (e) => {
     setSearch(e.target.value);
@@ -50,7 +46,13 @@ function Waivers() {
           size='small'
         />
       </div>
-      <WaiversTable rows={rows} search={search} user={user} bankBalance={bankBalance} />
+      <WaiversTable
+        rows={rows}
+        search={search}
+        user={user}
+        bankBalance={bankBalance}
+        setBankBalance={setBankBalance}
+      />
     </div>
   );
 }
