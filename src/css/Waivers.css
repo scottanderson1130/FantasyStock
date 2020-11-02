@@ -6,7 +6,6 @@
 }
 
 .waivers_bank-balance {
-  float: right;
-  padding-right: 40px;
+  float: center;
   text-align: center;
 }
