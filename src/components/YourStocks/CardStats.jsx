@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -26,7 +27,7 @@ const useStyles = makeStyles({
   }
 });
 
-function CardStats() {
+function CardStats({ bankBalance }) {
   const classes = useStyles();
   // const bull = <span className={classes.bullet}>•</span>;
 
@@ -35,7 +36,11 @@ function CardStats() {
       <Card className={classes.root} variant='outlined'>
         <CardContent>
           <Typography className={classes.title} color='textSecondary' gutterBottom>
-            Stats
+            <h2>Bank Balance</h2>
+            <h3>
+              $
+              {bankBalance.bank_balance * 0.01}
+            </h3>
           </Typography>
           <Typography variant='h5' component='h2'>
             information 1

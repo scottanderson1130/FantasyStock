@@ -13,10 +13,12 @@ import {
 import { ChevronLeft, Menu } from '@material-ui/icons';
 import '../css/Nav.css';
 import { useSelector } from 'react-redux';
-import { selectLogIn } from '../features/userSlice.js';
+import { selectLogIn, selectUser } from '../features/userSlice.js';
 
 function Nav() {
   const [open, setOpen] = useState(false);
+
+  const user = useSelector(selectUser);
 
   // Open and close Drawer functions
   const handleDrawerOpen = () => setOpen(true);
@@ -77,7 +79,7 @@ function Nav() {
             <Menu />
           </IconButton>
           <Typography className='nav_logo' variant='h6'>
-            Name
+            {user?.username}
           </Typography>
 
           <Button color='inherit'>

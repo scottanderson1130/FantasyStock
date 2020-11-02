@@ -61,7 +61,7 @@ const headCells = [
     id: 'current_price_per_share', numeric: true, disablePadding: false, label: 'Price Per Share'
   },
   {
-    id: 'shares_available', numeric: true, disablePadding: false, label: 'Available'
+    id: 'shares_available', numeric: true, disablePadding: false, label: ' Shares Available'
   }
 ];
 
