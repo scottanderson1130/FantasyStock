@@ -67,10 +67,7 @@ stockRouter.get('/portfolio/:userID', async (req, res) => {
     where: {
       id_user: userID
     }
-<<<<<<< HEAD
-=======
     // include: [Stock]
->>>>>>> f427bf4... (settings) Turn on news for testing
   })
     .then(async (arrayOfPortfolios) => {
       const response = [];
