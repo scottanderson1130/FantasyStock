@@ -26,11 +26,11 @@ function Waivers() {
 
     <div className='waivers'>
       <div className='waivers_bank-balance'>
-        <h1>Bank Balance</h1>
-        <h1 className='waivers_bank-amount'>
+        <h2>Bank Balance</h2>
+        <h3 className='waivers_bank-amount'>
           $
           {bankBalance.bank_balance * 0.01}
-        </h1>
+        </h3>
       </div>
       <div className='waivers_search'>
         <TextField

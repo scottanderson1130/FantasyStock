@@ -1,13 +1,22 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Avatar } from '@material-ui/core/';
+import axios from 'axios';
 import BasicTable from '../components/YourStocks/StocksTable.jsx';
 import '../css/YourStocks.css';
 import CardStats from '../components/YourStocks/CardStats.jsx';
 import { selectYourStock } from '../features/yourStockSlice.js';
+import { selectUser } from '../features/userSlice.js';
 
 function YourStocks() {
+  const user = useSelector(selectUser);
   const rows = useSelector(selectYourStock);
+  const [bankBalance, setBankBalance] = useState({});
+
+  useEffect(() => {
+    axios.get(`/stock/bank/${user?.id}`)
+      .then((response) => setBankBalance(response.data));
+  }, [user?.id]);
 
   return (
     <div className='yourStocks'>
@@ -22,9 +31,9 @@ function YourStocks() {
           />
         </div>
         <div className='YourStocks_card'>
-          <CardStats />
+          <CardStats bankBalance={bankBalance} />
         </div>
-        <BasicTable rows={rows} className='yourStocks_table' />
+        <BasicTable rows={rows} user={user} bankBalance={bankBalance} setBankBalance={setBankBalance} className='yourStocks_table' />
       </div>
     </div>
   );
