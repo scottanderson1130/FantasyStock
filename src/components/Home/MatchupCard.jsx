@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -7,7 +8,7 @@ import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setLeague } from '../../features/leagueSlice.js';
 
 const useStyles = makeStyles({
@@ -29,7 +30,6 @@ function MatchupCard({ league, user }) {
   const dispatch = useDispatch();
 
   const clickLeagueUpdate = () => {
-    console.log(league.id_league);
     dispatch(setLeague(league.id_league));
   };
 
@@ -49,9 +49,9 @@ function MatchupCard({ league, user }) {
 
       </CardContent>
       <CardActions style={{ justifyContent: 'center' }}>
-      <Link key='leaguinfo' to='/yourstocks'>
-        <Button onClick={clickLeagueUpdate} size='small' href=''>My Stocks</Button>
-      </Link>
+        <Link key='leaguinfo' to='/yourstocks'>
+          <Button onClick={clickLeagueUpdate} size='small' href=''>My Stocks</Button>
+        </Link>
       </CardActions>
     </Card>
   );
