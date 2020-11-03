@@ -1,17 +1,31 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 import { TextField } from '@material-ui/core';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 import WaiversTable from '../components/Waivers/WaiversTable.jsx';
 import '../css/Waivers.css';
-import { selectWaivers } from '../features/waiversSlice.js';
+import { selectWaivers, setWaivers } from '../features/waiversSlice.js';
 import { selectUser } from '../features/userSlice.js';
+import { selectLeague } from '../features/leagueSlice.js';
 
 function Waivers() {
   const user = useSelector(selectUser);
   const rows = useSelector(selectWaivers);
   const [search, setSearch] = useState('');
   const [bankBalance, setBankBalance] = useState({});
+
+  const dispatch = useDispatch();
+  const league = useSelector(selectLeague);
+
+  useEffect(() => {
+    async function fetchWaivers() {
+      const waiversResponse = await axios.get(`/stock/waivers/${league}`);
+      dispatch(setWaivers(waiversResponse.data));
+      return waiversResponse;
+    }
+    fetchWaivers();
+  }, [dispatch, user?.leagueInfo]);
 
   useEffect(() => {
     axios.get(`/stock/bank/${user?.id}`)

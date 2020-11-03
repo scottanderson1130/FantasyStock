@@ -40,7 +40,8 @@
     "eslint-plugin-react-hooks": "^4.2.0",
     "nodemon": "^2.0.6",
     "passport-google-oauth": "^2.0.0",
-    "style-loader": "^2.0.0"
+    "style-loader": "^2.0.0",
+    "fs": "0.0.1-security"
   },
   "dependencies": {
     "@babel/polyfill": "^7.12.1",
