@@ -27,7 +27,6 @@ function Waivers() {
     fetchWaivers();
   }, [dispatch, user?.leagueInfo]);
 
-
   useEffect(() => {
     axios.get(`/stock/bank/${user?.id}`)
       .then((response) => setBankBalance(response.data));
