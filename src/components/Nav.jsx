@@ -44,7 +44,7 @@ function Nav() {
     },
     {
       option: 'Settings',
-      path: '/'
+      path: '/settings'
     },
     {
       option: 'Scoreboard',
