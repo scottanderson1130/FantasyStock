@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import axios from 'axios';
 import { selectUser } from '../features/userSlice.js';
 import { selectLeague } from '../features/leagueSlice.js';
+import SettingsLeague from '../components/Settings/SettingsLeague.jsx';
 
 function Settings() {
   const [myLeague, setMyLeague] = useState({});
@@ -20,15 +21,7 @@ function Settings() {
 
   return (
     <div>
-      <h1>
-        League Name:
-        {myLeague?.league_name}
-      </h1>
-      <p>
-        Bank Balance:
-        {myLeague?.bank_balance}
-      </p>
-      <p>Length of Match (day, week)</p>
+      <SettingsLeague myLeague={myLeague} />
     </div>
   );
 }
