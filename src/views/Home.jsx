@@ -23,7 +23,15 @@ function Home() {
         <div>
           <Grid container justify='center'>
             <div>
-              {user?.leagueInfo.map((league) => <MatchupCard user={user} league={league} />)}
+              {
+              user.leagueInfo.map((league) => (
+                <MatchupCard
+                  user={user}
+                  league={league}
+                  key={league.id_league}
+                />
+              ))
+}
             </div>
           </Grid>
           <div>
