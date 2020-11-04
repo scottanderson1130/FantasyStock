@@ -4,12 +4,13 @@ import Grid from '@material-ui/core/Grid';
 import MatchupCard from '../components/Home/MatchupCard.jsx';
 import CreateNewLeague from '../components/Home/CreateNewLeague.jsx';
 import '../css/YourStocks.css';
-import { selectLogIn } from '../features/userSlice.js';
+import { selectLogIn, selectUser } from '../features/userSlice.js';
 import Stocknews from '../components/Home/Stocknews.jsx';
 
 // eslint-disable-next-line react/prop-types
 function Home() {
   const logIn = useSelector(selectLogIn);
+  const user = useSelector(selectUser);
 
   return (
     (!logIn)
@@ -22,7 +23,7 @@ function Home() {
         <div>
           <Grid container justify='center'>
             <div>
-              <MatchupCard />
+              {user?.leagueInfo.map((league) => <MatchupCard user={user} league={league} />)}
             </div>
           </Grid>
           <div>

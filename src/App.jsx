@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import './css/App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import axios from 'axios';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import ScoreBoard from './views/ScoreBoard.jsx';
 import YourStocks from './views/YourStocks.jsx';
 import Waivers from './views/Waivers.jsx';
@@ -10,9 +10,9 @@ import Home from './views/Home.jsx';
 import Nav from './components/Nav.jsx';
 import TickerBar from './components/TickerBar.jsx';
 import LeagueInfo from './views/LeagueInfo.jsx';
-import { selectUser, setLogIn, setUser } from './features/userSlice.js';
-import { setYourStock } from './features/yourStockSlice.js';
-import { setWaivers } from './features/waiversSlice.js';
+import Settings from './views/Settings.jsx';
+import MessageBoard from './views/MessageBoard.jsx';
+import { setLogIn, setUser } from './features/userSlice.js';
 
 function App() {
   const logIn = true;
@@ -33,39 +33,6 @@ function App() {
     fetchUser();
   }, [dispatch]);
 
-  const user = useSelector(selectUser);
-
-  useEffect(() => {
-    async function fetchYourStocks() {
-      await axios.get(`/stock/portfolio/${user?.id}`).then((response) => {
-        const responseCopy = { ...response };
-        response.data.map((stock, ind) => {
-          if (stock.stock.company_name) {
-            (responseCopy.data[ind].company_name = stock.stock.company_name);
-          }
-          if (stock.stock.ticker) {
-            (responseCopy.data[ind].ticker = stock.stock.ticker);
-          }
-          if (stock.stock.current_price_per_share) {
-            (responseCopy.data[ind].current_price_per_share = stock.stock.current_price_per_share);
-          }
-          return (responseCopy.data);
-        });
-        dispatch(setYourStock(responseCopy.data));
-      });
-    }
-    fetchYourStocks();
-  }, [dispatch, user]);
-
-  useEffect(() => {
-    async function fetchWaivers() {
-      const waiversResponse = await axios.get(`/stock/waivers/${user?.leagueInfo[0].id_league}`);
-      dispatch(setWaivers(waiversResponse.data));
-      return waiversResponse;
-    }
-    fetchWaivers();
-  }, [dispatch, user?.leagueInfo]);
-
   return (
     <Router>
       <div className='app'>
@@ -77,6 +44,8 @@ function App() {
           <Route path='/yourstocks' component={YourStocks} />
           <Route path='/waivers' component={Waivers} />
           <Route path='/leagueinfo' component={LeagueInfo} />
+          <Route path='/settings' component={Settings} />
+          <Route path='/messageboard' component={MessageBoard} />
         </Switch>
       </div>
     </Router>

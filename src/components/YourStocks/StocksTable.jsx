@@ -136,7 +136,9 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function BasicTable({ rows }) {
+function BasicTable({
+  rows, user, bankBalance, setBankBalance
+}) {
   BasicTable.propTypes = rows;
 
   const classes = useStyles();
@@ -181,7 +183,14 @@ function BasicTable({ rows }) {
               {stableSort(rows, getComparator(order, orderBy))
                 .slice(ControllingRowsPerPage, ControllingRowsPerPage + rowsPerPage)
                 .map((row, index) => (
-                  <StocksList row={row} index={index} key={row.stock.id} />
+                  <StocksList
+                    row={row}
+                    index={index}
+                    key={row.stock.id}
+                    user={user}
+                    bankBalance={bankBalance}
+                    setBankBalance={setBankBalance}
+                  />
                 ))}
             </TableBody>
           </Table>

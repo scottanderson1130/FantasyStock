@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -11,6 +12,10 @@ import TextField from '@material-ui/core/TextField';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import { makeStyles } from '@material-ui/core/styles';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { selectUser, setUser } from '../../features/userSlice.js';
+import { setLeague } from '../../features/leagueSlice.js';
 
 const useStyles = makeStyles({
   root: {
@@ -35,8 +40,25 @@ const useStyles = makeStyles({
 });
 
 function CreateNewLeague() {
-  const [open, setOpen] = React.useState(false);
+  const user = useSelector(selectUser);
+  const [inputLeague, SetInputLeague] = useState('');
+  const [open, setOpen] = useState(false);
   const classes = useStyles();
+
+  const dispatch = useDispatch();
+
+  const onSubmit = () => {
+    axios.post('/league', {
+      league_name: inputLeague,
+      id_owner: user?.id
+    }).then((leagueInfo) => dispatch(setLeague(leagueInfo?.data.id)))
+      .then(() => axios.post('/user', { id: user?.id })
+        .then((response) => dispatch(setUser(response.data))));
+  };
+
+  const handleLeagueTitle = (e) => {
+    SetInputLeague(e.target.value);
+  };
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -61,6 +83,7 @@ function CreateNewLeague() {
             margin='normal'
             variant='outlined'
             size='small'
+            onChange={(e) => handleLeagueTitle(e)}
           />
         </DialogContent>
         <DialogContent>
@@ -107,12 +130,14 @@ function CreateNewLeague() {
           </FormControl>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} href='/leagueinfo' color='primary'>
-            Create
-          </Button>
           <Button onClick={handleClose} color='secondary'>
             Cancel
           </Button>
+          <Link key='settings' to='/settings'>
+            <Button onClick={onSubmit} color='primary'>
+              Create
+            </Button>
+          </Link>
         </DialogActions>
       </Dialog>
     </div>

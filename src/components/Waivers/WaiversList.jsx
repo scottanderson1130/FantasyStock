@@ -15,6 +15,7 @@ import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { setWaivers } from '../../features/waiversSlice.js';
 import { setYourStock } from '../../features/yourStockSlice.js';
+import '../../css/WaiversList.css';
 
 function WaiversList({
   row, index, user, bankBalance, setBankBalance
@@ -98,34 +99,39 @@ function WaiversList({
       </TableRow>
       <Dialog open={open} onClose={handleClose} aria-labelledby='form-dialog-title'>
         <DialogTitle id='form-dialog-title'>{waiver.company_name}</DialogTitle>
-        Bank Balance:  $
-        {' '}
-        {
-          bankBalance.bank_balance * 0.01 - (
-            (row.current_price_per_share * 0.01).toFixed(2) * sharesInput).toFixed(2)
-        }
         <DialogContent>
+          <strong>Bank Balance: </strong>
+          $
+          {
+            (bankBalance.bank_balance * 0.01).toFixed(2) - (
+              (row.current_price_per_share * 0.01).toFixed(2) * sharesInput).toFixed(2)
+          }
           <DialogContentText>
+            <br />
             {row.ticker}
           </DialogContentText>
-          <p>
-            Shares Available:
-            {' '}
-            {row.sharesRemaining - sharesInput}
-          </p>
-          <p>
-            Price per Share: $
-            {((1 / 100) * row.current_price_per_share).toFixed(2)}
-          </p>
-          <p>
-            Total: $
-            {(((1 / 100) * row.current_price_per_share) * sharesInput).toFixed(2)}
-          </p>
+          <div className='waiversList_dialogBox'>
+            <p className='waiversList_dialogBox'>
+              <strong>Shares Available: </strong>
+              {' '}
+              {row.sharesRemaining - sharesInput}
+            </p>
+            <p className='waiversList_dialogBox'>
+              <strong>Price per Share: </strong>
+              $
+              {((1 / 100) * row.current_price_per_share).toFixed(2)}
+            </p>
+            <p>
+              <strong>Total: </strong>
+              $
+              {(((1 / 100) * row.current_price_per_share) * sharesInput).toFixed(2)}
+            </p>
+          </div>
           <TextField
             autoFocus
             margin='dense'
             id='name'
-            label='buy stocks'
+            label='buy/sell stocks'
             type='number'
             onChange={(e) => handleSharesSubmit(e)}
           />
