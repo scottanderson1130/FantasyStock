@@ -2,9 +2,6 @@ module.exports = (sequelize, DataTypes) => {
   const Message = sequelize.define('message', {
     words: {
       type: DataTypes.STRING
-    },
-    date_created: {
-      type: DataTypes.DATE
     }
   }, {
     freezeTableName: true
