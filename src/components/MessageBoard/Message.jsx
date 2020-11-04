@@ -8,19 +8,18 @@ const Message = forwardRef(({ message, username }, ref) => {
     message: propTypes.string.isRequired,
     username: propTypes.string.isRequired
   };
-  const isUser = username === message.username;
+  const isUser = username === message?.username;
 
   return (
     <div ref={ref} className={`message ${isUser && 'message_user'}`}>
       <Card className={isUser ? 'message_userCard' : 'message_guestCard'}>
-        <CardContent>
+        <CardContent style={{ padding: '20px' }}>
           <Typography
             color='white'
-            variant='h5'
-            component='h2'
+            variant='p'
+            component='p'
           >
-            {message.username}
-            :
+            {!isUser && `${message.username || 'Unknown user'}: `}
             {' '}
             {message.text}
           </Typography>

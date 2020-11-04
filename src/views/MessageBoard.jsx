@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import {
-  Button, FormControl, Input, InputLabel
+  FormControl, IconButton, Input
 } from '@material-ui/core';
+import { Send } from '@material-ui/icons';
 import FlipMove from 'react-flip-move';
 import Message from '../components/MessageBoard/Message.jsx';
 import '../css/MessageBoard.css';
@@ -25,27 +26,30 @@ function MessageBoard() {
 
   return (
     <div className='messageBoard'>
-      <h1>
-        Hello,
-
-        {user?.username}
-      </h1>
-
-      <FlipMove>
-        {
-          messages.map((message) => (
-            <Message username={user?.username} message={message} />
-          ))
-        }
-      </FlipMove>
-      <form>
-        <FormControl>
-          <InputLabel>Enter a Message</InputLabel>
-          <Input value={input} type='text' onChange={(e) => setInput(e.target.value)} />
-          <Button disabled={!input} variant='contained' color='primary' onClick={sendMessage} type='submit'>Send Message</Button>
+      <div>
+        <h1>
+          {`Hello, ${user?.username}`}
+        </h1>
+      </div>
+      <div className='messageBoard_messagesLayer'>
+        <div className='container'>
+          <FlipMove>
+            {
+              messages.map((message) => (
+                <Message username={user?.username} message={message} />
+              ))
+            }
+          </FlipMove>
+        </div>
+      </div>
+      <form className='messageBoard_form'>
+        <FormControl className='messageBoard_formControl'>
+          <Input className='messageBoard_inputForm' placeholder='Enter a message...' value={input} type='text' onChange={(e) => setInput(e.target.value)} />
+          <IconButton className='messageBoard_buttonForm' disabled={!input} variant='contained' color='primary' onClick={sendMessage} type='submit'>
+            <Send />
+          </IconButton>
         </FormControl>
       </form>
-
     </div>
   );
 }
