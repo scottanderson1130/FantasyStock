@@ -1,6 +1,4 @@
-/* eslint-disable array-callback-return */
 /* eslint-disable camelcase */
-/* eslint-disable no-console */
 const { Router } = require('express');
 
 const leagueRouter = Router();

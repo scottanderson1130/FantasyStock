@@ -11,6 +11,7 @@ import Nav from './components/Nav.jsx';
 import TickerBar from './components/TickerBar.jsx';
 import LeagueInfo from './views/LeagueInfo.jsx';
 import Settings from './views/Settings.jsx';
+import MessageBoard from './views/MessageBoard.jsx';
 import { setLogIn, setUser } from './features/userSlice.js';
 
 function App() {
@@ -44,6 +45,7 @@ function App() {
           <Route path='/waivers' component={Waivers} />
           <Route path='/leagueinfo' component={LeagueInfo} />
           <Route path='/settings' component={Settings} />
+          <Route path='/messageboard' component={MessageBoard} />
         </Switch>
       </div>
     </Router>
