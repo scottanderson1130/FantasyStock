@@ -60,7 +60,7 @@ function Nav() {
     },
     {
       option: 'Message Board',
-      path: '/'
+      path: '/messageboard'
     }
   ];
 
