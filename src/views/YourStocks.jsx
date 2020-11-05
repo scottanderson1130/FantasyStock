@@ -13,7 +13,6 @@ import { selectLeague } from '../features/leagueSlice.js';
 function YourStocks() {
   const rows = useSelector(selectYourStock);
   const [bankBalance, setBankBalance] = useState({});
-
   const user = useSelector(selectUser);
   const league = useSelector(selectLeague);
 
@@ -23,21 +22,16 @@ function YourStocks() {
   //   axios.get(`/stock/bank/${userId}`).then((money) => setBankBalance(money.data.bank_balance));
   // };
 
-  const fetchYourStocks = (id) => {
-    axios.get(`/stock/portfolio/${id}`)
-      .then((response) => response.data
-        .filter((info) => info.id_league === league))
-      .then((data) => dispatch(setYourStock(data)));
-  };
-
   useEffect(() => {
-    fetchYourStocks(user.id);
+    axios.get(`/stock/portfolio/${user.id}`)
+      .then((response) => response.data.filter((info) => info.id_league === league))
+      .then((data) => dispatch(setYourStock(data)));
   }, [dispatch, user]);
 
   useEffect(() => {
-    axios.get(`/stock/bank/${user.id}`)
+    axios.get(`/stock/bank/${user?.id}`)
       .then((response) => setBankBalance(response.data.bank_balance));
-  }, [user.id]);
+  }, [user?.id]);
 
   return (
     <div className='yourStocks'>
@@ -55,7 +49,6 @@ function YourStocks() {
           <CardStats bankBalance={bankBalance} />
         </div>
         <BasicTable
-          fetchYourStocks={(id) => fetchYourStocks(id)}
           rows={rows}
           user={user}
           bankBalance={bankBalance}
