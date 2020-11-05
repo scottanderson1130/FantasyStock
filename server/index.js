@@ -15,7 +15,7 @@ const app = express();
 const { userRouter } = require('./routes/user');
 const { stockRouter } = require('./routes/stock');
 const { leagueRouter } = require('./routes/league');
-const { messageRouter } = require('./routes/messages');
+// const { messageRouter } = require('./routes/messages');
 const models = require('./db/index');
 // Cookies and Session info
 

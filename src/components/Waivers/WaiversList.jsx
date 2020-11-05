@@ -29,7 +29,6 @@ function WaiversList({
   const league = useSelector(selectLeague);
 
   const onSubmit = () => {
-    console.log('HERE');
     axios.post('/stock/waivers', {
       id_stock: row.id,
       id_league: league,
