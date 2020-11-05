@@ -1,19 +1,27 @@
+
 .messageBoard {
   text-align: center;
 }
 
 .messageBoard_messagesLayer {
-  position: absolute;
-  overflow: hidden;
+  overflow:   none;
+  position: fixed;
+    bottom: 0;
+    left: 0;
+    overflow-anchor: none;
 }
 
 .container {
-    position: fixed;
-    overflow: scroll;
+  overflow:   auto;
+  position:   fixed;
     /* border-radius: 4px; */
     width: calc(100% - 10px);
-
-    bottom: 1px;
+    max-height: 610px;
+    bottom: 75px;
+    min-height: 75px;
+    overflow-anchor: auto;
+    display: flex;
+    flex-direction: column-reverse;
 }
 
 .messageBoard_form {
@@ -40,3 +48,4 @@
 .messageBoard_buttonForm {
   flex: 0;
 }
+
