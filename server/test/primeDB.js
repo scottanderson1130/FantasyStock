@@ -501,7 +501,7 @@ function primeDB() {
         id_stock: 9,
         id_league: 2,
         portfolio: {
-          shares: '2',
+          shares: 3,
           price_per_share_at_purchase: '11215'
         }
       }

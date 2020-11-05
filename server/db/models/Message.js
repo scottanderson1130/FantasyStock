@@ -1,7 +1,16 @@
 module.exports = (sequelize, DataTypes) => {
   const Message = sequelize.define('message', {
+    id: {
+      allowNull: false,
+      autoIncrement: false,
+      primaryKey: true,
+      type: DataTypes.STRING
+    },
     words: {
       type: DataTypes.STRING
+    },
+    date_created: {
+      type: DataTypes.DATE
     }
   }, {
     freezeTableName: true

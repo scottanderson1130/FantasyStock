@@ -35,12 +35,12 @@ function CardStats({ bankBalance }) {
     <div className='cardStats'>
       <Card className={classes.root} variant='outlined'>
         <CardContent>
-          <Typography className={classes.title} color='textSecondary' gutterBottom>
-            <h2>Bank Balance</h2>
-            <h3>
+          <Typography component='h2' className={classes.title} color='textSecondary' gutterBottom>
+            <strong>Bank Balance</strong>
+            <em>
               $
-              {bankBalance.bank_balance * 0.01}
-            </h3>
+              {(bankBalance * 0.01).toFixed(2)}
+            </em>
           </Typography>
           <Typography variant='h5' component='h2'>
             information 1

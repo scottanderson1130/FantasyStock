@@ -11,52 +11,48 @@ import {
   TextField
 } from '@material-ui/core';
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { setWaivers } from '../../features/waiversSlice.js';
 import { setYourStock } from '../../features/yourStockSlice.js';
+import { selectLeague } from '../../features/leagueSlice.js';
 
 function StocksList({
-  row, index, user, bankBalance, setBankBalance
+  row, user, index, bankBalance, setBankBalance
 }) {
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const [myStocks, setMyStocks] = useState({});
   const [sharesInput, setSharesInput] = useState(0);
 
+  const league = useSelector(selectLeague);
+
+  // const getWaivers = () => {
+  //   axios.get(`/stock/waivers/${league}`)
+  //     .then((waiver) => dispatch(setWaivers(waiver.data)));
+  // };
+
+  // useEffect(() => {
+  //   getWaivers();
+  //   fetchYourStocks(user.id);
+  //   updateBank(user.id);
+  // }, []);
+
   const onSubmit = () => {
     axios.post('/stock/waivers', {
-      id_stock: row.id_stock,
-      id_league: user.leagueInfo[0].id_league,
-      id_user: user.leagueInfo[0].id_user,
+      id_stock: row.id,
+      id_league: league,
+      id_user: user.id,
       portfolio: {
         price_per_share_at_purchase: row.current_price_per_share,
         shares: Number(sharesInput)
       }
-    }).then(() => axios.get(`/stock/bank/${user?.id}`)
-      .then((response) => setBankBalance(response.data)))
-      .then(() => axios.get(`/stock/waivers/${user?.leagueInfo[0].id_league}`)
-        .then((waivers) => dispatch(setWaivers(waivers.data))))
-      .then(() => axios.get(`/stock/portfolio/${user?.id}`)
-        .then((stocks) => {
-          const stocksCopy = { ...stocks };
-          stocks.data.map((stock, ind) => {
-            if (stock.stock.company_name) {
-              (stocksCopy.data[ind].company_name = stock.stock.company_name);
-            }
-            if (stock.stock.ticker) {
-              (stocksCopy.data[ind].ticker = stock.stock.ticker);
-            }
-            if (stock.stock.current_price_per_share) {
-              (stocksCopy.data[ind].current_price_per_share = stock.stock.current_price_per_share);
-            }
-            return (stocksCopy.data);
-          });
-          dispatch(setYourStock(stocksCopy.data));
-        }))
-
-      .catch((err) => console.error(err));
-
+    }).then(() => axios.get(`/stock/bank/${user.id}`)
+      .then((response) => setBankBalance(response.data.bank_balance)))
+      .then(() => axios.get(`/stock/waivers/${league}`))
+      .then((waivers) => dispatch(setWaivers(waivers.data)))
+      .then(() => axios.get(`/stock/portfolio/${user.id}`)
+        .then((stocks) => dispatch(setYourStock(stocks.data))));
     setOpen(false);
     setTimeout(() => setSharesInput(''), 1000);
   };
@@ -71,9 +67,9 @@ function StocksList({
     setTimeout(() => setSharesInput(''), 1000);
   };
 
-  const handleSharesSubmit = (e) => {
+  const handleSharesSubmit = ((e) => {
     setSharesInput(e.target.value);
-  };
+  });
 
   return (
     <>
@@ -90,8 +86,9 @@ function StocksList({
           {row.ticker}
         </TableCell>
         <TableCell align='right'>{row.company_name}</TableCell>
-        <TableCell align='right'>{((1 / 100) * row.portfolio.price_per_share_at_purchase).toFixed(2)}</TableCell>
-        <TableCell align='right'>{row.portfolio.shares}</TableCell>
+        <TableCell align='right'>{(0.01 * row.price_per_share_at_purchase).toFixed(2)}</TableCell>
+        <TableCell align='right'>{row.shares}</TableCell>
+        <TableCell align='right'>{(row.current_price_per_share * 0.01).toFixed(2)}</TableCell>
       </TableRow>
       <Dialog open={open} onClose={handleClose} aria-labelledby='form-dialog-title'>
         <DialogTitle id='form-dialog-title'><strong>{myStocks.company_name}</strong></DialogTitle>
@@ -99,8 +96,8 @@ function StocksList({
           <strong>Bank Balance: </strong>
           $
           {
-            (bankBalance.bank_balance * 0.01).toFixed(2) - (
-              (row.current_price_per_share * 0.01).toFixed(2) * sharesInput).toFixed(2)
+            ((bankBalance * 0.01) - (
+              (row.current_price_per_share * 0.01) * sharesInput)).toFixed(2)
           }
           <DialogContentText>
             <br />
@@ -110,17 +107,17 @@ function StocksList({
             <p className='waiversList_dialogBox'>
               <strong>Shares Available:</strong>
               {' '}
-              {row.portfolio.shares - (-sharesInput)}
+              {row.shares - (-sharesInput)}
             </p>
             <p className='waiversList_dialogBox'>
               <strong> Price per Share: </strong>
               $
-              {((1 / 100) * row.current_price_per_share).toFixed(2)}
+              {(0.01 * row.current_price_per_share).toFixed(2)}
             </p>
             <p>
               <strong>Total: </strong>
               $
-              {(((1 / 100) * row.current_price_per_share) * sharesInput).toFixed(2)}
+              {((0.01 * row.current_price_per_share) * sharesInput).toFixed(2)}
             </p>
           </div>
           <TextField
@@ -137,7 +134,7 @@ function StocksList({
           <Button onClick={handleClose} color='primary'>
             Cancel
           </Button>
-          <Button onClick={onSubmit} color='primary'>
+          <Button onClick={() => onSubmit()} color='primary' value={row.id}>
             Update
           </Button>
         </DialogActions>
