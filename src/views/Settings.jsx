@@ -4,6 +4,7 @@ import axios from 'axios';
 import { selectUser } from '../features/userSlice.js';
 import { selectLeague } from '../features/leagueSlice.js';
 import SettingsLeague from '../components/Settings/SettingsLeague.jsx';
+import '../css/Settings.css';
 
 function Settings() {
   const [myLeague, setMyLeague] = useState({});
@@ -20,8 +21,10 @@ function Settings() {
   }, [league, user]);
 
   return (
-    <div>
-      <SettingsLeague myLeague={myLeague} />
+    <div className='settings'>
+      <div className='settings_league'>
+        <SettingsLeague myLeague={myLeague} />
+      </div>
     </div>
   );
 }
