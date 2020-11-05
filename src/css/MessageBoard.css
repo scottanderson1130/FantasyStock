@@ -14,14 +14,13 @@
 .container {
   overflow:   auto;
   position:   fixed;
-    /* border-radius: 4px; */
-    width: calc(100% - 10px);
-    max-height: 610px;
-    bottom: 75px;
-    min-height: 75px;
-    overflow-anchor: auto;
-    display: flex;
-    flex-direction: column-reverse;
+  width: calc(100% - 10px);
+  max-height: 610px;
+  bottom: 75px;
+  min-height: 75px;
+  overflow-anchor: auto;
+  display: flex;
+  flex-direction: column-reverse;
 }
 
 .messageBoard_form {
@@ -33,11 +32,10 @@
   width: 100%;
   padding-bottom: 20px;
   padding-right: 30px;
-  /* margin: 20px; */
 }
 
 .messageBoard_formControl {
-  display: flex !important; 
+  display: flex !important;
   flex-direction: row !important;
 }
 
@@ -48,4 +46,6 @@
 .messageBoard_buttonForm {
   flex: 0;
 }
+
+
 

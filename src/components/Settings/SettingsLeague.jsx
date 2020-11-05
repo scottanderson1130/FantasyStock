@@ -5,6 +5,30 @@ import {
 } from '@material-ui/core';
 import '../../css/SettingsLeague.css';
 
+const inputsForm = [
+  {
+    description: '# of teams', type: 'number', placeholder: '# of teams', name: 'numberTeams'
+  },
+  {
+    description: 'matches number of days', type: 'number', placeholder: 'matches number of days', name: 'lengthMatches'
+  },
+  {
+    description: '# of matches', type: 'number', placeholder: '# of matches', name: 'numberMatches'
+  },
+  {
+    description: 'start date', type: 'date', placeholder: 'start date', name: 'startDate'
+  },
+  {
+    description: 'end date', type: 'date', placeholder: 'end date', name: 'endDate'
+  },
+  {
+    description: '# of playoff teams', type: 'number', placeholder: '# of playoff teams', name: 'numberTeamsPlayoffs'
+  },
+  {
+    description: 'starting bank', type: 'number', placeholder: 'starting bank', name: 'startingBank'
+  }
+];
+
 function SettingsLeague({ myLeague }) {
   SettingsLeague.propTypes = {
     myLeague: PropTypes.shape({
@@ -13,69 +37,52 @@ function SettingsLeague({ myLeague }) {
     }).isRequired
   };
 
-  const [leagueForm, setLeagueForm] = useState({
-    starting_bank: '',
-    start_date: '',
-    end_date: ''
-  });
+  const [leagueForm, setLeagueForm] = useState({});
 
   const [submitted, setSubmitted] = useState(false);
-  const [valid, setValid] = useState(false);
 
-  const handleStartingBanks = (e) => {
-    setLeagueForm({ ...leagueForm, starting_bank: e.target.value });
-  };
-  const handleStartDate = (e) => {
-    setLeagueForm({ ...leagueForm, start_date: e.target.value });
-  };
-  const handleEndDate = (e) => {
-    setLeagueForm({ ...leagueForm, end_date: e.target.value });
+  const handleChange = (e) => {
+    setLeagueForm({ ...leagueForm, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (leagueForm.starting_bank && leagueForm.start_date && leagueForm.end_date) {
-      setValid(true);
-    }
     setSubmitted(true);
     setTimeout(() => setSubmitted(false), 2000);
   };
 
   return (
-    <div>
-      <h2>League Settings</h2>
-      <h1>
+    <div className='settingsLeague'>
+      <h2 className='settingsLeague_title'>League Settings</h2>
+      <h3 className='settingsLeague_leagueName'>
         League Name:
         {myLeague?.league_name}
-      </h1>
-      <div className='settingsLeague_form'>
-        <form onSubmit={handleSubmit}>
-          {submitted && valid ? <div className='success-message'>Success! Your settings have been updated</div> : null}
-          <Input
-            values={leagueForm.starting_bank}
-            type='number'
-            placeholder='starting bank'
-            name='startingBank'
-            onChange={handleStartingBanks}
-          />
-          {!submitted && !leagueForm.starting_bank ? <span> Please enter a number</span> : null}
-          <Input
-            values={leagueForm.start_date}
-            placeholder='starting date'
-            type='date'
-            name='startDate'
-            onChange={handleStartDate}
-          />
-          {!submitted && !leagueForm.start_date ? <span> Please enter a date</span> : null}
-          <Input
-            values={leagueForm.end_date}
-            placeholder='end date'
-            name='endDate'
-            type='date'
-            onChange={handleEndDate}
-          />
-          {!submitted && !leagueForm.end_date ? <span> Please enter a date</span> : null}
-          <Button type='submit'>Submit</Button>
+      </h3>
+      <div>
+        <form className='settingsLeague_form' onSubmit={handleSubmit}>
+          {submitted && <div className='success-message'>Success! Your settings have been updated</div>}
+          {inputsForm.map(({
+            description, type, placeholder, name
+          }) => (
+            <div className='settingsLeague_settingBox'>
+              <p>{description}</p>
+              <Input
+                key={name}
+                type={type}
+                placeholder={placeholder}
+                name={name}
+                onChange={handleChange}
+              />
+            </div>
+          ))}
+          <Button
+            className='settingsLeague_formButton'
+            variant='contained'
+            color='primary'
+            type='submit'
+          >
+            Submit
+          </Button>
         </form>
       </div>
     </div>

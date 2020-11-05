@@ -1,3 +1,25 @@
-.settingsLeague_form {
+.settingsLeague_title {
+  padding-bottom: 20px;
   text-align: center;
+}
+
+.settingsLeague_leagueName{
+  padding-bottom: 10px;
+}
+
+.settingsLeague_form {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.settingsLeague_formButton {
+  margin-top: 20px !important;
+}
+
+.settingsLeague_settingBox {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
