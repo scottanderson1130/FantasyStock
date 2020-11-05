@@ -20,11 +20,18 @@ function MessageBoard() {
   useEffect(() => {
     axios.get(`/messages/${league}`)
       .then((groupMessages) => setMessages(groupMessages.data));
-  }, []);
+  }, [league]);
 
   const sendMessage = (e) => {
     e.preventDefault();
-    setMessages([...messages, { username: user?.username, text: input }]);
+    axios.post('/messages', {
+      id_league: league,
+      words: input,
+      id_user: user.id,
+      username: user.username
+    }).then((updateMessage) => setMessages([...messages, updateMessage.data]))
+      .then(() => axios.get(`/messages/${league}`)
+        .then((groupMessages) => setMessages(groupMessages.data)));
     setInput('');
   };
 
