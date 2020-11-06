@@ -24,11 +24,11 @@ function TickerBar() {
   function tickerDisplay(a, b) {
     let result = '';
     if (a > b) {
-      result = `⬆️ ${a * 0.01}`;
+      result = `⬆️ ${(a * 0.01).toFixed(2)}`;
     } else if (a === b) {
-      result = `${a * 0.01}`;
+      result = `${(a * 0.01).toFixed(2)}`;
     } else {
-      result = `⬇️ ${a * 0.01}`;
+      result = `⬇️ ${(a * 0.01).toFixed(2)}`;
     }
     return result;
   }

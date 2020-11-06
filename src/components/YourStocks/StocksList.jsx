@@ -70,7 +70,7 @@ function StocksList({
   const handleSharesSubmit = ((e) => {
     setSharesInput(e.target.value);
   });
-
+  console.log('BANK BALANCE', bankBalance);
   return (
     <>
       <TableRow

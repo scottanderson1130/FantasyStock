@@ -39,12 +39,10 @@ function WaiversList({
       }
     }).then(() => axios.get(`/stock/bank/${user.id}`)
       .then((response) => setBankBalance(response.data.bank_balance)))
-      .then(() => axios.get(`/stock/waivers/${league}`)
-        .then((waivers) => dispatch(setWaivers(waivers.data))))
+      .then(() => axios.get(`/stock/waivers/${league}`))
+      .then((waivers) => dispatch(setWaivers(waivers.data)))
       .then(() => axios.get(`/stock/portfolio/${user.id}`)
-        .then((stocks) => dispatch(setYourStock(stocks.data))))
-
-      .catch((err) => console.error(err));
+        .then((stocks) => dispatch(setYourStock(stocks.data))));
 
     setOpen(false);
     setSharesInput(0);

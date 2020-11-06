@@ -15,7 +15,7 @@ const app = express();
 const { userRouter } = require('./routes/user');
 const { stockRouter } = require('./routes/stock');
 const { leagueRouter } = require('./routes/league');
-// const { messageRouter } = require('./routes/messages');
+const { messageRouter } = require('./routes/messages');
 const models = require('./db/index');
 // Cookies and Session info
 
@@ -49,7 +49,7 @@ app.use(express.static(DIST_DIR));
 app.use('/user', userRouter);
 app.use('/stock', stockRouter);
 app.use('/league', leagueRouter);
-// app.use('/messages', messageRouter);
+app.use('/messages', messageRouter);
 app.get('/*', (req, res) => {
   res.sendFile(HTML_FILE);
 });

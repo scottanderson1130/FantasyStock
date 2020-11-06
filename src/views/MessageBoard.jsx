@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { useSelector } from 'react-redux';
 import {
   FormControl, IconButton, Input
@@ -8,18 +9,29 @@ import FlipMove from 'react-flip-move';
 import Message from '../components/MessageBoard/Message.jsx';
 import '../css/MessageBoard.css';
 import { selectUser } from '../features/userSlice.js';
+import { selectLeague } from '../features/leagueSlice.js';
 
 function MessageBoard() {
   const user = useSelector(selectUser);
   const [input, setInput] = useState('');
-  const [messages, setMessages] = useState([
-    { username: 'Chris', text: 'hey hey' },
-    { username: 'Scott', text: 'hey guys' }
-  ]);
+  const league = useSelector(selectLeague);
+  const [messages, setMessages] = useState([]);
+
+  useEffect(() => {
+    axios.get(`/messages/${league}`)
+      .then((groupMessages) => setMessages(groupMessages.data));
+  }, [league]);
 
   const sendMessage = (e) => {
     e.preventDefault();
-    setMessages([...messages, { username: user?.username, text: input }]);
+    axios.post('/messages', {
+      id_league: league,
+      words: input,
+      id_user: user.id,
+      username: user.username
+    }).then((updateMessage) => setMessages([...messages, updateMessage.data]))
+      .then(() => axios.get(`/messages/${league}`)
+        .then((groupMessages) => setMessages(groupMessages.data)));
     setInput('');
   };
 
@@ -33,11 +45,10 @@ function MessageBoard() {
       <div className='messageBoard_messagesLayer'>
         <div className='container'>
           <FlipMove>
-            {
-              messages.map((message) => (
+            {messages
+              && messages.map((message) => (
                 <Message username={user?.username} message={message} />
-              ))
-            }
+              ))}
           </FlipMove>
         </div>
       </div>
