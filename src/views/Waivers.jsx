@@ -25,12 +25,12 @@ function Waivers() {
       return waiversResponse;
     }
     fetchWaivers();
-  }, [dispatch, user?.leagueInfo]);
+  }, [dispatch, user.leagueInfo]);
 
   useEffect(() => {
-    axios.get(`/stock/bank/${user?.id}`)
-      .then((response) => setBankBalance(response.data));
-  }, [user?.id]);
+    axios.get(`/stock/bank/${user.id}`)
+      .then((response) => setBankBalance(response.data.bank_balance));
+  }, [user.id]);
 
   const handleSearch = (e) => {
     setSearch(e.target.value);
@@ -43,7 +43,7 @@ function Waivers() {
         <h2>Bank Balance</h2>
         <h3 className='waivers_bank-amount'>
           $
-          {bankBalance.bank_balance * 0.01}
+          {bankBalance * 0.01}
         </h3>
       </div>
       <div className='waivers_search'>

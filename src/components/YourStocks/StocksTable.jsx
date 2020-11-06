@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
@@ -57,10 +58,13 @@ const headCells = [
     id: 'company_name', numeric: true, disablePadding: false, label: 'Company'
   },
   {
-    id: 'price_per_share_at_purchase', numeric: true, disablePadding: false, label: 'Price Per Share'
+    id: 'price_per_share_at_purchase', numeric: true, disablePadding: false, label: 'Avg. PPS'
   },
   {
     id: 'shares', numeric: true, disablePadding: false, label: 'Shares'
+  },
+  {
+    id: 'current_price_per_share', numeric: true, disablePadding: false, label: 'Current Price'
   }
 ];
 
@@ -90,11 +94,11 @@ function EnhancedTableHead(props) {
               onClick={createSortHandler(headCell.id)}
             >
               {headCell.label}
-              {orderBy === headCell.id ? (
+              {orderBy === headCell.id && (
                 <span className={classes.visuallyHidden}>
-                  {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
+                  {`sorted ${order === 'desc' ? 'descending' : 'ascending'}`}
                 </span>
-              ) : null}
+              )}
             </TableSortLabel>
           </StyledTableCell>
         ))}
@@ -137,9 +141,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function BasicTable({
-  rows, user, bankBalance, setBankBalance
+  rows, user, bankBalance, setBankBalance, updateBank, fetchYourStocks
 }) {
-  BasicTable.propTypes = rows;
+  // BasicTable.propTypes = rows;
 
   const classes = useStyles();
   const [order, setOrder] = useState('asc');
@@ -164,6 +168,19 @@ function BasicTable({
 
   const ControllingRowsPerPage = page * rowsPerPage;
 
+  const stocksTable = rows.map((stockInfo) => {
+    const { portfolio, stock } = stockInfo;
+    const stockReturn = {
+      id: stockInfo.id_stock,
+      shares: portfolio.shares,
+      price_per_share_at_purchase: portfolio.price_per_share_at_purchase,
+      company_name: stock.company_name,
+      ticker: stock.ticker,
+      current_price_per_share: stock.current_price_per_share
+    };
+    return stockReturn;
+  });
+
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
@@ -180,16 +197,18 @@ function BasicTable({
               onRequestSort={handleRequestSort}
             />
             <TableBody>
-              {stableSort(rows, getComparator(order, orderBy))
+              {stableSort(stocksTable, getComparator(order, orderBy))
                 .slice(ControllingRowsPerPage, ControllingRowsPerPage + rowsPerPage)
-                .map((row, index) => (
+                .map((stock, index) => (
                   <StocksList
-                    row={row}
+                    row={stock}
                     index={index}
-                    key={row.stock.id}
+                    key={stock.id}
                     user={user}
                     bankBalance={bankBalance}
                     setBankBalance={setBankBalance}
+                    updateBank={((userId) => updateBank(userId))}
+                    fetchYourStocks={(id) => fetchYourStocks(id)}
                   />
                 ))}
             </TableBody>

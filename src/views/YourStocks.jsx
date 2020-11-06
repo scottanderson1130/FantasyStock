@@ -13,39 +13,31 @@ import { selectLeague } from '../features/leagueSlice.js';
 function YourStocks() {
   const rows = useSelector(selectYourStock);
   const [bankBalance, setBankBalance] = useState({});
+
   const user = useSelector(selectUser);
   const league = useSelector(selectLeague);
 
   const dispatch = useDispatch();
 
+  // const updateBank = (userId) => {
+  //   axios.get(`/stock/bank/${userId}`).then((money) => setBankBalance(money.data.bank_balance));
+  // };
+
+  const fetchYourStocks = (id) => {
+    axios.get(`/stock/portfolio/${id}`)
+      .then((response) => response.data
+        .filter((info) => info.id_league === league))
+      .then((data) => dispatch(setYourStock(data)));
+  };
+
   useEffect(() => {
-    async function fetchYourStocks() {
-      await axios.get(`/stock/portfolio/${user?.id}`).then((response) => {
-        const responseFilter = response.data.filter((info) => info.id_league === league);
-        responseFilter
-          .map((stock, ind) => {
-            if (stock.stock.company_name) {
-              (responseFilter[ind].company_name = stock.stock.company_name);
-            }
-            if (stock.stock.ticker) {
-              (responseFilter[ind].ticker = stock.stock.ticker);
-            }
-            if (stock.stock.current_price_per_share) {
-              (
-                responseFilter[ind].current_price_per_share = stock.stock.current_price_per_share);
-            }
-            return (responseFilter);
-          });
-        dispatch(setYourStock(responseFilter));
-      });
-    }
-    fetchYourStocks();
+    fetchYourStocks(user.id);
   }, [dispatch, user]);
 
   useEffect(() => {
-    axios.get(`/stock/bank/${user?.id}`)
-      .then((response) => setBankBalance(response.data));
-  }, [user?.id]);
+    axios.get(`/stock/bank/${user.id}`)
+      .then((response) => setBankBalance(response.data.bank_balance));
+  }, [user.id]);
 
   return (
     <div className='yourStocks'>
@@ -62,7 +54,14 @@ function YourStocks() {
         <div className='YourStocks_card'>
           <CardStats bankBalance={bankBalance} />
         </div>
-        <BasicTable rows={rows} user={user} bankBalance={bankBalance} setBankBalance={setBankBalance} className='yourStocks_table' />
+        <BasicTable
+          fetchYourStocks={(id) => fetchYourStocks(id)}
+          rows={rows}
+          user={user}
+          bankBalance={bankBalance}
+          setBankBalance={setBankBalance}
+          className='yourStocks_table'
+        />
       </div>
     </div>
   );

@@ -42,16 +42,16 @@ function TickerBar() {
               {() => (
                 <>
                   {ticker.map((example) => (
-                    <div key={example.ticker} className='tickerBar_line'>
+                    <div key={example.stock.ticker} className='tickerBar_line'>
                       <p>
-                        {example.ticker}
+                        {example.stock.ticker}
                         <span
                           className={
-                            tickerColor(example.current_price_per_share,
+                            tickerColor(example.stock.current_price_per_share,
                               example.portfolio.price_per_share_at_purchase)
                           }
                         >
-                          {tickerDisplay(example.current_price_per_share,
+                          {tickerDisplay(example.stock.current_price_per_share,
                             example.portfolio.price_per_share_at_purchase)}
                         </span>
                       </p>

@@ -69,17 +69,16 @@ stockRouter.get('/portfolio/:userID', async (req, res) => {
     }
     // include: [Stock]
   })
-    .then(async (arrayOfPortfolios) => {
+    .then((arrayOfPortfolios) => {
       const response = [];
-      const test = await arrayOfPortfolios.map(async (portfolio) => {
-        const detailedInfo = await { ...portfolio.dataValues };
+      arrayOfPortfolios.map((portfolio) => {
+        const detailedInfo = { ...portfolio.dataValues };
         Stock.findByPk(portfolio.dataValues.id_stock)
-          .then(async (stock) => {
-            detailedInfo.stock = await { ...stock.dataValues };
+          .then((stock) => {
+            detailedInfo.stock = { ...stock.dataValues };
             response.push(detailedInfo);
           });
       });
-      console.log(test);
       // un-ghetto later
       setTimeout(() => {
         res.send(response);
@@ -216,7 +215,7 @@ stockRouter.post('/waivers', async (req, res) => {
                 };
                 res.send(data);
               });
-          });
+          }).then((data) => (data)).catch((err) => console.error(err));
       }
     })
     .catch((err) => {

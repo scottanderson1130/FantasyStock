@@ -14,8 +14,7 @@ function MessageBoard() {
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState([
     { username: 'Chris', text: 'hey hey' },
-    { username: 'Scott', text: 'hey guys' },
-    { username: user?.username, text: 'what is going on' }
+    { username: 'Scott', text: 'hey guys' }
   ]);
 
   const sendMessage = (e) => {
