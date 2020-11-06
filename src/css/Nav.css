@@ -21,6 +21,7 @@ padding-left: 100px;
   padding-bottom: 30px;
   cursor: pointer;
   list-style-type: none;
+  text-decoration: none;
 }
 
 .nav_link {
@@ -32,3 +33,10 @@ a {
   text-decoration: none;
   color: white;
 }
+
+.nav_logo {
+  width: 20px;
+  object-fit: contain;
+  margin-bottom: 5px;
+}
+
