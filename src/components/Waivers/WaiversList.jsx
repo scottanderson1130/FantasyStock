@@ -10,7 +10,7 @@ import {
   TableRow,
   TextField
 } from '@material-ui/core';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { setWaivers } from '../../features/waiversSlice.js';
@@ -27,12 +27,6 @@ function WaiversList({
   const [sharesInput, setSharesInput] = useState(0);
 
   const league = useSelector(selectLeague);
-
-  useEffect(() => {
-    axios.get(`/stock/bank/${user.id}/${league}`)
-      .then((response) => setBankBalance(response.data.bank_balance));
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   const onSubmit = () => {
     axios.post('/stock/waivers', {
@@ -103,7 +97,7 @@ function WaiversList({
           </DialogContentText>
           <div className='waiversList_dialogBox'>
             <p className='waiversList_dialogBox'>
-              <strong>Shares Available: </strong>
+              Shares Available:
               {' '}
               {row.sharesRemaining - sharesInput}
             </p>

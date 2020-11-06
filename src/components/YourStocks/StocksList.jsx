@@ -71,7 +71,7 @@ function StocksList({
     setSharesInput(e.target.value);
   });
   return (
-    <>
+    <div>
       <TableRow
         onClick={handleOpen}
         className='basicTable_row'
@@ -138,7 +138,7 @@ function StocksList({
           </Button>
         </DialogActions>
       </Dialog>
-    </>
+    </div>
   );
 }
 

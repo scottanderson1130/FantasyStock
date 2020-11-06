@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 import { TextField } from '@material-ui/core';
 import { useSelector, useDispatch } from 'react-redux';
@@ -25,17 +24,16 @@ function Waivers() {
       return waiversResponse;
     }
     fetchWaivers();
-  }, [dispatch, user.leagueInfo]);
+  }, [dispatch, league, user.leagueInfo]);
 
   useEffect(() => {
-    axios.get(`/stock/bank/${user.id}`)
+    axios.get(`/stock/bank/${user.id}/${league}`)
       .then((response) => setBankBalance(response.data.bank_balance));
-  }, [user.id]);
+  }, [league, user.id]);
 
   const handleSearch = (e) => {
     setSearch(e.target.value);
   };
-
   return (
 
     <div className='waivers'>
