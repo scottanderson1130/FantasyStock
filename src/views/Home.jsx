@@ -25,7 +25,7 @@ function Home() {
         <div>
           <Grid container justify='center'>
             <div>
-              <Carousel autoPlay={false} animation='slide'>
+              <Carousel autoPlay={false} animation='slide' fullHeightHover={false}>
                 {
               user.leagueInfo.map((league) => (
                 <MatchupCard
