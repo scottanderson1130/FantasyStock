@@ -13,7 +13,7 @@ function Settings() {
 
   useEffect(() => {
     async function fetchLeague() {
-      const response = await axios.post(`/league/${league}`, { id_owner: user?.id });
+      const response = await axios.get(`/league/${league}/${user?.id}`);
       setMyLeague(response.data);
       return response;
     }

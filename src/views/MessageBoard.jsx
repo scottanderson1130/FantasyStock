@@ -54,8 +54,21 @@ function MessageBoard() {
       </div>
       <form className='messageBoard_form'>
         <FormControl className='messageBoard_formControl'>
-          <Input className='messageBoard_inputForm' placeholder='Enter a message...' value={input} type='text' onChange={(e) => setInput(e.target.value)} />
-          <IconButton className='messageBoard_buttonForm' disabled={!input} variant='contained' color='primary' onClick={sendMessage} type='submit'>
+          <Input
+            className='messageBoard_inputForm'
+            placeholder='Enter a message...'
+            value={input}
+            type='text'
+            onChange={(e) => setInput(e.target.value)}
+          />
+          <IconButton
+            className='messageBoard_buttonForm'
+            disabled={!input}
+            variant='contained'
+            color='primary'
+            onClick={sendMessage}
+            type='submit'
+          >
             <Send />
           </IconButton>
         </FormControl>
