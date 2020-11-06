@@ -10,11 +10,13 @@ const {
 
 // create a league route
 leagueRouter.post('/', (req, res) => {
-  const { league_name, id_owner } = req.body;
+  const { league_name, id_owner, settings } = req.body;
 
   League.create({
     league_name,
-    id_owner
+    id_owner,
+    settings
+    // then whatever changes needed here.
   }).then((leagueInfo) => {
     const responseLeagueInfo = { ...leagueInfo.dataValues };
     League_user.create({
@@ -28,6 +30,8 @@ leagueRouter.post('/', (req, res) => {
       res.status(500).send(err);
     });
 });
+// put league route required
+// put for users added to league
 
 // league by id
 leagueRouter.post('/:leagueID', (req, res) => {
