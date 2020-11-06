@@ -88,6 +88,9 @@ function Nav() {
           </Button>
 
           <Button color='inherit'>Folio</Button>
+          <Button color='inherit'>
+            <img className='nav_logo' src={logo} alt='logo' />
+          </Button>
         </Toolbar>
       </AppBar>
 
