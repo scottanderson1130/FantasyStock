@@ -147,7 +147,7 @@ function BasicTable({
 
   const classes = useStyles();
   const [order, setOrder] = useState('asc');
-  const [orderBy, setOrderBy] = useState('calories');
+  const [orderBy, setOrderBy] = useState('ticker');
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 

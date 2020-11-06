@@ -10,7 +10,7 @@ import {
   TableRow,
   TextField
 } from '@material-ui/core';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { setWaivers } from '../../features/waiversSlice.js';
@@ -28,6 +28,12 @@ function WaiversList({
 
   const league = useSelector(selectLeague);
 
+  useEffect(() => {
+    axios.get(`/stock/bank/${user.id}/${league}`)
+      .then((response) => setBankBalance(response.data.bank_balance));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const onSubmit = () => {
     axios.post('/stock/waivers', {
       id_stock: row.id,
@@ -37,12 +43,12 @@ function WaiversList({
         price_per_share_at_purchase: row.current_price_per_share,
         shares: Number(sharesInput)
       }
-    }).then(() => axios.get(`/stock/bank/${user.id}`)
-      .then((response) => setBankBalance(response.data.bank_balance)))
-      .then(() => axios.get(`/stock/waivers/${league}`))
-      .then((waivers) => dispatch(setWaivers(waivers.data)))
+    }).then(() => axios.get(`/stock/waivers/${league}`)
+      .then((waivers) => dispatch(setWaivers(waivers.data))))
       .then(() => axios.get(`/stock/portfolio/${user.id}`)
-        .then((stocks) => dispatch(setYourStock(stocks.data))));
+        .then((stocks) => dispatch(setYourStock(stocks.data))))
+      .then(() => axios.get(`/stock/bank/${user.id}/${league}`)
+        .then((response) => setBankBalance(response.data.bank_balance)));
 
     setOpen(false);
     setSharesInput(0);
@@ -89,8 +95,7 @@ function WaiversList({
           <strong>Bank Balance: </strong>
           $
           {
-            ((bankBalance * 0.01) - (
-              ((row.current_price_per_share * 0.01) * sharesInput))).toFixed(2)
+            ((bankBalance * 0.01) - ((row.current_price_per_share * 0.01) * sharesInput)).toFixed(2)
           }
           <DialogContentText>
             <br />

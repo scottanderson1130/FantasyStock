@@ -43,11 +43,12 @@ stockRouter.get('/stock/:stockID', (req, res) => {
 
 // get league_user by user id
 
-stockRouter.get('/bank/:userID', (req, res) => {
-  const { userID } = req.params;
+stockRouter.get('/bank/:userID/:leagueID', (req, res) => {
+  const { userID, leagueID } = req.params;
   League_user.findOne({
     where: {
-      id_user: userID
+      id_user: userID,
+      id_league: leagueID
     }
   })
     .then((bank) => {

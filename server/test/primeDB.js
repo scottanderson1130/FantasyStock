@@ -194,7 +194,7 @@ function primeDB() {
       where: {
         id_league: 1,
         id_user: '6',
-        bank_balance: 815556,
+        bank_balance: 1000000,
         net_worth: 0,
         record: '2-0'
       }
@@ -344,7 +344,7 @@ function primeDB() {
       where: {
         id_league: 2,
         id_user: '6',
-        bank_balance: 1000000,
+        bank_balance: 815556,
         net_worth: 0,
         record: '1-1'
       }
