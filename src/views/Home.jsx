@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import Carousel from 'react-material-ui-carousel';
 import Grid from '@material-ui/core/Grid';
 import MatchupCard from '../components/Home/MatchupCard.jsx';
 import CreateNewLeague from '../components/Home/CreateNewLeague.jsx';
@@ -8,6 +9,7 @@ import { selectLogIn, selectUser } from '../features/userSlice.js';
 import Stocknews from '../components/Home/Stocknews.jsx';
 
 // eslint-disable-next-line react/prop-types
+
 function Home() {
   const logIn = useSelector(selectLogIn);
   const user = useSelector(selectUser);
@@ -23,7 +25,8 @@ function Home() {
         <div>
           <Grid container justify='center'>
             <div>
-              {
+              <Carousel autoPlay={false} animation='slide' fullHeightHover={false}>
+                {
               user.leagueInfo.map((league) => (
                 <MatchupCard
                   user={user}
@@ -31,7 +34,8 @@ function Home() {
                   key={league.id_league}
                 />
               ))
-}
+              }
+              </Carousel>
             </div>
           </Grid>
           <div>

@@ -90,7 +90,7 @@ function Nav() {
               )}
           </Button>
 
-          <Button color='inherit'>Logo</Button>
+          <Button color='inherit'>Folio</Button>
         </Toolbar>
       </AppBar>
 

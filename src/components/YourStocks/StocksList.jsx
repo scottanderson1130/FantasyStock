@@ -47,12 +47,12 @@ function StocksList({
         price_per_share_at_purchase: row.current_price_per_share,
         shares: Number(sharesInput)
       }
-    }).then(() => axios.get(`/stock/bank/${user.id}`)
-      .then((response) => setBankBalance(response.data.bank_balance)))
-      .then(() => axios.get(`/stock/waivers/${league}`))
-      .then((waivers) => dispatch(setWaivers(waivers.data)))
+    }).then(() => axios.get(`/stock/waivers/${league}`)
+      .then((waivers) => dispatch(setWaivers(waivers.data))))
       .then(() => axios.get(`/stock/portfolio/${user.id}`)
-        .then((stocks) => dispatch(setYourStock(stocks.data))));
+        .then((stocks) => dispatch(setYourStock(stocks.data))))
+      .then(() => axios.get(`/stock/bank/${user.id}/${league}`)
+        .then((response) => setBankBalance(response.data.bank_balance)));
     setOpen(false);
     setTimeout(() => setSharesInput(''), 1000);
   };
@@ -70,7 +70,6 @@ function StocksList({
   const handleSharesSubmit = ((e) => {
     setSharesInput(e.target.value);
   });
-  console.log('BANK BALANCE', bankBalance);
   return (
     <>
       <TableRow

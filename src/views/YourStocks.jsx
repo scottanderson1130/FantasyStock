@@ -29,7 +29,7 @@ function YourStocks() {
   }, [dispatch, user]);
 
   useEffect(() => {
-    axios.get(`/stock/bank/${user?.id}`)
+    axios.get(`/stock/bank/${user.id}/${league}`)
       .then((response) => setBankBalance(response.data.bank_balance));
   }, [user?.id]);
 
