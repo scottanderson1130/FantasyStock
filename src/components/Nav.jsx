@@ -13,6 +13,7 @@ import '../css/Nav.css';
 import { useSelector } from 'react-redux';
 import { selectLogIn, selectUser } from '../features/userSlice.js';
 import logo from '../logo/logo.png';
+import { createFilterOptions } from '@material-ui/lab';
 
 function Nav() {
   const [open, setOpen] = useState(false);
@@ -107,13 +108,12 @@ function Nav() {
           ? (
             <ul className='nav_navigation'>
               <Link key='home' className='nav_link' to='/'>
-                <button
+                <option
                   onClick={handleDrawerClose}
-                  type='button'
                   className='nav_options'
                 >
                   Home
-                </button>
+                </option>
               </Link>
             </ul>
           )
@@ -121,13 +121,12 @@ function Nav() {
             <ul className='nav_navigation'>
               {views.map((view) => (
                 <Link key={view.option} className='nav_link' to={view.path}>
-                  <button
+                  <option
                     onClick={handleDrawerClose}
                     className='nav_options'
-                    type='button'
                   >
                     {view.option}
-                  </button>
+                  </option>
                 </Link>
               ))}
             </ul>
