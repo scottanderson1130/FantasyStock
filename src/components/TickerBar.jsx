@@ -35,7 +35,7 @@ function TickerBar() {
 
   return (
     (!logIn) ? <div />
-      : (ticker.length
+      : (ticker.length > 0
         && (
           <div className='tickerBar'>
             <Ticker mode='smooth' className='tickerBar_ticker'>
