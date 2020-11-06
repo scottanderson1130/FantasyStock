@@ -21,10 +21,10 @@ function Settings() {
   }, [league, user]);
 
   return (
-    <div className='settings'>
-      <div className='settings_league'>
-        <SettingsLeague myLeague={myLeague} />
-      </div>
+    <div
+      className='settings_league'
+    >
+      <SettingsLeague myLeague={myLeague} />
     </div>
   );
 }
