@@ -5,8 +5,18 @@ const leagueRouter = Router();
 
 const {
   League,
-  League_user
+  League_user,
+  User
 } = require('../db/index');
+
+// get User and League data with User id
+leagueRouter.get('/:userID', (req, res) => {
+  const { userID } = req.params;
+
+  User.findAll({
+    where: { id: userID }, include: [{ model: League }]
+  }).then((response) => res.send(response));
+});
 
 // create a league route
 leagueRouter.post('/', (req, res) => {
@@ -30,14 +40,13 @@ leagueRouter.post('/', (req, res) => {
 });
 
 // league by id
-leagueRouter.post('/:leagueID', (req, res) => {
-  const { leagueID } = req.params;
-  const { id_owner } = req.body;
+leagueRouter.get('/:leagueID/:userID', (req, res) => {
+  const { leagueID, userID } = req.params;
 
   League.findOne({
     where: {
       id: leagueID,
-      id_owner
+      id_owner: userID
     }
   }).then((league) => {
     const responseLeague = { ...league.dataValues };
