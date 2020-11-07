@@ -40,10 +40,6 @@ function Nav() {
       path: '/waivers'
     },
     {
-      option: 'Settings',
-      path: '/settings'
-    },
-    {
       option: 'Scoreboard',
       path: '/scoreboard'
     },
@@ -58,6 +54,10 @@ function Nav() {
     {
       option: 'Message Board',
       path: '/messageboard'
+    },
+    {
+      option: 'Settings',
+      path: '/settings'
     }
   ];
 
