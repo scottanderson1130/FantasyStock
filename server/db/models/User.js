@@ -35,6 +35,7 @@ module.exports = (sequelize, DataTypes) => {
       through: models.Stock_user,
       foreignKey: 'id_user'
     });
+    // User.hasMany(models.League, {as: 'id_owner'})
   };
 
   return User;
