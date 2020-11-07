@@ -9,21 +9,25 @@ const {
   User
 } = require('../db/index');
 
-// add user to League
-leagueRouter.post('/addUser', (req, res) => {
-  const { userID, leagueID } = req.body;
-  League_user.create({
-    id_league: leagueID,
-    id_user: userID,
-    bank_balance: 1000000,
-    net_worth: 0,
-    record: '0-0'
-  })
-    .then((response) => res.send(response))
-    .catch((err) => {
-      console.error(err);
-      res.status(500).send(err);
-    });
+// add user to League UserIDs is an array
+// todo: fix header error (post still works)
+leagueRouter.post('/addUser', async (req, res) => {
+  const { userIDs, leagueID } = req.body;
+  await userIDs.map((userID) => {
+    League_user.create({
+      id_league: leagueID,
+      id_user: userID,
+      bank_balance: 1000000,
+      net_worth: 0,
+      record: '0-0'
+    })
+      .catch((err) => {
+        console.error(err);
+        res.status(500).send(err);
+      });
+    return 'success';
+  });
+  res.send('created');
 });
 
 // get User and League data with User id
