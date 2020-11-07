@@ -4,12 +4,10 @@ require('dotenv').config();
 
 const newsRouter = Router();
 const { NEWS_API_KEY } = process.env;
-console.log(NEWS_API_KEY);
 
 newsRouter.get('/', (req, res) => {
   const { todayDate } = req.query;
   const url = `https://newsapi.org/v2/everything?q=stocks&from=${todayDate}&to=${todayDate}&sortBy=popularity`;
-  console.log(url);
   axios({
     method: 'GET',
     url,
