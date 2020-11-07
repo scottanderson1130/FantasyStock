@@ -71,8 +71,9 @@ matchupRouter.get('/:leagueID', async (req, res) => {
       }
     }
   });
+  const arrayMatchups = Object.values(currentMatchups)
   setTimeout(() => {
-    res.send(currentMatchups);
+    res.send(arrayMatchups);
   }, 100);
   // res.send(currentMatchups)
 });
