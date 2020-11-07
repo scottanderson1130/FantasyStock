@@ -5,19 +5,24 @@
 .addMembers_form {
   text-align: center;
   padding-top: 10px;
+  padding-bottom: 15px;
 }
 
 .addMembers_input {
   padding-top:10px;
 }
 
+.addMembers_ol {
+  display: flex;
+  flex-direction: column;
+}
+
 .addMembers_newList {
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding-top: 20px;
+  padding-top: 5px;
   padding-bottom: 20px;
-  justify-content: space-between;
 }
 
 .addMembers_deleteButton {

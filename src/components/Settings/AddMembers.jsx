@@ -58,9 +58,9 @@ function AddMembers() {
         </Button>
       </form>
 
-      <ol className='addMembers_newList'>
+      <ol className='addMembers_ol'>
         {users.map((user) => (
-          <>
+          <div className='addMembers_newList'>
             <li className='addMember_username' key={user.id}>
               {user.username}
               <p className='addMember_fullName'>{user.full_name}</p>
@@ -74,7 +74,7 @@ function AddMembers() {
             >
               delete
             </Button>
-          </>
+          </div>
         ))}
       </ol>
       {
