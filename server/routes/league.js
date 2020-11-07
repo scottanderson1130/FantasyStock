@@ -30,6 +30,15 @@ leagueRouter.post('/addUser', async (req, res) => {
   res.send('created');
 });
 
+// find all users in the league by league id
+leagueRouter.get('/league/:leagueID', (req, res) => {
+  const { leagueID } = req.params;
+
+  League.findAll({
+    where: { id: leagueID }, include: [{ model: User }]
+  }).then((response) => res.send(response));
+});
+
 // get User and League data with User id
 leagueRouter.get('/:userID', (req, res) => {
   const { userID } = req.params;
@@ -82,7 +91,7 @@ leagueRouter.post('/', (req, res) => {
 // put league route required
 // put for users added to league
 
-// league by id
+// league by id and user
 leagueRouter.get('/:leagueID/:userID', (req, res) => {
   const { leagueID, userID } = req.params;
 
