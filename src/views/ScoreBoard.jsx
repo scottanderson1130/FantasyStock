@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import axios from 'axios';
 import { withStyles } from '@material-ui/core/styles';
 import MuiAccordion from '@material-ui/core/Accordion';
 import MuiAccordionSummary from '@material-ui/core/AccordionSummary';
@@ -6,16 +8,7 @@ import MuiAccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import '../css/ScoreBoard.css';
 import ScoreBoardTable from '../components/ScoreBoard/ScoreBoardTable.jsx';
-
-const MATCHES = [
-  { id: 1, team1: 'The Rogers', team2: 'The Growlers' },
-  { id: 2, team1: 'Avengers', team2: 'Bears' },
-  { id: 3, team1: 'Cucumbers', team2: 'The Lines' },
-  { id: 4, team1: 'The Gardeners', team2: 'Quick Rabbit' },
-  { id: 5, team1: 'Iron Men', team2: 'Renegades' },
-  { id: 6, team1: 'Bar Hoppers', team2: 'Home Team' }
-
-];
+import { selectLeague } from '../features/leagueSlice.js';
 
 const Accordion = withStyles({
   root: {
@@ -60,29 +53,39 @@ const AccordionDetails = withStyles((theme) => ({
 
 function ScoreBoard() {
   const [expanded, setExpanded] = useState('');
+  const [matches, setMatches] = useState([]);
+  const league = useSelector(selectLeague);
+
+  useEffect(() => {
+    axios({
+      method: 'GET',
+      url: `matchup/${league}`
+    }).then((response) => setMatches(response.data));
+  }, [league]);
 
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
   };
-
+  console.log(Object.values(matches));
   return (
     <div className='scoreBoard'>
-      {MATCHES.map((match) => (
-        <div key={match.id} className='scoreBoard_accordion'>
+      {matches && Object.values(matches).map((match) => (
+        <div key={match} className='scoreBoard_accordion'>
           <Accordion
             square
-            expanded={expanded === match.id}
-            onChange={handleChange(match.id)}
+            expanded={expanded === match}
+            onChange={handleChange(match)}
           >
             <AccordionSummary aria-controls='panel1d-content' id='panel1d-header'>
+              {match.away.score}
               <Typography
                 className='scoreBoard_match-title'
               >
-                <strong>{match.team1}</strong>
+                {match.away.teamID}
                 {' '}
                 vs
                 {' '}
-                <strong>{match.team2}</strong>
+                {match.home.teamID}
               </Typography>
             </AccordionSummary>
             <AccordionDetails>

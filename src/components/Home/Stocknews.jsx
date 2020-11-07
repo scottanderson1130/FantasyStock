@@ -1,22 +1,22 @@
 /* eslint-disable react/no-array-index-key */
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 import StockList from './StockList.jsx';
-// import fakenews from './fakenews.json';
+import fakenews from './fakenews.json';
 
-const todayDate = new Date().toISOString().split('T')[0];
+// const todayDate = new Date().toISOString().split('T')[0];
 
 function Stocknews() {
   const [articles, setArticles] = useState([]);
 
   useEffect(() => {
-    axios({
-      method: 'GET',
-      url: '/news',
-      params: { todayDate }
-    }).then((response) => setArticles(response.data.articles))
-      .catch((err) => console.warning(err));
-    // setArticles(fakenews.articles);
+    // axios({
+    //   method: 'GET',
+    //   url: '/news',
+    //   params: { todayDate }
+    // }).then((response) => setArticles(response.data.articles))
+    //   .catch((err) => console.warning(err));
+    setArticles(fakenews.articles);
   }, []);
 
   return (
