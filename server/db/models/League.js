@@ -16,7 +16,8 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'id_league'
     });
     League.belongsTo(models.User, {
-      foreignKey: 'id_owner'
+      foreignKey: 'id_owner',
+      constraints: false
     });
   };
   return League;
