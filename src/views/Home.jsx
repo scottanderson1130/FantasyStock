@@ -7,12 +7,12 @@ import CreateNewLeague from '../components/Home/CreateNewLeague.jsx';
 import '../css/YourStocks.css';
 import { selectLogIn, selectUser } from '../features/userSlice.js';
 import Stocknews from '../components/Home/Stocknews.jsx';
-
-// eslint-disable-next-line react/prop-types
+import { selectUserLeagues } from '../features/leagueSlice.js';
 
 function Home() {
   const logIn = useSelector(selectLogIn);
   const user = useSelector(selectUser);
+  const userLeagues = useSelector(selectUserLeagues);
 
   return (
     (!logIn)
@@ -23,28 +23,36 @@ function Home() {
       )
       : (
         <div>
-          <Grid container justify='center'>
-            <div>
-              <Carousel autoPlay={false} animation='slide' fullHeightHover={false}>
-                {
-              user.leagueInfo.map((league) => (
-                <MatchupCard
-                  user={user}
-                  league={league}
-                  key={league.id_league}
-                />
-              ))
+          <Grid
+            className='home_MatchupCard'
+            container
+            justify='center'
+          >
+            <Carousel autoPlay={false} animation='slide' fullHeightHover={false}>
+              {
+                userLeagues.map((userLeague) => (
+                  <MatchupCard
+                    user={user}
+                    userLeague={userLeague}
+                    key={userLeague.id}
+                  />
+                ))
               }
-              </Carousel>
-            </div>
+            </Carousel>
           </Grid>
           <div>
-            <Grid container justify='center'>
+            <Grid
+              container
+              justify='center'
+            >
               <CreateNewLeague />
             </Grid>
           </div>
           <div>
-            <Grid container justify='center'>
+            <Grid
+              container
+              justify='center'
+            >
               <Stocknews />
             </Grid>
           </div>

@@ -13,7 +13,7 @@ function Settings() {
 
   useEffect(() => {
     async function fetchLeague() {
-      const response = await axios.post(`/league/${league}`, { id_owner: user?.id });
+      const response = await axios.get(`/league/${league}/${user?.id}`);
       setMyLeague(response.data);
       return response;
     }
@@ -21,10 +21,10 @@ function Settings() {
   }, [league, user]);
 
   return (
-    <div className='settings'>
-      <div className='settings_league'>
-        <SettingsLeague myLeague={myLeague} />
-      </div>
+    <div
+      className='settings_league'
+    >
+      <SettingsLeague myLeague={myLeague} />
     </div>
   );
 }
