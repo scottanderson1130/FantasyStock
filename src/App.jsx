@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import './css/App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import axios from 'axios';
@@ -19,7 +19,6 @@ function App() {
   const logIn = true;
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
-  const [userLeagueInfo, setUserLeagueInfo] = useState([]);
 
   useEffect(() => {
     async function fetchUser() {
@@ -38,7 +37,6 @@ function App() {
   useEffect(() => {
     async function fetchUserLeagueInfo() {
       const response = await axios.get(`/league/${user?.id}`);
-      setUserLeagueInfo(response?.data[0].leagues);
       dispatch(setUserLeagues(response?.data[0].leagues));
       return response;
     }
@@ -51,7 +49,7 @@ function App() {
         <Nav logIn={logIn} />
         <TickerBar logIn={logIn} />
         <Switch>
-          <Route path='/' exact component={Home} info={userLeagueInfo} />
+          <Route path='/' exact component={Home} />
           <Route path='/scoreboard' component={ScoreBoard} />
           <Route path='/yourstocks' component={YourStocks} />
           <Route path='/waivers' component={Waivers} />
