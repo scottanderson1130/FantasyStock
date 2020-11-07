@@ -70,6 +70,7 @@ leagueRouter.post('/', (req, res) => {
   // apply to standard
   // can build shuffler later
   // what is the format of the schedule aspect?
+
   League.create({
     league_name,
     id_owner,
@@ -79,7 +80,10 @@ leagueRouter.post('/', (req, res) => {
     const responseLeagueInfo = { ...leagueInfo.dataValues };
     League_user.create({
       id_user: responseLeagueInfo.id_owner,
-      id_league: responseLeagueInfo.id
+      id_league: responseLeagueInfo.id,
+      bank_balance: 1000000,
+      net_worth: 0,
+      record: '0-0'
     });
     res.send(responseLeagueInfo);
   })
