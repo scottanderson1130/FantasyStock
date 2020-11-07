@@ -9,6 +9,23 @@ const {
   User
 } = require('../db/index');
 
+// add user to League
+leagueRouter.post('/addUser', (req, res) => {
+  const { userID, leagueID } = req.body;
+  League_user.create({
+    id_league: leagueID,
+    id_user: userID,
+    bank_balance: 1000000,
+    net_worth: 0,
+    record: '0-0'
+  })
+    .then((response) => res.send(response))
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send(err);
+    });
+});
+
 // get User and League data with User id
 leagueRouter.get('/:userID', (req, res) => {
   const { userID } = req.params;
@@ -90,3 +107,6 @@ leagueRouter.get('/:leagueID/:userID', (req, res) => {
 module.exports = {
   leagueRouter
 };
+
+// todo: delete league
+// todo: add user to league

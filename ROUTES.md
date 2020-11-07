@@ -39,6 +39,21 @@ Ex Response:
     }
 }
 
+POST http://localhost:3000/league/addUser
+  const { userID, leagueID } = req.body;
+  response:
+{
+    "id_league": 1,
+    "id_user": "9",
+    "bank_balance": 1000000,
+    "net_worth": 0,
+    "updatedAt": "2020-11-07T17:46:17.799Z",
+    "createdAt": "2020-11-07T17:46:17.799Z",
+    "record": null,
+    "team_name": null,
+    "team_logo": null
+}
+
 Get all stock Info
 route:
 http://localhost:3000/stock/
