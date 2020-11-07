@@ -16,7 +16,8 @@ const { userRouter } = require('./routes/user');
 const { stockRouter } = require('./routes/stock');
 const { leagueRouter } = require('./routes/league');
 const { matchupRouter } = require('./routes/matchup');
-// const { messageRouter } = require('./routes/messages');
+const { messageRouter } = require('./routes/messages');
+const { newsRouter } = require('./routes/news');
 const models = require('./db/index');
 // Cookies and Session info
 
@@ -51,7 +52,8 @@ app.use('/user', userRouter);
 app.use('/stock', stockRouter);
 app.use('/league', leagueRouter);
 app.use('/matchup', matchupRouter);
-// app.use('/messages', messageRouter);
+app.use('/messages', messageRouter);
+app.use('/news', newsRouter);
 app.get('/*', (req, res) => {
   res.sendFile(HTML_FILE);
 });

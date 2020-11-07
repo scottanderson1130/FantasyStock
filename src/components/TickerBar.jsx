@@ -24,18 +24,18 @@ function TickerBar() {
   function tickerDisplay(a, b) {
     let result = '';
     if (a > b) {
-      result = `⬆️ ${a * 0.01}`;
+      result = `⬆️ ${(a * 0.01).toFixed(2)}`;
     } else if (a === b) {
-      result = `${a * 0.01}`;
+      result = `${(a * 0.01).toFixed(2)}`;
     } else {
-      result = `⬇️ ${a * 0.01}`;
+      result = `⬇️ ${(a * 0.01).toFixed(2)}`;
     }
     return result;
   }
 
   return (
     (!logIn) ? <div />
-      : (ticker.length
+      : (ticker.length > 0
         && (
           <div className='tickerBar'>
             <Ticker mode='smooth' className='tickerBar_ticker'>

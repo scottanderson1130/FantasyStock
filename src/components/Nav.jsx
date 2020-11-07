@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
@@ -14,17 +12,16 @@ import { ChevronLeft, Menu } from '@material-ui/icons';
 import '../css/Nav.css';
 import { useSelector } from 'react-redux';
 import { selectLogIn, selectUser } from '../features/userSlice.js';
+import logo from '../logo/logo.png';
 
 function Nav() {
   const [open, setOpen] = useState(false);
 
   const user = useSelector(selectUser);
 
-  // Open and close Drawer functions
   const handleDrawerOpen = () => setOpen(true);
   const handleDrawerClose = () => setOpen(false);
 
-  // nav bar options
   const views = [
     {
       option: 'Home',
@@ -90,7 +87,10 @@ function Nav() {
               )}
           </Button>
 
-          <Button color='inherit'>Logo</Button>
+          <Button color='inherit'>Folio</Button>
+          <Button color='inherit'>
+            <img className='nav_logo' src={logo} alt='logo' />
+          </Button>
         </Toolbar>
       </AppBar>
 
@@ -107,9 +107,12 @@ function Nav() {
           ? (
             <ul className='nav_navigation'>
               <Link key='home' className='nav_link' to='/'>
-                <li onClick={handleDrawerClose} className='nav_options'>
+                <option
+                  onClick={handleDrawerClose}
+                  className='nav_options'
+                >
                   Home
-                </li>
+                </option>
               </Link>
             </ul>
           )
@@ -117,9 +120,12 @@ function Nav() {
             <ul className='nav_navigation'>
               {views.map((view) => (
                 <Link key={view.option} className='nav_link' to={view.path}>
-                  <li onClick={handleDrawerClose} className='nav_options'>
+                  <option
+                    onClick={handleDrawerClose}
+                    className='nav_options'
+                  >
                     {view.option}
-                  </li>
+                  </option>
                 </Link>
               ))}
             </ul>

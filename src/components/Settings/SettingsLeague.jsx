@@ -7,25 +7,46 @@ import '../../css/SettingsLeague.css';
 
 const inputsForm = [
   {
-    description: '# of teams', type: 'number', placeholder: '# of teams', name: 'numberTeams'
+    description: '# of teams',
+    type: 'number',
+    placeholder: '# of teams',
+    name: 'numberTeams'
   },
   {
-    description: 'matches number of days', type: 'number', placeholder: 'matches number of days', name: 'lengthMatches'
+    description: 'matches number of days',
+    type: 'number',
+    placeholder: 'matches number of days',
+    name: 'lengthMatches'
   },
   {
-    description: '# of matches', type: 'number', placeholder: '# of matches', name: 'numberMatches'
+    description: '# of matches',
+    type: 'number',
+    placeholder: '# of matches',
+    name: 'numberMatches'
   },
   {
-    description: 'start date', type: 'date', placeholder: 'start date', name: 'startDate'
+    description: 'start date',
+    type: 'date',
+    placeholder: 'start date',
+    name: 'startDate'
   },
   {
-    description: 'end date', type: 'date', placeholder: 'end date', name: 'endDate'
+    description: 'end date',
+    type: 'date',
+    placeholder: 'end date',
+    name: 'endDate'
   },
   {
-    description: '# of playoff teams', type: 'number', placeholder: '# of playoff teams', name: 'numberTeamsPlayoffs'
+    description: '# of playoff teams',
+    type: 'number',
+    placeholder: '# of playoff teams',
+    name: 'numberTeamsPlayoffs'
   },
   {
-    description: 'starting bank', type: 'number', placeholder: 'starting bank', name: 'startingBank'
+    description: 'starting bank',
+    type: 'number',
+    placeholder: 'starting bank',
+    name: 'startingBank'
   }
 ];
 
@@ -38,12 +59,9 @@ function SettingsLeague({ myLeague }) {
   };
 
   const [leagueForm, setLeagueForm] = useState({});
-
   const [submitted, setSubmitted] = useState(false);
 
-  const handleChange = (e) => {
-    setLeagueForm({ ...leagueForm, [e.target.name]: e.target.value });
-  };
+  const handleChange = (e) => setLeagueForm({ ...leagueForm, [e.target.name]: e.target.value });
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -64,7 +82,9 @@ function SettingsLeague({ myLeague }) {
           {inputsForm.map(({
             description, type, placeholder, name
           }) => (
-            <div className='settingsLeague_settingBox'>
+            <div
+              className='settingsLeague_settingBox'
+            >
               <p>{description}</p>
               <Input
                 key={name}
