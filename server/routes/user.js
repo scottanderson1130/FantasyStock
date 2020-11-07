@@ -14,6 +14,14 @@ const {
 
 const userRouter = Router();
 
+// get user by username
+userRouter.get('/:username', (req, res) => {
+  const { username } = req.body;
+  User.findOne({ where: username })
+    .then((userInfo) => res.send(userInfo))
+    .catch((err) => console.error(err));
+});
+
 // // get user's Info by user google id
 // userRouter.get('/:userID', (req, res) => {
 //   const { userID } = req.params;
