@@ -1,0 +1,42 @@
+.addMembers_title {
+  text-align: center;
+}
+
+.addMembers_form {
+  text-align: center;
+  padding-top: 10px;
+}
+
+.addMembers_input {
+  padding-top:10px;
+}
+
+.addMembers_newList {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  justify-content: space-between;
+}
+
+.addMembers_deleteButton {
+margin: auto !important;
+}
+
+.addMember_username {
+  font-weight: bold;
+}
+
+.addMembers_addMembersButton {
+  text-align: center;
+}
+
+.addMember_fullName {
+  font-weight: normal
+}
+
+.addMembers_saved {
+  text-align: center;
+  font-style: italic;
+}
