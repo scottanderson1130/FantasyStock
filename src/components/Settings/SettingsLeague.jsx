@@ -74,8 +74,7 @@ function SettingsLeague({ myLeague }) {
     <div className='settingsLeague'>
       <h2 className='settingsLeague_title'>League Settings</h2>
       <h3 className='settingsLeague_leagueName'>
-        League Name:
-        {myLeague?.league_name}
+        {`League Name: ${myLeague?.league_name}`}
       </h3>
       <div>
         <form className='settingsLeague_form' onSubmit={handleSubmit}>
@@ -105,9 +104,7 @@ function SettingsLeague({ myLeague }) {
             Submit
           </Button>
         </form>
-
-        <div>
-          <h1>Add friends to list</h1>
+        <div className='settingsLeague_addMembers'>
           <AddMembers />
         </div>
       </div>

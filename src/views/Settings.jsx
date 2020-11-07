@@ -26,9 +26,8 @@ function Settings() {
     <div
       className={user.id === leagueOwner ? 'settings_league' : null}
     >
-      {/* {user.id === leagueOwner && */}
-      <SettingsLeague myLeague={myLeague} />
-      {/* } */}
+      {user.id === leagueOwner
+        && <SettingsLeague myLeague={myLeague} />}
     </div>
   );
 }
