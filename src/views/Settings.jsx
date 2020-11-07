@@ -2,13 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import { selectUser } from '../features/userSlice.js';
-import { selectLeague } from '../features/leagueSlice.js';
+import { selectLeague, selectLeagueOwner } from '../features/leagueSlice.js';
 import SettingsLeague from '../components/Settings/SettingsLeague.jsx';
 import '../css/Settings.css';
 
 function Settings() {
   const [myLeague, setMyLeague] = useState({});
   const league = useSelector(selectLeague);
+  const leagueOwner = useSelector(selectLeagueOwner);
   const user = useSelector(selectUser);
 
   useEffect(() => {
@@ -21,10 +22,13 @@ function Settings() {
   }, [league, user]);
 
   return (
+
     <div
-      className='settings_league'
+      className={user.id === leagueOwner ? 'settings_league' : null}
     >
+      {/* {user.id === leagueOwner && */}
       <SettingsLeague myLeague={myLeague} />
+      {/* } */}
     </div>
   );
 }

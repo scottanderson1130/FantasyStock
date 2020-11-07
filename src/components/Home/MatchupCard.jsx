@@ -8,7 +8,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { useDispatch } from 'react-redux';
-import { setLeague } from '../../features/leagueSlice.js';
+import { setLeague, setLeagueOwner } from '../../features/leagueSlice.js';
 
 const useStyles = makeStyles({
   root: {
@@ -38,6 +38,7 @@ function MatchupCard({ userLeague, user }) {
 
   const clickLeagueUpdate = () => {
     dispatch(setLeague(userLeague.id));
+    dispatch(setLeagueOwner(userLeague.id_owner));
   };
 
   const bankBalanceTwoDecimal = (userLeague.league_user.bank_balance * 0.01).toFixed(2);

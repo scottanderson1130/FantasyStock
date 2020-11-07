@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {
   Input, Button
 } from '@material-ui/core';
+import AddMembers from './AddMembers.jsx';
 import '../../css/SettingsLeague.css';
 
 const inputsForm = [
@@ -104,6 +105,11 @@ function SettingsLeague({ myLeague }) {
             Submit
           </Button>
         </form>
+
+        <div>
+          <h1>Add friends to list</h1>
+          <AddMembers />
+        </div>
       </div>
     </div>
   );
