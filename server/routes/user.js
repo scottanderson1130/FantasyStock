@@ -14,6 +14,28 @@ const {
 
 const userRouter = Router();
 
+// get all users
+userRouter.get('/', (req, res) => {
+  User.findAll()
+    .then((userInfo) => res.send(userInfo))
+    .catch((err) => console.error(err));
+});
+
+// get user by username
+userRouter.get('/:username', (req, res) => {
+  const { username } = req.params;
+
+  User.findOne({
+    where: {
+      username: {
+        [Op.iLike]: username
+      }
+    }
+  })
+    .then((userInfo) => res.send(userInfo))
+    .catch((err) => console.error(err));
+});
+
 // // get user's Info by user google id
 // userRouter.get('/:userID', (req, res) => {
 //   const { userID } = req.params;

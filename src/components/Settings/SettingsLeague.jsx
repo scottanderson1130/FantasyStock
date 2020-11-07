@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {
   Input, Button
 } from '@material-ui/core';
+import AddMembers from './AddMembers.jsx';
 import '../../css/SettingsLeague.css';
 
 const inputsForm = [
@@ -73,8 +74,7 @@ function SettingsLeague({ myLeague }) {
     <div className='settingsLeague'>
       <h2 className='settingsLeague_title'>League Settings</h2>
       <h3 className='settingsLeague_leagueName'>
-        League Name:
-        {myLeague?.league_name}
+        {`League Name: ${myLeague?.league_name}`}
       </h3>
       <div>
         <form className='settingsLeague_form' onSubmit={handleSubmit}>
@@ -104,6 +104,9 @@ function SettingsLeague({ myLeague }) {
             Submit
           </Button>
         </form>
+        <div className='settingsLeague_addMembers'>
+          <AddMembers />
+        </div>
       </div>
     </div>
   );
