@@ -13,7 +13,6 @@ import '../css/Nav.css';
 import { useSelector } from 'react-redux';
 import { selectLogIn, selectUser } from '../features/userSlice.js';
 import logo from '../logo/logo.png';
-import { createFilterOptions } from '@material-ui/lab';
 
 function Nav() {
   const [open, setOpen] = useState(false);

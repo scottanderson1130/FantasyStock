@@ -5,7 +5,6 @@ import Grid from '@material-ui/core/Grid';
 import MatchupCard from '../components/Home/MatchupCard.jsx';
 import CreateNewLeague from '../components/Home/CreateNewLeague.jsx';
 import '../css/YourStocks.css';
-import '../css/Home.css';
 import { selectLogIn, selectUser } from '../features/userSlice.js';
 import Stocknews from '../components/Home/Stocknews.jsx';
 import { selectUserLeagues } from '../features/leagueSlice.js';
