@@ -18,9 +18,65 @@ function primeDB() {
   League.findOrCreate({
     where: {
       league_name: 'The League',
+      id_owner: '6',
       settings: {
-        test: 'testvalue',
-        test2: 'othertestvalue'
+        schedule: {
+          currentWeek: 1,
+          weeklyMatchups: {
+            week1: {
+              match1: {
+                home: {
+                  teamID: '1',
+                  score: 115
+                },
+                away: {
+                  teamID: '3',
+                  score: 99
+                },
+                winner: null,
+                finalScore: null
+              },
+              match2: {
+                home: {
+                  teamID: '2',
+                  score: 115
+                },
+                away: {
+                  teamID: '4',
+                  score: 99
+                },
+                winner: null,
+                finalScore: null
+              }
+            },
+            week2: {
+              match1: {
+                home: {
+                  teamID: '1',
+                  score: 101
+                },
+                away: {
+                  teamID: '2',
+                  score: 90
+                },
+                winner: null,
+                finalScore: null
+              },
+              match2: {
+                home: {
+                  teamID: '3',
+                  score: 35
+                },
+                away: {
+                  teamID: 4,
+                  score: 199
+                },
+                winner: null,
+                finalScore: null
+              }
+            }
+          }
+        }
       }
     }
   })
@@ -33,9 +89,65 @@ function primeDB() {
     .then(() => League.findOrCreate({
       where: {
         league_name: 'The League of Extraordinary Gentlemen Investors',
+        id_owner: '2',
         settings: {
-          test: 'testvalue',
-          test2: 'othertestvalue'
+          schedule: {
+            currentWeek: 1,
+            weeklyMatchups: {
+              week1: {
+                match1: {
+                  home: {
+                    teamID: '1',
+                    score: 115
+                  },
+                  away: {
+                    teamID: '3',
+                    score: 99
+                  },
+                  winner: null,
+                  finalScore: null
+                },
+                match2: {
+                  home: {
+                    teamID: '2',
+                    score: 115
+                  },
+                  away: {
+                    teamID: '4',
+                    score: 99
+                  },
+                  winner: null,
+                  finalScore: null
+                }
+              },
+              week2: {
+                match1: {
+                  home: {
+                    teamID: '1',
+                    score: 101
+                  },
+                  away: {
+                    teamID: '2',
+                    score: 90
+                  },
+                  winner: null,
+                  finalScore: null
+                },
+                match2: {
+                  home: {
+                    teamID: '3',
+                    score: 35
+                  },
+                  away: {
+                    teamID: '4',
+                    score: 199
+                  },
+                  winner: null,
+                  finalScore: null
+                }
+              }
+            }
+          }
         }
       }
     }))
