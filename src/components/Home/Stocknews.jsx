@@ -1,6 +1,6 @@
 /* eslint-disable react/no-array-index-key */
 import React, { useState, useEffect } from 'react';
-// import { getNews } from '../../../server/routes/apiHelper.js';
+// import axios from 'axios';
 import StockList from './StockList.jsx';
 import fakenews from './fakenews.json';
 
@@ -10,7 +10,12 @@ function Stocknews() {
   const [articles, setArticles] = useState([]);
 
   useEffect(() => {
-    // getNews(todayDate).then((data) => setArticles(data));
+    // axios({
+    //   method: 'GET',
+    //   url: '/news',
+    //   params: { todayDate }
+    // }).then((response) => setArticles(response.data.articles))
+    //   .catch((err) => console.warning(err));
     setArticles(fakenews.articles);
   }, []);
 
