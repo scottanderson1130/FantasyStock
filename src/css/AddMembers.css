@@ -44,4 +44,10 @@ margin: auto !important;
 .addMembers_saved {
   text-align: center;
   font-style: italic;
+  margin-top: 20px;
+}
+
+.addMembers_membersNumber {
+  padding-top: 8px;
+  font-weight: bold
 }

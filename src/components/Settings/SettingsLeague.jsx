@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import {
   Input, Button
 } from '@material-ui/core';
+import axios from 'axios';
 import AddMembers from './AddMembers.jsx';
 import '../../css/SettingsLeague.css';
 
@@ -55,12 +56,19 @@ function SettingsLeague({ myLeague }) {
   SettingsLeague.propTypes = {
     myLeague: PropTypes.shape({
       league_name: PropTypes.string,
-      bank_balance: PropTypes.string
+      bank_balance: PropTypes.string,
+      id: PropTypes.string
     }).isRequired
   };
 
   const [leagueForm, setLeagueForm] = useState({});
   const [submitted, setSubmitted] = useState(false);
+  const [leagueUsers, setLeagueUsers] = useState([]);
+
+  useEffect(() => {
+    axios.get(`/league/league/${myLeague.id}`)
+      .then((response) => setLeagueUsers(response.data));
+  }, [myLeague.id]);
 
   const handleChange = (e) => setLeagueForm({ ...leagueForm, [e.target.name]: e.target.value });
 
@@ -105,7 +113,7 @@ function SettingsLeague({ myLeague }) {
           </Button>
         </form>
         <div className='settingsLeague_addMembers'>
-          <AddMembers />
+          <AddMembers leagueUsers={leagueUsers} setLeagueUsers={setLeagueUsers} />
         </div>
       </div>
     </div>
