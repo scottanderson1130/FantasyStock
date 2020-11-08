@@ -6,6 +6,7 @@ import {
 } from '@material-ui/core';
 import { Send } from '@material-ui/icons';
 import FlipMove from 'react-flip-move';
+import Pusher from 'pusher-js';
 import Message from '../components/MessageBoard/Message.jsx';
 import '../css/MessageBoard.css';
 import { selectUser } from '../features/userSlice.js';
@@ -22,6 +23,22 @@ function MessageBoard() {
       .then((groupMessages) => setMessages(groupMessages.data));
   }, [league]);
 
+  useEffect(() => {
+    const pusher = new Pusher(process.env.PUSHER_KEY, {
+      cluster: 'us2'
+    });
+
+    const channel = pusher.subscribe('messages');
+    channel.bind('inserted', (newMessage) => {
+      setMessages([...messages, newMessage]);
+    });
+
+    return () => {
+      channel.unbind_all();
+      channel.unsubscribe();
+    };
+  }, [messages]);
+
   const sendMessage = (e) => {
     e.preventDefault();
     axios.post('/messages', {
@@ -29,18 +46,16 @@ function MessageBoard() {
       words: input,
       id_user: user.id,
       username: user.username
-    }).then((updateMessage) => setMessages([...messages, updateMessage.data]))
-      .then(() => axios.get(`/messages/${league}`)
-        .then((groupMessages) => setMessages(groupMessages.data)));
+    });
     setInput('');
   };
 
   return (
     <div className='messageBoard'>
       <div>
-        <h1>
+        <h3>
           {`Hello, ${user?.username}`}
-        </h1>
+        </h3>
       </div>
       <div className='messageBoard_messagesLayer'>
         <div className='container'>
