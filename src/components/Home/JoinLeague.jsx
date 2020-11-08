@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
@@ -59,6 +60,7 @@ function JoinLeague({ leagues }) {
               </MenuItem>
             );
           }
+          return <></>;
         })}
       </Menu>
     </div>
