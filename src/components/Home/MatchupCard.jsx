@@ -43,46 +43,39 @@ function MatchupCard({ userLeague, user }) {
 
   const bankBalanceTwoDecimal = (userLeague.league_user.bank_balance * 0.01).toFixed(2);
   return (
-    <Card
-      className={classes.root}
-      variant='outlined'
+    <Link
+      key='leagueinfo'
+      to='/yourstocks'
     >
-      <CardContent>
-        <Typography
-          className={classes.title}
-          color='textSecondary'
-          gutterBottom
-        >
-          {userLeague?.league_name}
-        </Typography>
-        <Typography
-          variant='h5'
-          component='h2'
-        >
-          {`Bank Balance: $ ${bankBalanceTwoDecimal}`}
-        </Typography>
-        <Typography
-          className={classes.pos}
-          color='textSecondary'
-        >
-          {` Username: ${user.username}   Record ${userLeague.league_user.record}`}
-        </Typography>
-
-      </CardContent>
-      <CardActions className='matchupCard_button'>
-        <Link
-          key='leagueinfo'
-          to='/yourstocks'
-        >
-          <Button
-            onClick={clickLeagueUpdate}
-            size='small'
+      <Card
+        className={classes.root}
+        variant='outlined'
+        onClick={clickLeagueUpdate}
+      >
+        <CardContent>
+          <Typography
+            className={classes.title}
+            color='textSecondary'
+            gutterBottom
           >
-            My Stocks
-          </Button>
-        </Link>
-      </CardActions>
-    </Card>
+            {userLeague?.league_name}
+          </Typography>
+          <Typography
+            variant='h5'
+            component='h2'
+          >
+            {`Bank Balance: $ ${bankBalanceTwoDecimal}`}
+          </Typography>
+          <Typography
+            className={classes.pos}
+            color='textSecondary'
+          >
+            {` Username: ${user.username}   Record ${userLeague.league_user.record}`}
+          </Typography>
+
+        </CardContent>
+      </Card>
+    </Link>
   );
 }
 
