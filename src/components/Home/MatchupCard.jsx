@@ -8,7 +8,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { useDispatch } from 'react-redux';
-import { setLeague } from '../../features/leagueSlice.js';
+import { setLeague, setLeagueOwner } from '../../features/leagueSlice.js';
 
 const useStyles = makeStyles({
   root: {
@@ -38,26 +38,48 @@ function MatchupCard({ userLeague, user }) {
 
   const clickLeagueUpdate = () => {
     dispatch(setLeague(userLeague.id));
+    dispatch(setLeagueOwner(userLeague.id_owner));
   };
 
   const bankBalanceTwoDecimal = (userLeague.league_user.bank_balance * 0.01).toFixed(2);
   return (
-    <Card className={classes.root} variant='outlined'>
+    <Card
+      className={classes.root}
+      variant='outlined'
+    >
       <CardContent>
-        <Typography className={classes.title} color='textSecondary' gutterBottom>
+        <Typography
+          className={classes.title}
+          color='textSecondary'
+          gutterBottom
+        >
           {userLeague?.league_name}
         </Typography>
-        <Typography variant='h5' component='h2'>
+        <Typography
+          variant='h5'
+          component='h2'
+        >
           {`Bank Balance: $ ${bankBalanceTwoDecimal}`}
         </Typography>
-        <Typography className={classes.pos} color='textSecondary'>
+        <Typography
+          className={classes.pos}
+          color='textSecondary'
+        >
           {` Username: ${user.username}   Record ${userLeague.league_user.record}`}
         </Typography>
 
       </CardContent>
       <CardActions className='matchupCard_button'>
-        <Link key='leagueinfo' to='/yourstocks'>
-          <Button onClick={clickLeagueUpdate} size='small'>My Stocks</Button>
+        <Link
+          key='leagueinfo'
+          to='/yourstocks'
+        >
+          <Button
+            onClick={clickLeagueUpdate}
+            size='small'
+          >
+            My Stocks
+          </Button>
         </Link>
       </CardActions>
     </Card>
