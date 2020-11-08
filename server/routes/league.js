@@ -50,40 +50,32 @@ leagueRouter.get('/:userID', (req, res) => {
 
 // create a league route
 leagueRouter.post('/', (req, res) => {
-  const { league_name, id_owner, settings } = req.body;
-  // Settings Template:
-  // settings: {
-  //   number_teams: integer
-  //   length_matches: integer (number of days) (defaulting to 7)
-  //   number_matches: integer
-  //   start_date: date /defaults: next monday '''''' calculate
-  //   end_date: date / it follows
-  //   number_teams_playoffs: Integer / default top 40%, will be specific to the numbers options
-  //   starting_bank: Integer / default 10,000,00 (remember extra )
-  //   schedule: {
-  // currentWeek: val?,
-  //  Weekly matchup []
-  // }
-  // }
-  // where do i do schedule?
-  // on league post? Shuffle team number
-  // apply to standard
-  // can build shuffler later
-  // what is the format of the schedule aspect?
-
+  const { league_name, id_owner } = req.body;
+  const settings = {
+    date_end: null, // date / it follows
+    lengthMatch: null, // integer (number of days) (defaulting to 7)
+    numberOfMatches: null, // integer
+    numberOfTeams: null, // integer
+    numberOfTeamsPlayoffs: null, // Integer / default 10,000,00 (remember extra )
+    date_start: null, // date /defaults: next monday '''''' calculate
+    startingBank: null, // Integer / default 10,000,00 (remember extra )
+    schedule: {
+      currentWeek: null,
+      weeklyMatchups: null
+    }
+  };
   League.create({
     league_name,
     id_owner,
     settings
-    // then whatever changes needed here.
   }).then((leagueInfo) => {
     const responseLeagueInfo = { ...leagueInfo.dataValues };
     League_user.create({
       id_user: responseLeagueInfo.id_owner,
       id_league: responseLeagueInfo.id,
-      bank_balance: 1000000,
-      net_worth: 0,
-      record: '0-0'
+      bank_balance: null,
+      net_worth: null,
+      record: null
     });
     res.send(responseLeagueInfo);
   })
@@ -92,10 +84,104 @@ leagueRouter.post('/', (req, res) => {
       res.status(500).send(err);
     });
 });
-// put league route required
-// put for users added to league
 
-// league by id and user
+// TODO: settings lock after week 1 starts
+leagueRouter.put('/', (req, res) => {
+  const {
+    id_league, league_name, id_owner, settings
+  } = req.body;
+  const newSettings = {
+    date_end: settings.endDate || null, // date / it follows
+    lengthMatch: settings.lengthMatches || null, // integer (number of days) (defaulting to 7)
+    numberOfMatches: settings.numberMatches || null, // integer
+    numberOfTeams: settings.numberTeams || null, // integer
+    numberOfTeamsPlayoffs: settings.numberTeamsPlayoffs || null,
+    // Integer / default 10,000,00 (remember extra )
+    date_start: settings.startDate || null, // date /defaults: next monday '''''' calculate
+    startingBank: settings.startingBank || null, // Integer / default 10,000,00 (remember extra )
+    schedule: {
+      // TODO: schedule generator
+      currentWeek: null,
+      weeklyMatchups: null
+    }
+  };
+  League.update({ league_name, settings: newSettings, id_owner },
+    {
+      where: {
+        id_league
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send(err);
+    });
+  res.send(newSettings);
+});
+
+// TODO: Indiviual user joins a league
+
+// Add an array of users to a league (deletes any users
+// already in league that are not included in the sent array)
+leagueRouter.put('/users', (req, res) => {
+  const { userIDs, leagueID } = req.body;
+  League_user.findAll({
+    where: {
+      id_league: leagueID
+    }
+  })
+    .then((joins) => {
+      const existingIDs = [];
+      // eslint-disable-next-line array-callback-return
+      joins.map((join) => {
+        existingIDs.push(join.dataValues.id_user);
+      });
+      // eslint-disable-next-line array-callback-return
+      existingIDs.map((existingID) => {
+        if (!userIDs.includes(existingID)) {
+          League_user.destroy({
+            where: {
+              id_league: leagueID,
+              id_user: existingID
+            }
+          })
+            .catch((err) => {
+              console.error(err);
+              res.status(500).send(err);
+            });
+        }
+      });
+      // eslint-disable-next-line array-callback-return
+      userIDs.map((userID) => {
+        if (!existingIDs.includes(userID)) {
+          // TODO: Networth to balance plus shares so start at ten?
+          League_user.create({
+            bank_balance: 1000000,
+            net_worth: 0,
+            record: '0-0',
+            id_league: leagueID,
+            id_user: userID
+          })
+            .catch((err) => {
+              console.error(err);
+              res.status(500).send(err);
+            });
+        }
+      });
+      res.send(userIDs);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send(err);
+    });
+// won't log the adds and deletes atm
+});
+// put league route settings required
+// put for users added to league
+// where do i do schedule?
+// on league post? Shuffle team number
+// apply to standard
+
+// find league by id and user
 leagueRouter.get('/:leagueID/:userID', (req, res) => {
   const { leagueID, userID } = req.params;
 
