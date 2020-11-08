@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
@@ -6,7 +7,7 @@ import Button from '@material-ui/core/Button';
 import AwayPortfolio from './AwayPortfolio.jsx';
 import HomePortfolio from './HomePortfolio.jsx';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     padding: 10
   },

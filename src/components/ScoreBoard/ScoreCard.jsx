@@ -1,9 +1,8 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import ButtonBase from '@material-ui/core/ButtonBase';
 import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles({
@@ -26,11 +25,9 @@ const useStyles = makeStyles({
 
 function ScoreCard({
   awayScore,
-  awayName,
   awayRecord,
   awayTeamId,
   homeScore,
-  homeName,
   homeRecord,
   homeTeamId,
   getMatchups

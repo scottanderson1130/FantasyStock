@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import '../css/ScoreBoard.css';
@@ -7,18 +6,11 @@ import ScoreCard from '../components/ScoreBoard/ScoreCard.jsx';
 import CurrentMatchup from '../components/ScoreBoard/CurrentMatchup.jsx';
 import { selectLeague } from '../features/leagueSlice.js';
 
-const useStyles = makeStyles((theme) => ({
-  header: {
-    textAlign: 'center'
-  }
-}));
-
 function ScoreBoard() {
   const [matches, setMatches] = useState([]);
   const [matchPortfolio, setMatchPortfolio] = useState([]);
   const [toggle, setToggle] = useState(false);
   const league = useSelector(selectLeague);
-  const classes = useStyles();
 
   useEffect(() => {
     axios({
@@ -27,7 +19,9 @@ function ScoreBoard() {
     }).then((response) => setMatches(response.data));
   }, [league]);
 
-  const getMatchups = (homeID, awayID) => {
+  const getMatchups = () => {
+    // TODO:add homeID and userID once we have users in a league
+
     const getHomePortfolio = axios
       .get('/stock/portfolio/6')
       .then((response) => response.data);
