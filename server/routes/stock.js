@@ -1,9 +1,7 @@
 /* eslint-disable array-callback-return */
 /* eslint-disable camelcase */
 /* eslint-disable no-console */
-// const axios = require('axios');
 const { Router } = require('express');
-// const { Op } = require('sequelize');
 
 const {
   Stock,
@@ -12,17 +10,58 @@ const {
 } = require('../db/index');
 const {
   checkSharesAvailable,
-  checkMoneyAvailable
+  checkMoneyAvailable,
+  updateStocks
 } = require('./helpers');
 
 const stockRouter = Router();
 
 // get all stock info
 stockRouter.get('/', (req, res) => {
-  Stock.findAll()
-    .then((stocks) => {
-      res.send(stocks);
-    })
+  updateStocks()
+    .then((updatedStocks) => updatedStocks)
+    .then((updatedStocks) => updatedStocks.map(async (stockInfoX) => {
+      const stockArray = Object.values(stockInfoX);
+      const plug = async (stockInfo) => {
+        if (!stockInfo) {
+          return null;
+        }
+        const updatedStock = {};
+        if (!stockInfo.quote == null) {
+          updatedStock.ticker = stockInfo.quote.symbol;
+          updatedStock.current_price_per_share = Math.round(stockInfo.quote.latestPrice * 100);
+          //   // Todo: moment for date_updated
+          Stock.update({
+            current_price_per_share: updatedStock.current_price_per_share
+          },
+          {
+            where: {
+              ticker: updatedStock.ticker
+            }
+          })
+            .catch((err) => {
+              console.error(err);
+              res.status(500).send(err);
+            });
+        }
+        return null;
+      };
+      return Promise.all(stockArray.map((stockInfo) => plug(stockInfo)))
+        .then(() => {
+          Stock.findAll()
+            .then((stocks) => {
+              res.send(stocks);
+            })
+            .catch((err) => {
+              console.error(err);
+              res.status(500).send(err);
+            });
+        })
+        .catch((err) => {
+          console.error(err);
+          res.status(500).send(err);
+        });
+    }))
     .catch((err) => {
       res.status(500).send(err);
     });
@@ -68,7 +107,6 @@ stockRouter.get('/portfolio/:userID', async (req, res) => {
     where: {
       id_user: userID
     }
-    // include: [Stock]
   })
     .then((arrayOfPortfolios) => {
       const response = [];
@@ -158,7 +196,7 @@ stockRouter.post('/waivers', async (req, res) => {
   if (sharesAvailable < shares) {
     res.send('not enough shares available');
   }
-  // add history aspect
+  // TODO: add history aspect
   Stock_user.findAll({
     where: {
       id_stock, id_league, id_user
@@ -187,7 +225,7 @@ stockRouter.post('/waivers', async (req, res) => {
           });
       } else {
         const currentShares = entry[0].dataValues.portfolio.shares;
-        // round this
+        // TODO: round this
         const updatedPriceperShare = ((shares * price_per_share_at_purchase)
           + (currentShares * entry[0].dataValues.portfolio.price_per_share_at_purchase))
           / (currentShares + shares);
