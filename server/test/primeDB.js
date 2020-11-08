@@ -7,8 +7,8 @@ const {
   League_user,
   // Message,
   Stock,
-  User,
-  Stock_user
+  User
+  // Stock_user
 } = require('../db/index.js');
 // messages req
 // history req
@@ -467,195 +467,34 @@ function primeDB() {
       }
       return console.error('❌save undefined');
     })
-    .then(() => Stock.findOrCreate({
-      where: {
-        ticker: 'AAPL',
-        company_name: 'Apple, Inc.',
-        current_price_per_share: 11215,
-        date_updated: '2020-10-28'
-      }
-    }))
+    .then(() => {
+      const tickerArr = [
+        'ABT', 'ABBV', 'ACN', 'ACE', 'ADBE', 'ADT', 'AAP', 'AES', 'AET', 'AFL', 'AMG', 'A', 'GAS', 'APD', 'ARG', 'AKAM', 'AA', 'AGN', 'ALXN', 'ALLE', 'ADS', 'ALL', 'ALTR', 'MO', 'AMZN', 'AEE', 'AAL', 'AEP', 'AXP', 'AIG', 'AMT', 'AMP', 'ABC', 'AME', 'AMGN', 'APH', 'APC', 'ADI', 'AON', 'APA', 'AIV', 'AMAT', 'ADM', 'AIZ', 'T', 'ADSK', 'ADP', 'AN', 'AZO', 'AVGO',
+        'BHI', 'BLL', 'BAC', 'BK', 'BCR', 'BXLT', 'BAX', 'BBT', 'BDX', 'BBBY', 'BRK-B', 'BBY', 'BLX', 'HRB', 'BA', 'BWA', 'BXP', 'BSK', 'BMY', 'BRCM', 'BF-B', 'CHRW', 'CA', 'CVC', 'COG', 'CAM', 'CPB', 'COF', 'CAH', 'HSIC', 'KMX', 'CCL', 'CAT', 'CBG', 'CBS', 'CELG', 'CNP', 'CTL', 'CERN', 'CF', 'SCHW', 'CHK', 'CVX', 'CMG', 'CB', 'CI', 'XEC', 'CINF', 'CTAS', 'CSCO',
+        'C', 'CTXS', 'CLX', 'CME', 'CMS', 'COH', 'KO', 'CCE', 'CTSH', 'CL', 'CMCSA', 'CMA', 'CSC', 'CAG', 'COP', 'CNX', 'ED', 'STZ', 'GLW', 'COST', 'CCI', 'CSX', 'CMI', 'CVS', 'DHI', 'DHR', 'DRI', 'DVA', 'DE', 'DLPH', 'DAL', 'XRAY', 'DVN', 'DO', 'DTV', 'DFS', 'DISCA', 'DISCK', 'DG', 'DLTR', 'D', 'DOV', 'DOW', 'DPS', 'DTE', 'DD', 'DUK', 'DNB', 'ETFC', 'EMN',
+        'ETN', 'EBAY', 'ECL', 'EIX', 'EW', 'EA', 'EMC', 'EMR', 'ENDP', 'ESV', 'ETR', 'EOG', 'EQT', 'EFX', 'EQIX', 'EQR', 'ESS', 'EL', 'ES', 'EXC', 'EXPE', 'EXPD', 'ESRX', 'XOM', 'FFIV', 'FB', 'FAST', 'FDX', 'FIS', 'FITB', 'FSLR', 'FE', 'FSIV', 'FLIR', 'FLS', 'FLR', 'FMC', 'FTI', 'F', 'FOSL', 'BEN', 'FCX', 'FTR', 'GME', 'GPS', 'GRMN', 'GD', 'GE', 'GGP', 'GIS',
+        'GM', 'GPC', 'GNW', 'GILD', 'GS', 'GT', 'GOOGL', 'GOOG', 'GWW', 'HAL', 'HBI', 'HOG', 'HAR', 'HRS', 'HIG', 'HAS', 'HCA', 'HCP', 'HCN', 'HP', 'HES', 'HPQ', 'HD', 'HON', 'HRL', 'HSP', 'HST', 'HCBK', 'HUM', 'HBAN', 'ITW', 'IR', 'INTC', 'ICE', 'IBM', 'IP', 'IPG', 'IFF', 'INTU', 'ISRG', 'IVZ', 'IRM', 'JEC', 'JBHT', 'JNJ', 'JCI', 'JOY', 'JPM', 'JNPR', 'KSU',
+        'K', 'KEY', 'GMCR', 'KMB', 'KIM', 'KMI', 'KLAC', 'KSS', 'KRFT', 'KR', 'LB', 'LLL', 'LH', 'LRCX', 'LM', 'LEG', 'LEN', 'LVLT', 'LUK', 'LLY', 'LNC', 'LLTC', 'LMT', 'L', 'LOW', 'LYB', 'MTB', 'MAC', 'M', 'MNK', 'MRO', 'MPC', 'MAR', 'MMC', 'MLM', 'MAS', 'MA', 'MAT', 'MKC', 'MCD', 'MHFI', 'MCK', 'MJN', 'MMV', 'MDT', 'MRK', 'MET', 'KORS', 'MCHP', 'MU',
+        'MSFT', 'MHK', 'TAP', 'MDLZ', 'MON', 'MNST', 'MCO', 'MS', 'MOS', 'MSI', 'MUR', 'MYL', 'NDAQ', 'NOV', 'NAVI', 'NTAP', 'NFLX', 'NWL', 'NFX', 'NEM', 'NWSA', 'NEE', 'NLSN', 'NKE', 'NI', 'NE', 'NBL', 'JWN', 'NSC', 'NTRS', 'NOC', 'NRG', 'NUE', 'NVDA', 'ORLY', 'OXY', 'OMC', 'OKE', 'ORCL', 'OI', 'PCAR', 'PLL', 'PH', 'PDCO', 'PAYX', 'PNR', 'PBCT', 'POM', 'PEP', 'PKI',
+        'PRGO', 'PFE', 'PCG', 'PM', 'PSX', 'PNW', 'PXD', 'PBI', 'PCL', 'PNC', 'RL', 'PPG', 'PPL', 'PX', 'PCP', 'PCLN', 'PFG', 'PG', 'PGR', 'PLD', 'PRU', 'PEG', 'PSA', 'PHM', 'PVH', 'QRVO', 'PWR', 'QCOM', 'DGX', 'RRC', 'RTN', 'O', 'RHT', 'REGN', 'RF', 'RSG', 'RAI', 'RHI', 'ROK', 'COL', 'ROP', 'ROST', 'RLC', 'R', 'CRM', 'SNDK', 'SCG', 'SLB', 'SNI', 'STX',
+        'SEE', 'SRE', 'SHW', 'SIAL', 'SPG', 'SWKS', 'SLG', 'SJM', 'SNA', 'SO', 'LUV', 'SWN', 'SE', 'STJ', 'SWK', 'SPLS', 'SBUX', 'HOT', 'STT', 'SRCL', 'SYK', 'STI', 'SYMC', 'SYY', 'TROW', 'TGT', 'TEL', 'TE', 'TGNA', 'THC', 'TDC', 'TSO', 'TXN', 'TXT', 'HSY', 'TRV', 'TMO', 'TIF', 'TWX', 'TWC', 'TJK', 'TMK', 'TSS', 'TSCO', 'RIG', 'TRIP', 'FOXA', 'TSN', 'TYC', 'UA',
+        'UNP', 'UNH', 'UPS', 'URI', 'UTX', 'UHS', 'UNM', 'URBN', 'VFC', 'VLO', 'VAR', 'VTR', 'VRSN', 'VZ', 'VRTX', 'VIAB', 'V', 'VNO', 'VMC', 'WMT', 'WBA', 'DIS', 'WM', 'WAT', 'ANTM', 'WFC', 'WDC', 'WU', 'WY', 'WHR', 'WFM', 'WMB', 'WEC', 'WYN', 'WYNN', 'XEL', 'XRX', 'XLNX', 'XL', 'XYL', 'YHOO', 'YUM', 'ZBH', 'ZION', 'ZTS', 'AVB', 'AVY'
+      ];
+      // eslint-disable-next-line array-callback-return
+      tickerArr.map((ticker) => {
+        Stock.findOrCreate({
+          where: {
+            ticker
+          }
+        });
+      });
+    })
     .then((numberEffected) => {
       if (numberEffected) {
-        return console.log('✅ AAPL Created');
+        return console.log('✅ Seeded');
       }
-      return console.error('❌save undefined');
+      return console.error('❌Seedsave undefined');
     })
-    .then(() => Stock.findOrCreate({
-      where: {
-        ticker: 'GOOGL',
-        company_name: 'Alphabet, Inc.',
-        current_price_per_share: 151959,
-        date_updated: '2020-10-28'
-      }
-    }))
-    .then((numberEffected) => {
-      if (numberEffected) {
-        return console.log('✅ GOOGL Created');
-      }
-      return console.error('❌save undefined');
-    })
-    .then(() => Stock.findOrCreate({
-      where: {
-        ticker: 'MSFT',
-        company_name: 'Microsoft Corp.',
-        current_price_per_share: 20455,
-        date_updated: '2020-10-28'
-      }
-    }))
-    .then((numberEffected) => {
-      if (numberEffected) {
-        return console.log('✅ MSFT Created');
-      }
-      return console.error('❌save undefined');
-    })
-    .then(() => Stock.findOrCreate({
-      where: {
-        ticker: 'GE',
-        company_name: 'General Electric Co.',
-        current_price_per_share: 777,
-        date_updated: '2020-10-28'
-      }
-    }))
-    .then((numberEffected) => {
-      if (numberEffected) {
-        return console.log('✅ GE Created');
-      }
-      return console.error('❌save undefined');
-    })
-    .then(() => Stock.findOrCreate({
-      where: {
-        ticker: 'V',
-        company_name: 'Visa, Inc.',
-        current_price_per_share: 17986,
-        date_updated: '2020-10-28'
-      }
-    }))
-    .then((numberEffected) => {
-      if (numberEffected) {
-        return console.log('✅ V Created');
-      }
-      return console.error('❌save undefined');
-    })
-    .then(() => Stock.findOrCreate({
-      where: {
-        ticker: 'BBBY',
-        company_name: 'Bed Bath & Beyond, Inc.',
-        current_price_per_share: 2127,
-        date_updated: '2020-10-28'
-      }
-    }))
-    .then((numberEffected) => {
-      if (numberEffected) {
-        return console.log('✅ BBBY Created');
-      }
-      return console.error('❌save undefined');
-    })
-    .then(() => Stock.findOrCreate({
-      where: {
-        ticker: 'SAM',
-        company_name: 'Boston Beer Co., Inc.',
-        current_price_per_share: 104364,
-        date_updated: '2020-10-28'
-      }
-    }))
-    .then((numberEffected) => {
-      if (numberEffected) {
-        return console.log('✅ SAM Created');
-      }
-      return console.error('❌save undefined');
-    })
-    .then(() => Stock.findOrCreate({
-      where: {
-        ticker: 'UAA',
-        company_name: 'Under Armour, Inc.',
-        current_price_per_share: 1325,
-        date_updated: '2020-10-28'
-      }
-    }))
-    .then((numberEffected) => {
-      if (numberEffected) {
-        return console.log('✅ UAA Created');
-      }
-      return console.error('❌save undefined');
-    })
-    .then(() => Stock.findOrCreate({
-      where: {
-        ticker: 'NKE',
-        company_name: 'NIKE, Inc.',
-        current_price_per_share: 12250,
-        date_updated: '2020-10-28'
-      }
-    }))
-    .then((numberEffected) => {
-      if (numberEffected) {
-        return console.log('✅ NKE Created');
-      }
-      return console.error('❌save undefined');
-    })
-    .then(() => Stock.findOrCreate({
-      where: {
-        ticker: 'NVDA',
-        company_name: 'NVIDIA Corp.',
-        current_price_per_share: 51258,
-        date_updated: '2020-10-28'
-      }
-    }))
-    .then((numberEffected) => {
-      if (numberEffected) {
-        return console.log('✅ NVDA Created');
-      }
-      return console.error('❌save undefined');
-    })
-    .then(() => Stock_user.findOrCreate({
-      where: {
-        id_user: '6',
-        id_stock: 9,
-        id_league: 2,
-        portfolio: {
-          shares: 3,
-          price_per_share_at_purchase: '11215'
-        }
-      }
-    }))
-    .then((numberEffected) => {
-      if (numberEffected) {
-        return console.log('✅ Portfolio1 Created');
-      }
-      return console.error('❌save undefined');
-    })
-    // .then(() => Portfolio.findOrCreate({
-    //   where: {
-    //     // id: 2,
-    //     id_user: 1,
-    //     id_stock: 2,
-    //     id_league: 2,
-    //     shares: 1,
-    //     price_per_share_at_purchase: 151959
-    //   }
-    // }))
-    // .then((numberEffected) => {
-    //   if (numberEffected) {
-    //     return console.log('✅ Portfolio2 Created');
-    //   }
-    //   return console.error('❌save undefined');
-    // })
-    // .then(() => Portfolio.findOrCreate({
-    //   where: {
-    //     // id: 3,
-    //     id_user: 1,
-    //     id_stock: 6,
-    //     id_league: 2,
-    //     shares: 10,
-    //     price_per_share_at_purchase: 2127
-    //   }
-    // }))
-    // .then((numberEffected) => {
-    //   if (numberEffected) {
-    //     return console.log('✅ Portfolio3 Created');
-    //   }
-    //   return console.error('❌save undefined');
-    // })
     .catch((err) => {
       console.error(`❌${err}`);
     });
