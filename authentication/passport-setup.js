@@ -22,7 +22,8 @@ passport.use(
       axios.post('http://localhost:3000/user', {
         id: '6',
         username: profile.name.familyName,
-        full_name: profile.displayName
+        full_name: profile.displayName,
+        avatar: profile.photos.value
       }).then((response) => done(null, response.data));
     }
   )

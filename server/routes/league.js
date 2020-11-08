@@ -36,7 +36,7 @@ leagueRouter.get('/league/:leagueID', (req, res) => {
 
   League.findAll({
     where: { id: leagueID }, include: [{ model: User }]
-  }).then((response) => res.send(response));
+  }).then((response) => res.send(response[0].dataValues.users));
 });
 
 // get User and League data with User id
