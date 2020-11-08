@@ -15,7 +15,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { selectUser, setUser } from '../../features/userSlice.js';
-import { setLeague } from '../../features/leagueSlice.js';
+import { setLeague, setLeagueOwner } from '../../features/leagueSlice.js';
 
 const useStyles = makeStyles({
   root: {
@@ -51,7 +51,10 @@ function CreateNewLeague() {
     axios.post('/league', {
       league_name: inputLeague,
       id_owner: user?.id
-    }).then((leagueInfo) => dispatch(setLeague(leagueInfo?.data.id)))
+    }).then((leagueInfo) => {
+      dispatch(setLeague(leagueInfo?.data.id));
+      dispatch(setLeagueOwner(leagueInfo?.data.id_owner));
+    })
       .then(() => axios.post('/user', { id: user?.id })
         .then((response) => dispatch(setUser(response.data))));
   };

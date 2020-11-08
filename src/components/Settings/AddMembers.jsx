@@ -1,15 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import propTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { Button, Input } from '@material-ui/core';
 import { selectLeague } from '../../features/leagueSlice.js';
 import '../../css/AddMembers.css';
 
-function AddMembers() {
+function AddMembers({ leagueUsers }) {
+  AddMembers.propTypes = {
+    leagueUsers: propTypes.arrayOf(propTypes.shape({
+      color: propTypes.string.isRequired,
+      fontSize: propTypes.number.isRequired
+    })).isRequired
+  };
+
   const [input, setInput] = useState('');
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState(leagueUsers);
   const leagueID = useSelector(selectLeague);
   const [submitted, setSubmitted] = useState(false);
+
+  useEffect(() => {
+    setUsers(leagueUsers);
+  }, [leagueUsers]);
 
   const handleChange = (e) => {
     setInput(e.target.value);
@@ -29,17 +41,17 @@ function AddMembers() {
 
   const addMembersToLeague = () => {
     const userIDs = users.map((user) => user.id);
-
     axios.post('/league/addUser', { userIDs, leagueID });
-
-    setUsers([]);
     setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 800);
+    setTimeout(() => setSubmitted(false), 1000);
   };
 
   return (
     <div>
       <h2 className='addMembers_title'>Add Members</h2>
+      <p className='addMembers_membersNumber'>
+        {`members: ${users.length}`}
+      </p>
       <form className='addMembers_form'>
         <Input
           variant='outlined'
