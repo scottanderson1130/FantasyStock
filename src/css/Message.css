@@ -17,3 +17,10 @@
 .message_guestCard {
   background-color: #e9e9eb !important;
 }
+
+.message_date {
+  color:black;
+  padding-top: 3px;
+  margin-right: 5px;
+  font-size: 12px;
+}

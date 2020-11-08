@@ -53,7 +53,7 @@ function MessageBoard() {
   return (
     <div className='messageBoard'>
       <div>
-        <h3>
+        <h3 className='messageBoard_title'>
           {`Hello, ${user?.username}`}
         </h3>
       </div>

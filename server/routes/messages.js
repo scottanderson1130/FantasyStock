@@ -33,7 +33,8 @@ messageRouter.post('/', (req, res) => {
         id_league: response.id_league,
         id_user: response.id_user,
         words: response.words,
-        username: response.username
+        username: response.username,
+        createdAt: response.createdAt
       });
       res.send('message sent');
     })
