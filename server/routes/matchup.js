@@ -15,7 +15,8 @@ const {
 } = require('../db/index');
 
 matchupRouter.get('/:leagueID', async (req, res) => {
-  // TODO: calculate the scores, update the settings, and send the updated settings with new scores in it
+  // TODO: calculate the scores, update the settings,
+  // and send the updated settings with new scores in it
   const { leagueID } = req.params;
   const stockInfo = {};
   const currentMatchups = await League.findByPk(
