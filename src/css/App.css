@@ -9,3 +9,7 @@ body {
 html {
   font-family: 'SF Pro Display', sans-serif;
 }
+
+* { 
+  font-size: 103%
+}

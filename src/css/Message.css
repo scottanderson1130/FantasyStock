@@ -13,7 +13,6 @@
 .message_userCard {
   background-color: #0b81ff !important;
 }
-
 .message_guestCard {
   background-color: #e9e9eb !important;
 }
@@ -23,4 +22,8 @@
   padding-top: 3px;
   margin-right: 5px;
   font-size: 12px;
+}
+
+.message_cardContent {
+  padding: 10px !important;
 }
