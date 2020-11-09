@@ -83,7 +83,7 @@ function SettingsLeague({ myLeague }) {
         <form className='settingsLeague_form' onSubmit={handleSubmit}>
           {submitted && <div className='success-message'>Success! Your settings have been updated</div>}
           {inputsForm.map(({
-            description, type, placeholder, name
+            description, type, name
           }) => (
             <div
               className='settingsLeague_settingBox'
