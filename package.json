@@ -8,6 +8,7 @@
     "dev": "webpack -d --watch",
     "build": "webpack -p",
     "test-db": "node server/test/primeDB.js",
+    "primeMatch": "node server/test/matchPrimer.js",
     "test": "mocha",
     "lint": "eslint . --ext .js --ext .jsx"
   },
