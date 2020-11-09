@@ -68,7 +68,7 @@ function EnhancedTableHead({
   classes, order, orderBy, onRequestSort
 }) {
   EnhancedTableHead.propTypes = {
-    classes: PropTypes.shape({ subProp: PropTypes.string }).isRequired,
+    classes: PropTypes.shape({ visuallyHidden: PropTypes.shape }).isRequired,
     onRequestSort: PropTypes.func.isRequired,
     order: PropTypes.oneOf(['asc', 'desc']).isRequired,
     orderBy: PropTypes.string.isRequired

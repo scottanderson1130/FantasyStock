@@ -26,7 +26,8 @@ function WaiversList({
       id: PropTypes.number,
       company_name: PropTypes.string,
       current_price_per_share: PropTypes.number,
-      sharesRemaining: PropTypes.number
+      sharesRemaining: PropTypes.number,
+      ticker: PropTypes.string
     }).isRequired,
     index: PropTypes.number.isRequired,
     user: PropTypes.shape({
