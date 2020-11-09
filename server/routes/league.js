@@ -48,6 +48,10 @@ leagueRouter.get('/:userID', (req, res) => {
   }).then((response) => res.send(response));
 });
 
+leagueRouter.get('/', (req, res) => {
+  League.findAll().then((response) => res.send(response)).catch((err) => res.send(err));
+});
+
 // create a league route
 leagueRouter.post('/', (req, res) => {
   const { league_name, id_owner } = req.body;
@@ -73,7 +77,7 @@ leagueRouter.post('/', (req, res) => {
     League_user.create({
       id_user: responseLeagueInfo.id_owner,
       id_league: responseLeagueInfo.id,
-      bank_balance: null,
+      bank_balance: 1000000,
       net_worth: null,
       record: null
     });

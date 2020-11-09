@@ -162,7 +162,7 @@ function WaiversTable({
 
   const filteredStocks = rows?.filter(
     (row) => row
-      .company_name.toLowerCase()
+      .ticker.toLowerCase()
       .indexOf(search.toLowerCase()) !== -1
   );
   const ControllingRowsPerPage = page * rowsPerPage;
