@@ -32,6 +32,7 @@ function Waivers() {
   }, [league, user.id]);
 
   const handleSearch = (e) => {
+    console.log('SEARCH (35)', e.target.value);
     setSearch(e.target.value);
   };
   return (

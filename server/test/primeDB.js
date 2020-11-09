@@ -39,11 +39,11 @@ function primeDB() {
               match2: {
                 home: {
                   teamID: '2',
-                  score: 115
+                  score: 130
                 },
                 away: {
                   teamID: '4',
-                  score: 99
+                  score: 125
                 },
                 winner: null,
                 finalScore: null
@@ -110,11 +110,11 @@ function primeDB() {
                 match2: {
                   home: {
                     teamID: '2',
-                    score: 115
+                    score: 125
                   },
                   away: {
                     teamID: '4',
-                    score: 99
+                    score: 120
                   },
                   winner: null,
                   finalScore: null
