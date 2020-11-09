@@ -46,7 +46,7 @@ function YourStocks() {
           />
         </div>
         <div className='YourStocks_card'>
-          <CardStats bankBalance={bankBalance} />
+          <CardStats bankBalance={bankBalance} rows={rows} />
         </div>
         <BasicTable
           rows={rows}

@@ -1,9 +1,9 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
+import PropTypes from 'prop-types';
 
 const useStyles = makeStyles({
   root: {
@@ -32,6 +32,16 @@ function ScoreCard({
   homeTeamId,
   getMatchups
 }) {
+  console.log(typeof awayScore, typeof awayRecord, typeof awayTeamId, typeof getMatchups);
+  ScoreCard.propTypes = {
+    awayScore: PropTypes.number.isRequired,
+    awayRecord: PropTypes.string.isRequired,
+    awayTeamId: PropTypes.number.isRequired,
+    homeScore: PropTypes.number.isRequired,
+    homeRecord: PropTypes.string.isRequired,
+    homeTeamId: PropTypes.number.isRequired,
+    getMatchups: PropTypes.func.isRequired
+  };
   const classes = useStyles();
   return (
     <Card

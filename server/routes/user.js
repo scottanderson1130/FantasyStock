@@ -18,7 +18,7 @@ const userRouter = Router();
 userRouter.get('/', (req, res) => {
   User.findAll()
     .then((userInfo) => res.send(userInfo))
-    .catch((err) => console.error(err));
+    .catch((err) => console.warn(err));
 });
 
 // get user by username
@@ -33,7 +33,7 @@ userRouter.get('/:username', (req, res) => {
     }
   })
     .then((userInfo) => res.send(userInfo))
-    .catch((err) => console.error(err));
+    .catch((err) => console.warn(err));
 });
 
 // // get user's Info by user google id
@@ -59,7 +59,7 @@ userRouter.get('/:username', (req, res) => {
 //         });
 //     })
 //     .catch((err) => {
-//       console.error(err);
+//       console.warn(err);
 //       res.status(500).send(err);
 //     });
 // });
@@ -90,7 +90,7 @@ userRouter.post('/', (req, res) => {
         });
     })
     .catch((err) => {
-      console.error(err);
+      console.warn(err);
       res.status(500).send(err);
     });
 });
@@ -111,7 +111,7 @@ userRouter.put('/', (req, res) => {
       res.status(201).send(newUser);
     })
     .catch((err) => {
-      console.error(err);
+      console.warn(err);
       res.status(500).send(err);
     });
 });

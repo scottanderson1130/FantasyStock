@@ -84,7 +84,7 @@ function primeDB() {
       if (res) {
         return console.log('✅ League Created');
       }
-      return console.error('❌save undefined');
+      return console.warn('❌save undefined');
     })
     .then(() => League.findOrCreate({
       where: {
@@ -181,7 +181,7 @@ function primeDB() {
       if (numberEffected) {
         return console.log('✅ Other League Created');
       }
-      return console.error('❌save undefined');
+      return console.warn('❌save undefined');
     })
     .then(() => User.findOrCreate({
       where: {
@@ -194,7 +194,7 @@ function primeDB() {
       if (numberEffected) {
         return console.log('✅ User Created');
       }
-      return console.error('❌save undefined');
+      return console.warn('❌save undefined');
     })
     .then(() => User.findOrCreate({
       where: {
@@ -207,7 +207,7 @@ function primeDB() {
       if (numberEffected) {
         return console.log('✅ User2 Created');
       }
-      return console.error('❌save undefined');
+      return console.warn('❌save undefined');
     })
     .then(() => User.findOrCreate({
       where: {
@@ -220,7 +220,7 @@ function primeDB() {
       if (numberEffected) {
         return console.log('✅ User3 Created');
       }
-      return console.error('❌save undefined');
+      return console.warn('❌save undefined');
     })
     .then(() => User.findOrCreate({
       where: {
@@ -233,7 +233,7 @@ function primeDB() {
       if (numberEffected) {
         return console.log('✅ User4 Created');
       }
-      return console.error('❌save undefined');
+      return console.warn('❌save undefined');
     })
     .then(() => User.findOrCreate({
       where: {
@@ -246,7 +246,7 @@ function primeDB() {
       if (numberEffected) {
         return console.log('✅ User5 Created');
       }
-      return console.error('❌save undefined');
+      return console.warn('❌save undefined');
     })
     .then(() => User.findOrCreate({
       where: {
@@ -259,7 +259,7 @@ function primeDB() {
       if (numberEffected) {
         return console.log('✅ User6 Created');
       }
-      return console.error('❌save undefined');
+      return console.warn('❌save undefined');
     })
     .then(() => User.findOrCreate({
       where: {
@@ -272,7 +272,7 @@ function primeDB() {
       if (numberEffected) {
         return console.log('✅ User7 Created');
       }
-      return console.error('❌save undefined');
+      return console.warn('❌save undefined');
     })
     .then(() => User.findOrCreate({
       where: {
@@ -285,7 +285,7 @@ function primeDB() {
       if (numberEffected) {
         return console.log('✅ User8 Created');
       }
-      return console.error('❌save undefined');
+      return console.warn('❌save undefined');
     })
     .then(() => User.findOrCreate({
       where: {
@@ -298,7 +298,7 @@ function primeDB() {
       if (numberEffected) {
         return console.log('✅ User9 Created');
       }
-      return console.error('❌save undefined');
+      return console.warn('❌save undefined');
     })
     .then(() => User.findOrCreate({
       where: {
@@ -311,7 +311,7 @@ function primeDB() {
       if (numberEffected) {
         return console.log('✅ User10 Created');
       }
-      return console.error('❌save undefined');
+      return console.warn('❌save undefined');
     })
     .then(() => League_user.findOrCreate({
       where: {
@@ -326,7 +326,7 @@ function primeDB() {
       if (numberEffected) {
         return console.log('✅ League_User1 Association Created');
       }
-      return console.error('❌save undefined');
+      return console.warn('❌save undefined');
     })
     .then(() => League_user.findOrCreate({
       where: {
@@ -341,7 +341,7 @@ function primeDB() {
       if (numberEffected) {
         return console.log('✅ League_User2 Association Created');
       }
-      return console.error('❌save undefined');
+      return console.warn('❌save undefined');
     })
     .then(() => League_user.findOrCreate({
       where: {
@@ -356,7 +356,7 @@ function primeDB() {
       if (numberEffected) {
         return console.log('✅ League_User3 Association Created');
       }
-      return console.error('❌save undefined');
+      return console.warn('❌save undefined');
     })
     .then(() => League_user.findOrCreate({
       where: {
@@ -371,7 +371,7 @@ function primeDB() {
       if (numberEffected) {
         return console.log('✅ League_User4 Association Created');
       }
-      return console.error('❌save undefined');
+      return console.warn('❌save undefined');
     })
     .then(() => League_user.findOrCreate({
       where: {
@@ -386,7 +386,7 @@ function primeDB() {
       if (numberEffected) {
         return console.log('✅ League_User5 Association Created');
       }
-      return console.error('❌save undefined');
+      return console.warn('❌save undefined');
     })
     .then(() => League_user.findOrCreate({
       where: {
@@ -401,7 +401,7 @@ function primeDB() {
       if (numberEffected) {
         return console.log('✅ League_User6 Association Created');
       }
-      return console.error('❌save undefined');
+      return console.warn('❌save undefined');
     })
     .then(() => League_user.findOrCreate({
       where: {
@@ -416,7 +416,7 @@ function primeDB() {
       if (numberEffected) {
         return console.log('✅ League_User7 Association Created');
       }
-      return console.error('❌save undefined');
+      return console.warn('❌save undefined');
     })
     .then(() => League_user.findOrCreate({
       where: {
@@ -431,68 +431,68 @@ function primeDB() {
       if (numberEffected) {
         return console.log('✅ League_User8 Association Created');
       }
-      return console.error('❌save undefined');
+      return console.warn('❌save undefined');
     })
-    // .then(() => League_user.findOrCreate({
-    //   where: {
-    //     id_league: 2,
-    //     id_user: '9',
-    //     bank_balance: 1000000,
-    //     net_worth: 0,
-    //     record: '1-1'
-    //   }
-    // }))
-    // .then((numberEffected) => {
-    //   if (numberEffected) {
-    //     return console.log('✅ League_User9 Association Created');
-    //   }
-    //   return console.error('❌save undefined');
-    // })
-    // .then(() => League_user.findOrCreate({
-    //   where: {
-    //     id_league: 2,
-    //     id_user: '10',
-    //     bank_balance: 1000000,
-    //     net_worth: 0,
-    //     record: '1-1'
-    //   }
-    // }))
-    // .then((numberEffected) => {
-    //   if (numberEffected) {
-    //     return console.log('✅ League_User10 Association Created');
-    //   }
-    //   return console.error('❌save undefined');
-    // })
-    // .then(() => League_user.findOrCreate({
-    //   where: {
-    //     id_league: 2,
-    //     id_user: '5',
-    //     bank_balance: 1000000,
-    //     net_worth: 0,
-    //     record: '1-1'
-    //   }
-    // }))
-    // .then((numberEffected) => {
-    //   if (numberEffected) {
-    //     return console.log('✅ League_User11 Association Created');
-    //   }
-    //   return console.error('❌save undefined');
-    // })
-    // .then(() => League_user.findOrCreate({
-    //   where: {
-    //     id_league: 2,
-    //     id_user: '6',
-    //     bank_balance: 815556,
-    //     net_worth: 0,
-    //     record: '1-1'
-    //   }
-    // }))
-    // .then((numberEffected) => {
-    //   if (numberEffected) {
-    //     return console.log('✅ League_User12 Association Created');
-    //   }
-    //   return console.error('❌save undefined');
-    // })
+    .then(() => League_user.findOrCreate({
+      where: {
+        id_league: 2,
+        id_user: '9',
+        bank_balance: 1000000,
+        net_worth: 0,
+        record: '1-1'
+      }
+    }))
+    .then((numberEffected) => {
+      if (numberEffected) {
+        return console.log('✅ League_User9 Association Created');
+      }
+      return console.warn('❌save undefined');
+    })
+    .then(() => League_user.findOrCreate({
+      where: {
+        id_league: 2,
+        id_user: '10',
+        bank_balance: 1000000,
+        net_worth: 0,
+        record: '1-1'
+      }
+    }))
+    .then((numberEffected) => {
+      if (numberEffected) {
+        return console.log('✅ League_User10 Association Created');
+      }
+      return console.warn('❌save undefined');
+    })
+    .then(() => League_user.findOrCreate({
+      where: {
+        id_league: 2,
+        id_user: '5',
+        bank_balance: 1000000,
+        net_worth: 0,
+        record: '1-1'
+      }
+    }))
+    .then((numberEffected) => {
+      if (numberEffected) {
+        return console.log('✅ League_User11 Association Created');
+      }
+      return console.warn('❌save undefined');
+    })
+    .then(() => League_user.findOrCreate({
+      where: {
+        id_league: 2,
+        id_user: '6',
+        bank_balance: 815556,
+        net_worth: 0,
+        record: '1-1'
+      }
+    }))
+    .then((numberEffected) => {
+      if (numberEffected) {
+        return console.log('✅ League_User12 Association Created');
+      }
+      return console.warn('❌save undefined');
+    })
     .then(() => {
       const tickerArr = [
         'ABT', 'ABBV', 'ACN', 'ACE', 'ADBE', 'ADT', 'AAP', 'AES', 'AET', 'AFL', 'AMG', 'A', 'GAS', 'APD', 'ARG', 'AKAM', 'AA', 'AGN', 'ALXN', 'ALLE', 'ADS', 'ALL', 'ALTR', 'MO', 'AMZN', 'AEE', 'AAL', 'AEP', 'AXP', 'AIG', 'AMT', 'AMP', 'ABC', 'AME', 'AMGN', 'APH', 'APC', 'ADI', 'AON', 'APA', 'AIV', 'AMAT', 'ADM', 'AIZ', 'T', 'ADSK', 'ADP', 'AN', 'AZO', 'AVGO',
@@ -519,10 +519,10 @@ function primeDB() {
       if (numberEffected) {
         return console.log('✅ Seeded');
       }
-      return console.error('❌Seedsave undefined');
+      return console.warn('❌Seedsave undefined');
     })
     .catch((err) => {
-      console.error(`❌${err}`);
+      console.warn(`❌${err}`);
     });
 }
 

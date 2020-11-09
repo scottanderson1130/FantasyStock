@@ -12,7 +12,7 @@ function Waivers() {
   const user = useSelector(selectUser);
   const rows = useSelector(selectWaivers);
   const [search, setSearch] = useState('');
-  const [bankBalance, setBankBalance] = useState({});
+  const [bankBalance, setBankBalance] = useState();
 
   const dispatch = useDispatch();
   const league = useSelector(selectLeague);
@@ -32,7 +32,6 @@ function Waivers() {
   }, [league, user.id]);
 
   const handleSearch = (e) => {
-    console.log('SEARCH (35)', e.target.value);
     setSearch(e.target.value);
   };
   return (

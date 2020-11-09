@@ -42,14 +42,13 @@ stockRouter.get('/', (req, res) => {
             }
           })
             .catch((err) => {
-              console.error(err);
+              console.warn(err);
               res.status(500).send(err);
             });
         }
         return null;
       };
       return Promise.all(stockArray.map((stockInfo) => {
-        console.log('(51)', stockInfo);
         plug(stockInfo);
       }))
         .then(() => {
@@ -58,12 +57,12 @@ stockRouter.get('/', (req, res) => {
               res.send(stocks);
             })
             .catch((err) => {
-              console.error(err);
+              console.warn(err);
               res.status(500).send(err);
             });
         })
         .catch((err) => {
-          console.error(err);
+          console.warn(err);
           res.status(500).send(err);
         });
     }))
@@ -80,7 +79,7 @@ stockRouter.get('/stock/:stockID', (req, res) => {
       res.send(stock);
     })
     .catch((err) => {
-      console.error(err);
+      console.warn(err);
       res.status(500).send(err);
     });
 });
@@ -99,7 +98,7 @@ stockRouter.get('/bank/:userID/:leagueID', (req, res) => {
       res.send(bank);
     })
     .catch((err) => {
-      console.error(err);
+      console.warn(err);
       res.status(500).send(err);
     });
 });
@@ -129,7 +128,7 @@ stockRouter.get('/portfolio/:userID', async (req, res) => {
       }, 50);
     })
     .catch((err) => {
-      console.error(err);
+      console.warn(err);
       res.status(500).send(err);
     });
 });
@@ -169,43 +168,38 @@ stockRouter.get('/waivers/:leagueID', (req, res) => {
               where: {
                 ticker: updatedStock.ticker
               }
-            }).then((data) => console.log('(172)', data))
+            }).then((data) => data)
               .catch((err) => {
-                console.error('ERROR (174)', err);
+                console.warn('ERROR (174)', err);
                 res.status(500).send(err);
               });
           }
           return null;
         };
-        console.log('(180)');
         return Promise.all(stockArray.map((stockInfo) => {
-          console.log('STOCK INFO (182)', stockInfo);
           plug(stockInfo);
         }))
           .then(() => {
             Stock.findAll()
-              .then((stocks) => {
-                console.log('STOCKS (183)', stocks);
+              .then(() => {
                 // res.send(stocks);
               })
               .catch((err) => {
-                console.error('(190)', err);
+                console.warn('(190)', err);
                 res.status(500).send(err);
               });
           })
           .catch((err) => {
-            console.error('(195)', err);
+            console.warn('(195)', err);
             res.status(500).send(err);
           });
       }))
       .catch((err) => {
-        console.error('ERROR (200)');
+        console.warn('ERROR (200)');
         res.status(500).send(err);
       });
   };
-  // console.log(test)
   delayStockUpdate().then(() => {});
-  // console.log(test2)
   // sync
   const { leagueID } = req.params;
   const waivers = [];
@@ -247,7 +241,7 @@ stockRouter.get('/waivers/:leagueID', (req, res) => {
         });
     })
     .catch((err) => {
-      console.error(err);
+      console.warn(err);
       res.status(500).send(err);
     });
 });
@@ -329,11 +323,11 @@ stockRouter.post('/waivers', async (req, res) => {
                 };
                 res.send(data);
               });
-          }).then((data) => (data)).catch((err) => console.error(err));
+          }).then((data) => (data)).catch((err) => console.warn(err));
       }
     })
     .catch((err) => {
-      console.error(err);
+      console.warn(err);
       res.status(500).send(err);
     });
 });

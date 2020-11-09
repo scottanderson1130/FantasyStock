@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
@@ -108,8 +107,7 @@ function EnhancedTableHead(props) {
 }
 
 EnhancedTableHead.propTypes = {
-  // eslint-disable-next-line react/forbid-prop-types
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.shape.isRequired,
   onRequestSort: PropTypes.func.isRequired,
   order: PropTypes.oneOf(['asc', 'desc']).isRequired,
   orderBy: PropTypes.string.isRequired
@@ -143,7 +141,14 @@ const useStyles = makeStyles((theme) => ({
 function BasicTable({
   rows, user, bankBalance, setBankBalance, updateBank, fetchYourStocks
 }) {
-  // BasicTable.propTypes = rows;
+  BasicTable.propTypes = {
+    rows: PropTypes.shape.isRequired,
+    user: PropTypes.shape.isRequired,
+    bankBalance: PropTypes.number.isRequired,
+    setBankBalance: PropTypes.func.isRequired,
+    updateBank: PropTypes.func.isRequired,
+    fetchYourStocks: PropTypes.func.isRequired
+  };
 
   const classes = useStyles();
   const [order, setOrder] = useState('asc');
