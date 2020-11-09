@@ -166,7 +166,6 @@ function WaiversTable({
       .indexOf(search.toLowerCase()) !== -1
   );
   const ControllingRowsPerPage = page * rowsPerPage;
-
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>

@@ -23,6 +23,7 @@ stockRouter.get('/', (req, res) => {
     .then((updatedStocks) => updatedStocks)
     .then((updatedStocks) => updatedStocks.map(async (stockInfoX) => {
       const stockArray = Object.values(stockInfoX);
+
       const plug = async (stockInfo) => {
         if (!stockInfo) {
           return null;
@@ -47,7 +48,10 @@ stockRouter.get('/', (req, res) => {
         }
         return null;
       };
-      return Promise.all(stockArray.map((stockInfo) => plug(stockInfo)))
+      return Promise.all(stockArray.map((stockInfo) => {
+        console.log('(51)', stockInfo);
+        plug(stockInfo);
+      }))
         .then(() => {
           Stock.findAll()
             .then((stocks) => {
@@ -146,9 +150,8 @@ stockRouter.get('/waivers/:leagueID', (req, res) => {
       .then((updatedStocks) => updatedStocks)
       .then((updatedStocks) => updatedStocks.map((stockInfoX) => {
         const stockArray = Object.values(stockInfoX); // this is returning the right data
-
         const plug = (stockInfo) => {
-          if (!stockInfo) {
+          if (!stockInfo && !stockInfo.company_name) {
             return null;
           }
           const updatedStock = {};
@@ -164,25 +167,27 @@ stockRouter.get('/waivers/:leagueID', (req, res) => {
             },
             {
               where: {
-                ticker: updatedStock.ticker,
-                current_price_per_share: updatedStock.current_price_per_share,
-                company_name: updatedStock.company_name
+                ticker: updatedStock.ticker
               }
-            })
+            }).then((data) => console.log('(172)', data))
               .catch((err) => {
-                console.error('ERROR (170)', err);
+                console.error('ERROR (174)', err);
                 res.status(500).send(err);
               });
           }
           return null;
         };
-
-        return Promise.all(stockArray.map((stockInfo) => plug(stockInfo)))
+        console.log('(180)');
+        return Promise.all(stockArray.map((stockInfo) => {
+          console.log('STOCK INFO (182)', stockInfo);
+          plug(stockInfo);
+        }))
           .then(() => {
             Stock.findAll()
-            // .then((stocks) => {
-            //   // res.send(stocks);
-            // })
+              .then((stocks) => {
+                console.log('STOCKS (183)', stocks);
+                // res.send(stocks);
+              })
               .catch((err) => {
                 console.error('(190)', err);
                 res.status(500).send(err);
