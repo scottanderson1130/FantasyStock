@@ -92,7 +92,7 @@ function primeDB() {
         id_owner: '2',
         settings: {
           schedule: {
-            currentWeek: 1,
+            currentWeek: 3,
             weeklyMatchups: {
               week1: {
                 match1: {
@@ -139,7 +139,33 @@ function primeDB() {
                     score: 35
                   },
                   away: {
+                    teamID: 4,
+                    score: 199
+                  },
+                  winner: null,
+                  finalScore: null
+                }
+              },
+              week3: {
+                match1: {
+                  home: {
+                    teamID: '1',
+                    score: 101
+                  },
+                  away: {
                     teamID: '4',
+                    score: 90
+                  },
+                  winner: null,
+                  finalScore: null
+                },
+                match2: {
+                  home: {
+                    teamID: '2',
+                    score: 35
+                  },
+                  away: {
+                    teamID: 3,
                     score: 199
                   },
                   winner: null,
@@ -407,66 +433,66 @@ function primeDB() {
       }
       return console.error('❌save undefined');
     })
-    .then(() => League_user.findOrCreate({
-      where: {
-        id_league: 2,
-        id_user: '9',
-        bank_balance: 1000000,
-        net_worth: 0,
-        record: '1-1'
-      }
-    }))
-    .then((numberEffected) => {
-      if (numberEffected) {
-        return console.log('✅ League_User9 Association Created');
-      }
-      return console.error('❌save undefined');
-    })
-    .then(() => League_user.findOrCreate({
-      where: {
-        id_league: 2,
-        id_user: '10',
-        bank_balance: 1000000,
-        net_worth: 0,
-        record: '1-1'
-      }
-    }))
-    .then((numberEffected) => {
-      if (numberEffected) {
-        return console.log('✅ League_User10 Association Created');
-      }
-      return console.error('❌save undefined');
-    })
-    .then(() => League_user.findOrCreate({
-      where: {
-        id_league: 2,
-        id_user: '5',
-        bank_balance: 1000000,
-        net_worth: 0,
-        record: '1-1'
-      }
-    }))
-    .then((numberEffected) => {
-      if (numberEffected) {
-        return console.log('✅ League_User11 Association Created');
-      }
-      return console.error('❌save undefined');
-    })
-    .then(() => League_user.findOrCreate({
-      where: {
-        id_league: 2,
-        id_user: '6',
-        bank_balance: 815556,
-        net_worth: 0,
-        record: '1-1'
-      }
-    }))
-    .then((numberEffected) => {
-      if (numberEffected) {
-        return console.log('✅ League_User12 Association Created');
-      }
-      return console.error('❌save undefined');
-    })
+    // .then(() => League_user.findOrCreate({
+    //   where: {
+    //     id_league: 2,
+    //     id_user: '9',
+    //     bank_balance: 1000000,
+    //     net_worth: 0,
+    //     record: '1-1'
+    //   }
+    // }))
+    // .then((numberEffected) => {
+    //   if (numberEffected) {
+    //     return console.log('✅ League_User9 Association Created');
+    //   }
+    //   return console.error('❌save undefined');
+    // })
+    // .then(() => League_user.findOrCreate({
+    //   where: {
+    //     id_league: 2,
+    //     id_user: '10',
+    //     bank_balance: 1000000,
+    //     net_worth: 0,
+    //     record: '1-1'
+    //   }
+    // }))
+    // .then((numberEffected) => {
+    //   if (numberEffected) {
+    //     return console.log('✅ League_User10 Association Created');
+    //   }
+    //   return console.error('❌save undefined');
+    // })
+    // .then(() => League_user.findOrCreate({
+    //   where: {
+    //     id_league: 2,
+    //     id_user: '5',
+    //     bank_balance: 1000000,
+    //     net_worth: 0,
+    //     record: '1-1'
+    //   }
+    // }))
+    // .then((numberEffected) => {
+    //   if (numberEffected) {
+    //     return console.log('✅ League_User11 Association Created');
+    //   }
+    //   return console.error('❌save undefined');
+    // })
+    // .then(() => League_user.findOrCreate({
+    //   where: {
+    //     id_league: 2,
+    //     id_user: '6',
+    //     bank_balance: 815556,
+    //     net_worth: 0,
+    //     record: '1-1'
+    //   }
+    // }))
+    // .then((numberEffected) => {
+    //   if (numberEffected) {
+    //     return console.log('✅ League_User12 Association Created');
+    //   }
+    //   return console.error('❌save undefined');
+    // })
     .then(() => {
       const tickerArr = [
         'ABT', 'ABBV', 'ACN', 'ACE', 'ADBE', 'ADT', 'AAP', 'AES', 'AET', 'AFL', 'AMG', 'A', 'GAS', 'APD', 'ARG', 'AKAM', 'AA', 'AGN', 'ALXN', 'ALLE', 'ADS', 'ALL', 'ALTR', 'MO', 'AMZN', 'AEE', 'AAL', 'AEP', 'AXP', 'AIG', 'AMT', 'AMP', 'ABC', 'AME', 'AMGN', 'APH', 'APC', 'ADI', 'AON', 'APA', 'AIV', 'AMAT', 'ADM', 'AIZ', 'T', 'ADSK', 'ADP', 'AN', 'AZO', 'AVGO',
