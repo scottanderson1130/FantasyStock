@@ -11,31 +11,26 @@ const inputsForm = [
   {
     description: '# of teams',
     type: 'number',
-    placeholder: '# of teams',
     name: 'numberTeams'
   },
   {
     description: 'matches number of days',
     type: 'number',
-    placeholder: 'matches number of days',
     name: 'lengthMatches'
   },
   {
     description: '# of matches',
     type: 'number',
-    placeholder: '# of matches',
     name: 'numberMatches'
   },
   {
     description: 'start date',
     type: 'date',
-    placeholder: 'start date',
     name: 'startDate'
   },
   {
     description: 'end date',
     type: 'date',
-    placeholder: 'end date',
     name: 'endDate'
   },
   {
@@ -88,7 +83,7 @@ function SettingsLeague({ myLeague }) {
         <form className='settingsLeague_form' onSubmit={handleSubmit}>
           {submitted && <div className='success-message'>Success! Your settings have been updated</div>}
           {inputsForm.map(({
-            description, type, placeholder, name
+            description, type, name
           }) => (
             <div
               className='settingsLeague_settingBox'
@@ -97,7 +92,6 @@ function SettingsLeague({ myLeague }) {
               <Input
                 key={name}
                 type={type}
-                placeholder={placeholder}
                 name={name}
                 onChange={handleChange}
               />
