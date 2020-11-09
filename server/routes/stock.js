@@ -2,6 +2,7 @@
 /* eslint-disable camelcase */
 /* eslint-disable no-console */
 const { Router } = require('express');
+const { Op } = require('sequelize');
 
 const {
   Stock,
@@ -139,10 +140,78 @@ stockRouter.get('/portfolio/:userID', async (req, res) => {
 // query League to get the number of Shares/stock for the league
 // calculate the shares available
 stockRouter.get('/waivers/:leagueID', (req, res) => {
+  // sync
+  const delayStockUpdate = async () => {
+    updateStocks()
+      .then((updatedStocks) => updatedStocks)
+      .then((updatedStocks) => updatedStocks.map((stockInfoX) => {
+        const stockArray = Object.values(stockInfoX); // this is returning the right data
+
+        const plug = (stockInfo) => {
+          if (!stockInfo) {
+            return null;
+          }
+          const updatedStock = {};
+          if (stockInfo.quote.latestPrice !== null) {
+            updatedStock.ticker = stockInfo.quote.symbol;
+            updatedStock.company_name = stockInfo.quote.companyName;
+            updatedStock.current_price_per_share = Math.round(stockInfo.quote.latestPrice * 100);
+            //   // Todo: moment for date_updated
+            // Todo: switch company name to not regularly updated
+            return Stock.update({
+              current_price_per_share: updatedStock.current_price_per_share,
+              company_name: updatedStock.company_name
+            },
+            {
+              where: {
+                ticker: updatedStock.ticker,
+                current_price_per_share: updatedStock.current_price_per_share,
+                company_name: updatedStock.company_name
+              }
+            })
+              .catch((err) => {
+                console.error('ERROR (170)', err);
+                res.status(500).send(err);
+              });
+          }
+          return null;
+        };
+
+        return Promise.all(stockArray.map((stockInfo) => plug(stockInfo)))
+          .then(() => {
+            Stock.findAll()
+            // .then((stocks) => {
+            //   // res.send(stocks);
+            // })
+              .catch((err) => {
+                console.error('(190)', err);
+                res.status(500).send(err);
+              });
+          })
+          .catch((err) => {
+            console.error('(195)', err);
+            res.status(500).send(err);
+          });
+      }))
+      .catch((err) => {
+        console.error('ERROR (200)');
+        res.status(500).send(err);
+      });
+  };
+  // console.log(test)
+  delayStockUpdate().then(() => {});
+  // console.log(test2)
+  // sync
   const { leagueID } = req.params;
   const waivers = [];
   // axios call to update Stock first. then do the findall
-  Stock.findAll()
+  Stock.findAll({
+    where: {
+      current_price_per_share: {
+        [Op.ne]: null
+      }
+    }
+  })
     .then((allStocks) => {
       // allStocks is an array of objects (stocks from stock) at this point
       // need to calculate shares
@@ -177,6 +246,7 @@ stockRouter.get('/waivers/:leagueID', (req, res) => {
       res.status(500).send(err);
     });
 });
+
 // need to add block from negative shares
 // also make sure it caps at 100 stocks? think it is tho.
 stockRouter.post('/waivers', async (req, res) => {

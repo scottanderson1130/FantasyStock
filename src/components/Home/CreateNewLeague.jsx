@@ -35,7 +35,7 @@ const useStyles = makeStyles({
     marginBottom: 12
   },
   buttonPadding: {
-    marginTop: '25px'
+    marginTop: 25
   }
 });
 
@@ -73,7 +73,7 @@ function CreateNewLeague() {
   return (
     <div>
       <Button variant='outlined' color='primary' onClick={handleClickOpen} className={classes.buttonPadding}>
-        Create New League
+        Create League
       </Button>
       <Dialog open={open} onClose={handleClose} aria-labelledby='form-dialog-title'>
         <DialogTitle id='form-dialog-title'>Create a League</DialogTitle>

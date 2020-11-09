@@ -41,7 +41,7 @@ function AddMembers({ leagueUsers }) {
 
   const addMembersToLeague = () => {
     const userIDs = users.map((user) => user.id);
-    axios.post('/league/addUser', { userIDs, leagueID });
+    axios.put('/league/users', { userIDs, leagueID });
     setSubmitted(true);
     setTimeout(() => setSubmitted(false), 1000);
   };
