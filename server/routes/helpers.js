@@ -1,10 +1,10 @@
 /* eslint-disable max-len */
 /* eslint-disable camelcase */
+/* eslint-disable no-param-reassign */
 const axios = require('axios');
 require('dotenv').config();
 
 const {
-  // Stock,
   Stock_user,
   League_user
 } = require('../db/index');
@@ -73,8 +73,64 @@ const updateStocks = async () => {
   return getData().then((data) => data);
 };
 
+// Adapted Fisher-Yates Shuffler
+const shuffle = (array) => {
+  const m = array.length;
+  let t;
+  let i;
+  while (m) {
+    i = Math.floor(Math.random() * m - 1);
+    t = array[m];
+    array[m] = array[i];
+    array[i] = t;
+  }
+  return array;
+};
+const arraySlider = (array) => {
+  const newArray = array.slice(1);
+  newArray.push(array[0]);
+  return newArray;
+};
+const matchScheduler = (numOfWeeks, randomOrderIDs) => {
+  const numOfTeams = randomOrderIDs.length;
+  const gamesPerWeek = numOfTeams / 2;
+  let firstHalfOfIDs = randomOrderIDs.slice(0, gamesPerWeek);
+  const secondHalfofIDs = randomOrderIDs.slice(gamesPerWeek);
+  const schedule = {
+    currentWeek: 0,
+    weeklyMatchups: {}
+  };
+  // TODO: Home vs away fairness & noparam reassign
+  for (let i = 1; i <= numOfWeeks; i + 1) {
+    const week = `week${i}`;
+    const weeklyGames = [];
+    for (let k = 1; k <= gamesPerWeek; k + 1) {
+      const gameTemplate = {
+        Home: {
+          teamID: firstHalfOfIDs[k - 1],
+          score: 0
+        },
+        Away: {
+          teamID: secondHalfofIDs[k - 1],
+          score: 0
+        }
+      };
+      weeklyGames.push(gameTemplate);
+    }
+    firstHalfOfIDs = arraySlider(firstHalfOfIDs);
+    schedule.weeklyMatchups[week] = weeklyGames;
+  }
+  return schedule;
+};
+// TODO: numPlayoffs
+const matchupGenerator = (userIDs, numWeeks) => {
+  const randomOrderUserIDs = shuffle(userIDs);
+  const schedule = matchScheduler(numWeeks, randomOrderUserIDs);
+  return schedule;
+};
 module.exports = {
-  checkMoneyAvailable,
   checkSharesAvailable,
-  updateStocks
+  checkMoneyAvailable,
+  updateStocks,
+  matchupGenerator
 };
