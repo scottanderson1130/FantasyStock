@@ -5,6 +5,7 @@ import { selectUser } from '../features/userSlice.js';
 import { selectLeague, selectLeagueOwner } from '../features/leagueSlice.js';
 import SettingsLeague from '../components/Settings/SettingsLeague.jsx';
 import '../css/Settings.css';
+import UserSettings from '../components/Settings/UserSettings.jsx';
 
 function Settings() {
   const [myLeague, setMyLeague] = useState({});
@@ -23,12 +24,14 @@ function Settings() {
 
   return (
 
-    <div
-      className={user.id === leagueOwner ? 'settings_league' : null}
-    >
+    <div className='settings_league'>
       {user.id === leagueOwner
         && <SettingsLeague myLeague={myLeague} />}
+      <div className='settings_userSettings'>
+        <UserSettings />
+      </div>
     </div>
+
   );
 }
 

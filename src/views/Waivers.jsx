@@ -12,18 +12,15 @@ function Waivers() {
   const user = useSelector(selectUser);
   const rows = useSelector(selectWaivers);
   const [search, setSearch] = useState('');
-  const [bankBalance, setBankBalance] = useState({});
+  const [bankBalance, setBankBalance] = useState();
 
   const dispatch = useDispatch();
   const league = useSelector(selectLeague);
 
   useEffect(() => {
-    async function fetchWaivers() {
-      const waiversResponse = await axios.get(`/stock/waivers/${league}`);
-      dispatch(setWaivers(waiversResponse.data));
-      return waiversResponse;
-    }
-    fetchWaivers();
+    axios.get(`/stock/waivers/${league}`).then((response) => {
+      dispatch(setWaivers(response.data));
+    });
   }, [dispatch, league, user.leagueInfo]);
 
   useEffect(() => {

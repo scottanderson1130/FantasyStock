@@ -9,3 +9,11 @@ body {
 html {
   font-family: 'SF Pro Display', sans-serif;
 }
+
+* { 
+  font-size: 102%
+}
+
+a {
+  text-decoration: none;
+}

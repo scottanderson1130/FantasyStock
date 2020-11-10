@@ -1,11 +1,9 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import PropTypes from 'prop-types';
 import '../../css/CardStats.css';
 
 const useStyles = makeStyles({
@@ -27,36 +25,60 @@ const useStyles = makeStyles({
   }
 });
 
-function CardStats({ bankBalance }) {
+function CardStats({ bankBalance, rows }) {
+  CardStats.propTypes = {
+    bankBalance: PropTypes.number.isRequired,
+    rows: PropTypes.shape().isRequired
+  };
   const classes = useStyles();
-  // const bull = <span className={classes.bullet}>•</span>;
+
+  const portfolioCalcValue = () => {
+    let portfolioValue = 0;
+    rows.forEach((stock) => {
+      portfolioValue
+        += ((stock.stock.current_price_per_share * stock.portfolio.shares) * 0.01);
+    });
+    return (portfolioValue);
+  };
+
+  const portfolioCalcPaid = () => {
+    let portfolioPaid = 0;
+    rows.forEach((stock) => {
+      portfolioPaid
+        += ((stock.portfolio.price_per_share_at_purchase * stock.portfolio.shares) * 0.01);
+    });
+    return portfolioPaid;
+  };
+  const portPercent = (((portfolioCalcValue() - portfolioCalcPaid()) / 100));
+  const totalValue = (portfolioCalcValue() + (bankBalance * 0.01));
 
   return (
     <div className='cardStats'>
       <Card className={classes.root} variant='outlined'>
         <CardContent>
-          <Typography component='h2' className={classes.title} color='textSecondary' gutterBottom>
-            <strong>Bank Balance</strong>
-            <em>
-              $
-              {(bankBalance * 0.01).toFixed(2)}
-            </em>
-          </Typography>
           <Typography variant='h5' component='h2'>
-            information 1
+            Bank Balance:
+            $
+            {(bankBalance * 0.01).toFixed(2)}
           </Typography>
           <Typography className={classes.pos} color='textSecondary'>
-            information 2
-          </Typography>
-          <Typography variant='body2' component='p'>
-            description
-            <br />
-            more description
+            Portfolio Value:
+            {' '}
+            $
+            {portfolioCalcValue()
+              .toFixed(2)}
+            (
+            {portPercent.toFixed(2)}
+            %
+            )
+            <div>
+              Total Value:
+              {' '}
+              $
+              {totalValue.toFixed(2)}
+            </div>
           </Typography>
         </CardContent>
-        <CardActions className='cardStats_learn-more'>
-          <Button size='small'>Learn More</Button>
-        </CardActions>
       </Card>
     </div>
   );

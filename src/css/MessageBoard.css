@@ -9,13 +9,14 @@
     bottom: 0;
     left: 0;
     overflow-anchor: none;
+    background-color: black;
 }
 
 .container {
   overflow:   auto;
   position:   fixed;
   width: calc(100% - 10px);
-  max-height: 590px;
+  max-height: 580px;
   bottom: 75px;
   min-height: 75px;
   overflow-anchor: auto;

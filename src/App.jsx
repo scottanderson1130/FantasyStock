@@ -16,8 +16,8 @@ import { selectUser, setLogIn, setUser } from './features/userSlice.js';
 import { setUserLeagues } from './features/leagueSlice.js';
 
 function App() {
-  const logIn = true;
   const dispatch = useDispatch();
+  const logIn = true;
   const user = useSelector(selectUser);
 
   useEffect(() => {
@@ -36,9 +36,8 @@ function App() {
 
   useEffect(() => {
     async function fetchUserLeagueInfo() {
-      const response = await axios.get(`/league/${user?.id}`);
-      dispatch(setUserLeagues(response.data[0].leagues));
-      return response;
+      axios.get(`/league/${user?.id}`)
+        .then((response) => dispatch(setUserLeagues(response.data[0].leagues)));
     }
     fetchUserLeagueInfo();
   }, [user, dispatch]);

@@ -1,9 +1,9 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
+import PropTypes from 'prop-types';
 import AwayPortfolio from './AwayPortfolio.jsx';
 import HomePortfolio from './HomePortfolio.jsx';
 
@@ -34,6 +34,25 @@ const useStyles = makeStyles(() => ({
 }));
 
 function CurrentMatchup({ switchViews, homePortfolio, awayPortfolio }) {
+  CurrentMatchup.propTypes = {
+    switchViews: PropTypes.func.isRequired,
+    homePortfolio: PropTypes.switch({
+      companyName: PropTypes.string,
+      ticker: PropTypes.string,
+      pps: PropTypes.number,
+      cpps: PropTypes.number,
+      shares: PropTypes.number,
+      userId: PropTypes.string
+    }).isRequired,
+    awayPortfolio: PropTypes.switch({
+      companyName: PropTypes.string,
+      ticker: PropTypes.string,
+      pps: PropTypes.number,
+      cpps: PropTypes.number,
+      shares: PropTypes.number,
+      userId: PropTypes.string
+    }).isRequired
+  };
   const classes = useStyles();
 
   function FormRow() {

@@ -19,15 +19,15 @@ function ScoreBoard() {
     }).then((response) => setMatches(response.data));
   }, [league]);
 
-  const getMatchups = () => {
+  const getMatchups = (homeId, userId) => {
     // TODO:add homeID and userID once we have users in a league
 
     const getHomePortfolio = axios
-      .get('/stock/portfolio/6')
+      .get(`/stock/portfolio/${homeId}`)
       .then((response) => response.data);
 
     const getAwayPortfolio = axios
-      .get('/stock/portfolio/6')
+      .get(`/stock/portfolio/${userId}`)
       .then((response) => response.data);
 
     return Promise.all([getHomePortfolio, getAwayPortfolio])
@@ -38,6 +38,7 @@ function ScoreBoard() {
   const switchViews = () => {
     setToggle(false);
   };
+
   return (
     <div>
       {!toggle ? matches.map((match) => (

@@ -1,9 +1,9 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
+import PropTypes from 'prop-types';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -24,6 +24,12 @@ function AwayPortfolio({
   cpps,
   shares
 }) {
+  AwayPortfolio.propTypes = {
+    companyName: PropTypes.string.isRequired,
+    pps: PropTypes.number.isRequired,
+    cpps: PropTypes.number.isRequired,
+    shares: PropTypes.number.isRequired
+  };
   const classes = useStyles();
   return (
     <div>

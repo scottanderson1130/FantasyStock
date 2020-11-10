@@ -13,10 +13,11 @@ const useStyles = makeStyles({
     display: 'flex',
     borderRadius: '25px',
     marginBottom: '10px',
-    margin: '10px'
+    margin: '10px',
+    textAlign: 'center'
   },
   title: {
-    fontSize: 14
+    fontWeight: 'bold'
   },
   pos: {
     marginBottom: 12
@@ -53,14 +54,13 @@ function MatchupCard({ userLeague, user }) {
         <CardContent>
           <Typography
             className={classes.title}
-            color='textSecondary'
-            gutterBottom
+            variant='h6'
+            component='h2'
           >
             {userLeague?.league_name}
           </Typography>
           <Typography
-            variant='h5'
-            component='h2'
+            variant='body2'
           >
             {`Bank Balance: $ ${bankBalanceTwoDecimal}`}
           </Typography>

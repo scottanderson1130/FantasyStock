@@ -38,7 +38,7 @@ messageRouter.post('/', (req, res) => {
       });
       res.send('message sent');
     })
-    .catch((error) => console.error(error));
+    .catch((error) => console.warn(error));
 });
 
 module.exports = { messageRouter };

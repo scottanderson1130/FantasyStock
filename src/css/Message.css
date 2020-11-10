@@ -13,9 +13,8 @@
 .message_userCard {
   background-color: #0b81ff !important;
 }
-
 .message_guestCard {
-  background-color: #e9e9eb !important;
+  background-color: #74747c !important;
 }
 
 .message_date {
@@ -23,4 +22,13 @@
   padding-top: 3px;
   margin-right: 5px;
   font-size: 12px;
+}
+
+.message_cardContent {
+  padding: 5px !important;
+}
+
+.message_textMessage {
+  color: white !important;
+  text-align: center;
 }

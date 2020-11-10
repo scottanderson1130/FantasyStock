@@ -22,7 +22,7 @@ leagueRouter.post('/addUser', async (req, res) => {
       record: '0-0'
     })
       .catch((err) => {
-        console.error(err);
+        console.warn(err);
         res.status(500).send(err);
       });
     return 'success';
@@ -37,6 +37,26 @@ leagueRouter.get('/league/:leagueID', (req, res) => {
   League.findAll({
     where: { id: leagueID }, include: [{ model: User }]
   }).then((response) => res.send(response[0].dataValues.users));
+});
+
+// find one league by id with all information plus users
+
+leagueRouter.get('/oneleague/:leagueID', (req, res) => {
+  const { leagueID } = req.params;
+
+  League.findOne(
+    {
+      where: {
+        id: leagueID
+      },
+      include: [{ model: User }]
+    }
+  )
+    .then((leagueInfo) => res.send(leagueInfo))
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send(err);
+    });
 });
 
 // get User and League data with User id
@@ -84,7 +104,7 @@ leagueRouter.post('/', (req, res) => {
     res.send(responseLeagueInfo);
   })
     .catch((err) => {
-      console.error(err);
+      console.warn(err);
       res.status(500).send(err);
     });
 });
@@ -116,7 +136,7 @@ leagueRouter.put('/', (req, res) => {
       }
     })
     .catch((err) => {
-      console.error(err);
+      console.warn(err);
       res.status(500).send(err);
     });
   res.send(newSettings);
@@ -149,7 +169,7 @@ leagueRouter.put('/users', (req, res) => {
             }
           })
             .catch((err) => {
-              console.error(err);
+              console.warn(err);
               res.status(500).send(err);
             });
         }
@@ -166,7 +186,7 @@ leagueRouter.put('/users', (req, res) => {
             id_user: userID
           })
             .catch((err) => {
-              console.error(err);
+              console.warn(err);
               res.status(500).send(err);
             });
         }
@@ -174,10 +194,10 @@ leagueRouter.put('/users', (req, res) => {
       res.send(userIDs);
     })
     .catch((err) => {
-      console.error(err);
+      console.warn(err);
       res.status(500).send(err);
     });
-// won't log the adds and deletes atm
+  // won't log the adds and deletes atm
 });
 // put league route settings required
 // put for users added to league
@@ -206,7 +226,7 @@ leagueRouter.get('/:leagueID/:userID', (req, res) => {
         res.send(responseLeague);
       });
   }).catch((err) => {
-    console.error(err);
+    console.warn(err);
     res.status(500).send(err);
   });
 });
