@@ -144,7 +144,7 @@ function WaiversList({
             Cancel
           </Button>
           <Button
-            disabled={(calcBankBalance.toFixed(2) > 0) && (row.sharesRemaining - sharesInput <= 100) && row.sharesRemaining - sharesInput >= 0 ? '' : 'disabled'}
+            disabled={(calcBankBalance.toFixed(2) > 0) && (row.sharesRemaining - sharesInput <= row.sharesRemaining) && row.sharesRemaining - sharesInput >= 0 ? '' : 'disabled'}
             onClick={onSubmit}
             color='primary'
           >
