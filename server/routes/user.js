@@ -114,11 +114,11 @@ userRouter.put('/', (req, res) => {
   User.update({
     full_name, username, avatar
   },
-    {
-      where: {
-        id
-      }
-    })
+  {
+    where: {
+      id
+    }
+  })
     .then((newUser) => {
       res.status(201).send(newUser);
     })
