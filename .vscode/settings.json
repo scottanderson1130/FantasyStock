@@ -1,3 +1,5 @@
 {
-  "prettier.trailingComma": "none"
+  "prettier.trailingComma": "none",
+  "synthwave84.brightness": 0.1,
+  "synthwave84.disableGlow": true
 }

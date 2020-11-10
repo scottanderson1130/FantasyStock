@@ -170,7 +170,6 @@ stockRouter.get('/waivers/:leagueID', (req, res) => {
               }
             }).then((data) => data)
               .catch((err) => {
-                console.warn('ERROR (174)', err);
                 res.status(500).send(err);
               });
           }
@@ -185,17 +184,14 @@ stockRouter.get('/waivers/:leagueID', (req, res) => {
                 // res.send(stocks);
               })
               .catch((err) => {
-                console.warn('(190)', err);
                 res.status(500).send(err);
               });
           })
           .catch((err) => {
-            console.warn('(195)', err);
             res.status(500).send(err);
           });
       }))
       .catch((err) => {
-        console.warn('ERROR (200)');
         res.status(500).send(err);
       });
   };
@@ -322,8 +318,20 @@ stockRouter.post('/waivers', async (req, res) => {
                   id_stock, id_league, id_user, portfolio: updatedPortfolio
                 };
                 res.send(data);
+              }).then(() => {
+                Stock_user.destroy({
+                  where: {
+                    id_stock,
+                    id_league,
+                    id_user,
+                    portfolio: {
+                      shares: 0
+                    }
+                  }
+                });
               });
-          }).then((data) => (data)).catch((err) => console.warn(err));
+          }).then((response) => response)
+          .catch(() => res.sendStatus(404));
       }
     })
     .catch((err) => {

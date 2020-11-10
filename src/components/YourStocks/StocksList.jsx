@@ -43,18 +43,7 @@ function StocksList({
 
   const league = useSelector(selectLeague);
 
-  // const getWaivers = () => {
-  //   axios.get(`/stock/waivers/${league}`)
-  //     .then((waiver) => dispatch(setWaivers(waiver.data)));
-  // };
-
-  // useEffect(() => {
-  //   getWaivers();
-  //   fetchYourStocks(user.id);
-  //   updateBank(user.id);
-  // }, []);
-
-  const onSubmit = () => {
+  const onSubmit = async () => {
     axios.post('/stock/waivers', {
       id_stock: row.id,
       id_league: league,
@@ -86,6 +75,7 @@ function StocksList({
   const handleSharesSubmit = ((e) => {
     setSharesInput(e.target.value);
   });
+  const sharesCount = ((shares, shareInput) => (shares - (-shareInput)));
 
   const calcBankBalance = ((bankBalance * 0.01)
   - ((row.current_price_per_share * 0.01) * sharesInput));
@@ -125,7 +115,7 @@ function StocksList({
             <p className='waiversList_dialogBox'>
               <strong>Shares Available:</strong>
               {' '}
-              {row.shares - (-sharesInput)}
+              {sharesCount(row.shares, sharesInput)}
             </p>
             <p className='waiversList_dialogBox'>
               <strong> Price per Share: </strong>
@@ -145,7 +135,7 @@ function StocksList({
             label='buy/sell shares'
             type='number'
             fullWidth
-            onChange={(e) => handleSharesSubmit(e)}
+            onChange={(e) => handleSharesSubmit(e, sharesCount(row.shares, sharesInput), row.id)}
           />
         </DialogContent>
         <DialogActions>
@@ -154,7 +144,7 @@ function StocksList({
           </Button>
           <Button
             disabled={(calcBankBalance.toFixed(2) > 0) && (row.shares - (-sharesInput) >= 0) && (row.shares - (-sharesInput) <= 100) ? '' : 'disabled'}
-            onClick={() => onSubmit()}
+            onClick={() => onSubmit(sharesCount(row.shares, sharesInput), row.id)}
             color='primary'
             value={row.id}
           >
