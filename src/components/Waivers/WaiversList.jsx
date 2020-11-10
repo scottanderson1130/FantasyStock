@@ -77,6 +77,8 @@ function WaiversList({
   const handleSharesSubmit = (e) => {
     setSharesInput(e.target.value);
   };
+  const calcBankBalance = ((bankBalance * 0.01)
+  - ((row.current_price_per_share * 0.01) * sharesInput));
 
   return (
     <>
@@ -105,7 +107,7 @@ function WaiversList({
           <strong>Bank Balance: </strong>
           $
           {
-            ((bankBalance * 0.01) - ((row.current_price_per_share * 0.01) * sharesInput)).toFixed(2)
+            calcBankBalance.toFixed(2)
           }
           <DialogContentText>
             <br />
@@ -141,7 +143,11 @@ function WaiversList({
           <Button onClick={handleClose} color='primary'>
             Cancel
           </Button>
-          <Button onClick={onSubmit} color='primary'>
+          <Button
+            disabled={(calcBankBalance.toFixed(2) > 0) && (row.sharesRemaining - sharesInput <= 100) && row.sharesRemaining - sharesInput >= 0 ? '' : 'disabled'}
+            onClick={onSubmit}
+            color='primary'
+          >
             Submit
           </Button>
         </DialogActions>

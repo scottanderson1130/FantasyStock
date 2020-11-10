@@ -86,6 +86,10 @@ function StocksList({
   const handleSharesSubmit = ((e) => {
     setSharesInput(e.target.value);
   });
+
+  const calcBankBalance = ((bankBalance * 0.01)
+  - ((row.current_price_per_share * 0.01) * sharesInput));
+
   return (
     <>
       <TableRow
@@ -111,8 +115,7 @@ function StocksList({
           <strong>Bank Balance: </strong>
           $
           {
-            ((bankBalance * 0.01) - (
-              (row.current_price_per_share * 0.01) * sharesInput)).toFixed(2)
+            calcBankBalance.toFixed(2)
           }
           <DialogContentText>
             <br />
@@ -149,7 +152,12 @@ function StocksList({
           <Button onClick={handleClose} color='primary'>
             Cancel
           </Button>
-          <Button onClick={() => onSubmit()} color='primary' value={row.id}>
+          <Button
+            disabled={(calcBankBalance.toFixed(2) > 0) && (row.shares - (-sharesInput) >= 0) && (row.shares - (-sharesInput) <= 100) ? '' : 'disabled'}
+            onClick={() => onSubmit()}
+            color='primary'
+            value={row.id}
+          >
             Update
           </Button>
         </DialogActions>

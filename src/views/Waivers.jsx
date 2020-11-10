@@ -18,12 +18,9 @@ function Waivers() {
   const league = useSelector(selectLeague);
 
   useEffect(() => {
-    async function fetchWaivers() {
-      const waiversResponse = await axios.get(`/stock/waivers/${league}`);
-      dispatch(setWaivers(waiversResponse.data));
-      return waiversResponse;
-    }
-    fetchWaivers();
+    axios.get(`/stock/waivers/${league}`).then((response) => {
+      dispatch(setWaivers(response.data));
+    });
   }, [dispatch, league, user.leagueInfo]);
 
   useEffect(() => {
