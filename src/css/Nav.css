@@ -1,3 +1,8 @@
+.nav {
+  display: flex;
+  align-items: center !important;
+}
+
 .nav_bar {
   background-color: black !important;
 }
@@ -29,7 +34,7 @@ padding-left: 100px;
   text-decoration: none;
 }
 
-a {
+.a {
   text-decoration: none;
   color: white;
 }
@@ -46,3 +51,6 @@ a {
   float: right;
 }
 
+.nav_options:hover {
+  transform: scale(1.1);
+}

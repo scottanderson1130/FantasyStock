@@ -13,3 +13,7 @@ html {
 * { 
   font-size: 102%
 }
+
+a {
+  text-decoration: none;
+}

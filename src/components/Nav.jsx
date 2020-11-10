@@ -52,7 +52,7 @@ function Nav() {
       path: '/'
     },
     {
-      option: 'Message Board',
+      option: 'Chat',
       path: '/messageboard'
     },
     {
@@ -75,15 +75,15 @@ function Nav() {
           >
             <Menu />
           </IconButton>
-          <Typography className='nav_logo' variant='h6'>
+          <Typography className='nav_logo' variant='body1'>
             {user?.username}
           </Typography>
 
           <Button color='inherit'>
             {(!logIn)
-              ? <a href='/auth/google'>Log In </a>
+              ? <a className='a' href='/auth/google'>Log In </a>
               : (
-                <a href='/auth/logout'>Log out </a>
+                <a className='a' href='/auth/logout'>Log out </a>
               )}
           </Button>
 

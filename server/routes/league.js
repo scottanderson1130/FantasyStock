@@ -39,6 +39,26 @@ leagueRouter.get('/league/:leagueID', (req, res) => {
   }).then((response) => res.send(response[0].dataValues.users));
 });
 
+// find one league by id with all information plus users
+
+leagueRouter.get('/oneleague/:leagueID', (req, res) => {
+  const { leagueID } = req.params;
+
+  League.findOne(
+    {
+      where: {
+        id: leagueID
+      },
+      include: [{ model: User }]
+    }
+  )
+    .then((leagueInfo) => res.send(leagueInfo))
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send(err);
+    });
+});
+
 // get User and League data with User id
 leagueRouter.get('/:userID', (req, res) => {
   const { userID } = req.params;
@@ -177,7 +197,7 @@ leagueRouter.put('/users', (req, res) => {
       console.warn(err);
       res.status(500).send(err);
     });
-// won't log the adds and deletes atm
+  // won't log the adds and deletes atm
 });
 // put league route settings required
 // put for users added to league

@@ -14,6 +14,18 @@ const {
 
 const userRouter = Router();
 
+// get a user by user id
+userRouter.get('/user/:userID', (req, res) => {
+  const { userID } = req.params;
+  User.findOne({
+    where: {
+      id: userID
+    }
+  })
+    .then((userInfo) => res.send(userInfo))
+    .catch((err) => console.error(err));
+});
+
 // get all users
 userRouter.get('/', (req, res) => {
   User.findAll()
@@ -32,8 +44,8 @@ userRouter.get('/:username', (req, res) => {
       }
     }
   })
-    .then((userInfo) => res.send(userInfo))
-    .catch((err) => console.warn(err));
+    .then((userInfo) => res.status(200).send(userInfo))
+    .catch((err) => res.status(500).send(err));
 });
 
 // // get user's Info by user google id
