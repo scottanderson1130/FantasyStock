@@ -4,7 +4,6 @@ const axios = require('axios');
 require('dotenv').config();
 
 const {
-  // Stock,
   Stock_user,
   League_user
 } = require('../db/index');
@@ -73,8 +72,61 @@ const updateStocks = async () => {
   return getData().then((data) => data);
 };
 
+// Adapted Fisher-Yates Shuffler
+const shuffle = (array) => {
+  var m = array.length, t, i;
+  while (m) {
+    i = Math.floor(Math.random() * m--);
+    t = array[m];
+    array[m] = array[i];
+    array[i] = t;
+  }
+  return array;
+}
+const arraySlider = (array) => {
+  const newArray = array.slice(1)
+  newArray.push(array[0])
+  return newArray
+}
+const matchScheduler = (numOfWeeks, randomOrderIDs) => {
+  const numOfTeams = randomOrderIDs.length;
+  const gamesPerWeek = numOfTeams / 2;
+  let firstHalfOfIDs = randomOrderIDs.slice(0, gamesPerWeek)
+  const secondHalfofIDs = randomOrderIDs.slice(gamesPerWeek)
+  const schedule = {
+    currentWeek: 0,
+    weeklyMatchups: {}
+  };
+  // TODO: Home vs away fairness
+  for(i = 1; i <= numOfWeeks; i++) {
+    let week = `week${i}`
+    let weeklyGames =[];
+    for(k = 1; k <= gamesPerWeek; k++) {
+      let gameTemplate = {
+        Home: {
+          teamID: firstHalfOfIDs[k-1],
+          score: 0
+        },
+        Away: {
+          teamID: secondHalfofIDs[k-1],
+          score: 0
+        }
+      };
+      weeklyGames.push(gameTemplate);
+    }
+    firstHalfOfIDs = arraySlider(firstHalfOfIDs);
+    schedule.weeklyMatchups[week] = weeklyGames;
+  }
+  return schedule;
+};
+const matchupGenerator = (userIDs, numWeeks, numPlayoffs) => {
+  const randomOrderUserIDs = shuffle(userIDs);
+  const schedule = matchScheduler(numWeeks, randomOrderUserIDs);
+  return schedule;
+}
 module.exports = {
-  checkMoneyAvailable,
   checkSharesAvailable,
-  updateStocks
+  checkMoneyAvailable,
+  updateStocks,
+  matchupGenerator
 };
