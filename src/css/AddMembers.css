@@ -13,7 +13,6 @@
 }
 
 .addMembers_ol {
-  display: flex;
   flex-direction: column;
 }
 

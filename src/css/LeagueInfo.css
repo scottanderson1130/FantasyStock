@@ -1,0 +1,42 @@
+.leagueInfo{
+  padding: 20px;
+}
+
+.leagueInfo_title {
+  text-align: center;
+  padding-bottom: 20px;
+  font-size: 120%;
+}
+
+.leagueInfo_info {
+  padding-top: 10px;
+  padding-bottom: 20px;
+  text-align: center;
+}
+
+.leagueInfo_members {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-align: center;
+}
+
+.leagueInfo_selectLeague {
+  text-align: center;
+  padding-top: 60px;
+  color: black;
+  cursor: pointer;
+}
+
+.leagueInfo_selectLeague:hover {
+  transform: scale(1.1);
+}
+
+.MuiAccordionSummary-content {
+  margin-top: 6px !important;
+  margin-bottom: 6px !important;
+}
+
+#panel1d-header.MuiButtonBase-root.MuiAccordionSummary-root {
+  background-color: black !important;
+  color: white !important;
+}

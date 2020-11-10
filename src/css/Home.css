@@ -1,4 +1,22 @@
-.home_MatchupCard {
-  padding: 50px;
-  width: 400px;
+.home_logInContainer {
+  text-align: center;
+  padding-top: 60px;
+  color: black;
+  cursor: pointer;
 }
+
+.home_pleaseLogIn {
+  text-decoration: none;
+  color: black;
+}
+
+.home_logInContainer:hover {
+  transform: scale(1.1);
+}
+
+.home_logo {
+  padding-top: 30px;
+  object-fit: contain;
+  width: 300px;
+}
+
