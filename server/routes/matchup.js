@@ -30,7 +30,7 @@ matchupRouter.get('/:leagueID', async (req, res) => {
       return currentMatchupsValues;
     })
     .catch((err) => {
-      console.error(err);
+      console.warn(err);
       res.status(500).send(err);
     });
   const users = await League_user.findAll({
@@ -39,7 +39,7 @@ matchupRouter.get('/:leagueID', async (req, res) => {
     }
   }).then(((leagueUsers) => [...leagueUsers]))
     .catch((err) => {
-      console.error(err);
+      console.warn(err);
       res.status(500).send(err);
     });
   users.map(async (user) => {
@@ -58,7 +58,7 @@ matchupRouter.get('/:leagueID', async (req, res) => {
         });
       })
       .catch((err) => {
-        console.error(err);
+        console.warn(err);
         res.status(500).send(err);
       });
     for (const match in currentMatchups) {

@@ -23,6 +23,7 @@ stockRouter.get('/', (req, res) => {
     .then((updatedStocks) => updatedStocks)
     .then((updatedStocks) => updatedStocks.map(async (stockInfoX) => {
       const stockArray = Object.values(stockInfoX);
+
       const plug = async (stockInfo) => {
         if (!stockInfo) {
           return null;
@@ -41,25 +42,27 @@ stockRouter.get('/', (req, res) => {
             }
           })
             .catch((err) => {
-              console.error(err);
+              console.warn(err);
               res.status(500).send(err);
             });
         }
         return null;
       };
-      return Promise.all(stockArray.map((stockInfo) => plug(stockInfo)))
+      return Promise.all(stockArray.map((stockInfo) => {
+        plug(stockInfo);
+      }))
         .then(() => {
           Stock.findAll()
             .then((stocks) => {
               res.send(stocks);
             })
             .catch((err) => {
-              console.error(err);
+              console.warn(err);
               res.status(500).send(err);
             });
         })
         .catch((err) => {
-          console.error(err);
+          console.warn(err);
           res.status(500).send(err);
         });
     }))
@@ -76,7 +79,7 @@ stockRouter.get('/stock/:stockID', (req, res) => {
       res.send(stock);
     })
     .catch((err) => {
-      console.error(err);
+      console.warn(err);
       res.status(500).send(err);
     });
 });
@@ -95,7 +98,7 @@ stockRouter.get('/bank/:userID/:leagueID', (req, res) => {
       res.send(bank);
     })
     .catch((err) => {
-      console.error(err);
+      console.warn(err);
       res.status(500).send(err);
     });
 });
@@ -125,7 +128,7 @@ stockRouter.get('/portfolio/:userID', async (req, res) => {
       }, 50);
     })
     .catch((err) => {
-      console.error(err);
+      console.warn(err);
       res.status(500).send(err);
     });
 });
@@ -146,9 +149,8 @@ stockRouter.get('/waivers/:leagueID', (req, res) => {
       .then((updatedStocks) => updatedStocks)
       .then((updatedStocks) => updatedStocks.map((stockInfoX) => {
         const stockArray = Object.values(stockInfoX); // this is returning the right data
-
         const plug = (stockInfo) => {
-          if (!stockInfo) {
+          if (!stockInfo && !stockInfo.company_name) {
             return null;
           }
           const updatedStock = {};
@@ -164,43 +166,40 @@ stockRouter.get('/waivers/:leagueID', (req, res) => {
             },
             {
               where: {
-                ticker: updatedStock.ticker,
-                current_price_per_share: updatedStock.current_price_per_share,
-                company_name: updatedStock.company_name
+                ticker: updatedStock.ticker
               }
-            })
+            }).then((data) => data)
               .catch((err) => {
-                console.error('ERROR (170)', err);
+                console.warn('ERROR (174)', err);
                 res.status(500).send(err);
               });
           }
           return null;
         };
-
-        return Promise.all(stockArray.map((stockInfo) => plug(stockInfo)))
+        return Promise.all(stockArray.map((stockInfo) => {
+          plug(stockInfo);
+        }))
           .then(() => {
             Stock.findAll()
-            // .then((stocks) => {
-            //   // res.send(stocks);
-            // })
+              .then(() => {
+                // res.send(stocks);
+              })
               .catch((err) => {
-                console.error('(190)', err);
+                console.warn('(190)', err);
                 res.status(500).send(err);
               });
           })
           .catch((err) => {
-            console.error('(195)', err);
+            console.warn('(195)', err);
             res.status(500).send(err);
           });
       }))
       .catch((err) => {
-        console.error('ERROR (200)');
+        console.warn('ERROR (200)');
         res.status(500).send(err);
       });
   };
-  // console.log(test)
   delayStockUpdate().then(() => {});
-  // console.log(test2)
   // sync
   const { leagueID } = req.params;
   const waivers = [];
@@ -242,7 +241,7 @@ stockRouter.get('/waivers/:leagueID', (req, res) => {
         });
     })
     .catch((err) => {
-      console.error(err);
+      console.warn(err);
       res.status(500).send(err);
     });
 });
@@ -324,11 +323,11 @@ stockRouter.post('/waivers', async (req, res) => {
                 };
                 res.send(data);
               });
-          }).then((data) => (data)).catch((err) => console.error(err));
+          }).then((data) => (data)).catch((err) => console.warn(err));
       }
     })
     .catch((err) => {
-      console.error(err);
+      console.warn(err);
       res.status(500).send(err);
     });
 });

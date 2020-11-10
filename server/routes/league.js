@@ -22,7 +22,7 @@ leagueRouter.post('/addUser', async (req, res) => {
       record: '0-0'
     })
       .catch((err) => {
-        console.error(err);
+        console.warn(err);
         res.status(500).send(err);
       });
     return 'success';
@@ -84,7 +84,7 @@ leagueRouter.post('/', (req, res) => {
     res.send(responseLeagueInfo);
   })
     .catch((err) => {
-      console.error(err);
+      console.warn(err);
       res.status(500).send(err);
     });
 });
@@ -116,7 +116,7 @@ leagueRouter.put('/', (req, res) => {
       }
     })
     .catch((err) => {
-      console.error(err);
+      console.warn(err);
       res.status(500).send(err);
     });
   res.send(newSettings);
@@ -149,7 +149,7 @@ leagueRouter.put('/users', (req, res) => {
             }
           })
             .catch((err) => {
-              console.error(err);
+              console.warn(err);
               res.status(500).send(err);
             });
         }
@@ -166,7 +166,7 @@ leagueRouter.put('/users', (req, res) => {
             id_user: userID
           })
             .catch((err) => {
-              console.error(err);
+              console.warn(err);
               res.status(500).send(err);
             });
         }
@@ -174,7 +174,7 @@ leagueRouter.put('/users', (req, res) => {
       res.send(userIDs);
     })
     .catch((err) => {
-      console.error(err);
+      console.warn(err);
       res.status(500).send(err);
     });
 // won't log the adds and deletes atm
@@ -206,7 +206,7 @@ leagueRouter.get('/:leagueID/:userID', (req, res) => {
         res.send(responseLeague);
       });
   }).catch((err) => {
-    console.error(err);
+    console.warn(err);
     res.status(500).send(err);
   });
 });

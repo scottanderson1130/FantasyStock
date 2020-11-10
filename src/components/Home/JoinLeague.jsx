@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */
+/* eslint-disable react/no-array-index-key */
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
@@ -6,6 +6,7 @@ import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
+import PropTypes from 'prop-types';
 import League from './League.jsx';
 import { selectUser } from '../../features/userSlice.js';
 
@@ -16,6 +17,9 @@ const useStyles = makeStyles({
 });
 
 function JoinLeague({ leagues }) {
+  JoinLeague.propTypes = {
+    leagues: PropTypes.instanceOf(Array).isRequired
+  };
   const [anchorEl, setAnchorEl] = useState(null);
   const classes = useStyles();
   const user = useSelector(selectUser);
@@ -49,10 +53,10 @@ function JoinLeague({ leagues }) {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        {leagues && leagues.map((showLeague) => {
+        {leagues && leagues.map((showLeague, ind) => {
           if (showLeague.id_owner !== user.id) {
             return (
-              <MenuItem onClick={() => handleClose(showLeague.id)}>
+              <MenuItem key={showLeague.id_owner} onClick={() => handleClose(showLeague.id)}>
                 <League
                   leagueId={showLeague.id}
                   leagueName={showLeague.league_name}
@@ -60,7 +64,7 @@ function JoinLeague({ leagues }) {
               </MenuItem>
             );
           }
-          return <></>;
+          return <div key={ind} />;
         })}
       </Menu>
     </div>

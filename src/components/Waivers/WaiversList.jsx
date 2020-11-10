@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import {
   Button,
   Dialog,
@@ -13,6 +12,7 @@ import {
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 import { setWaivers } from '../../features/waiversSlice.js';
 import { setYourStock } from '../../features/yourStockSlice.js';
 import { selectLeague } from '../../features/leagueSlice.js';
@@ -21,6 +21,22 @@ import '../../css/WaiversList.css';
 function WaiversList({
   row, index, user, bankBalance, setBankBalance
 }) {
+  WaiversList.propTypes = {
+    row: PropTypes.shape({
+      id: PropTypes.number,
+      company_name: PropTypes.string,
+      current_price_per_share: PropTypes.number,
+      sharesRemaining: PropTypes.number,
+      ticker: PropTypes.string
+    }).isRequired,
+    index: PropTypes.number.isRequired,
+    user: PropTypes.shape({
+      id: PropTypes.string
+    }).isRequired,
+    bankBalance: PropTypes.number.isRequired,
+    setBankBalance: PropTypes.func.isRequired
+  };
+
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const [waiver, setWaiver] = useState({});

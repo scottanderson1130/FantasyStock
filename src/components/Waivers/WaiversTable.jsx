@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
@@ -65,10 +64,16 @@ const headCells = [
   }
 ];
 
-function EnhancedTableHead(props) {
-  const {
-    classes, order, orderBy, onRequestSort
-  } = props;
+function EnhancedTableHead({
+  classes, order, orderBy, onRequestSort
+}) {
+  EnhancedTableHead.propTypes = {
+    classes: PropTypes.shape({ visuallyHidden: PropTypes.shape }).isRequired,
+    onRequestSort: PropTypes.func.isRequired,
+    order: PropTypes.oneOf(['asc', 'desc']).isRequired,
+    orderBy: PropTypes.string.isRequired
+  };
+
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
   };
@@ -104,13 +109,6 @@ function EnhancedTableHead(props) {
   );
 }
 
-EnhancedTableHead.propTypes = {
-  classes: PropTypes.shape({ subProp: PropTypes.string }).isRequired,
-  onRequestSort: PropTypes.func.isRequired,
-  order: PropTypes.oneOf(['asc', 'desc']).isRequired,
-  orderBy: PropTypes.string.isRequired
-};
-
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%'
@@ -139,6 +137,13 @@ const useStyles = makeStyles((theme) => ({
 function WaiversTable({
   rows, search, user, bankBalance, setBankBalance
 }) {
+  WaiversTable.propTypes = {
+    rows: PropTypes.shape.isRequired,
+    search: PropTypes.func.isRequired,
+    user: PropTypes.shape.isRequired,
+    bankBalance: PropTypes.number.isRequired,
+    setBankBalance: PropTypes.func.isRequired
+  };
   const classes = useStyles();
   const [order, setOrder] = useState('asc');
   const [orderBy, setOrderBy] = useState('calories');
@@ -166,7 +171,6 @@ function WaiversTable({
       .indexOf(search.toLowerCase()) !== -1
   );
   const ControllingRowsPerPage = page * rowsPerPage;
-
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
