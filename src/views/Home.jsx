@@ -10,6 +10,8 @@ import '../css/YourStocks.css';
 import { selectLogIn, selectUser } from '../features/userSlice.js';
 import Stocknews from '../components/Home/Stocknews.jsx';
 import { selectUserLeagues } from '../features/leagueSlice.js';
+import logo from '../logo/logo.png';
+import '../css/Home.css';
 
 function Home() {
   const [leagues, setLeagues] = useState([]);
@@ -24,8 +26,14 @@ function Home() {
   return (
     (!logIn)
       ? (
-        <div>
-          <h1>Please Log In</h1>
+        <div className='home_logInContainer'>
+          <a
+            href='/auth/google'
+            className='home_pleaseLogIn'
+          >
+            Please Log In
+          </a>
+          <img className='home_logo' src={logo} alt='logo' />
         </div>
       )
       : (
@@ -37,7 +45,7 @@ function Home() {
           >
             <Carousel autoPlay={false} animation='slide' fullHeightHover={false}>
               {
-                userLeagues.map((userLeague) => (
+                userLeagues?.map((userLeague) => (
                   <MatchupCard
                     user={user}
                     userLeague={userLeague}

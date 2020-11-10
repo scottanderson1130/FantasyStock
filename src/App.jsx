@@ -16,8 +16,8 @@ import { selectUser, setLogIn, setUser } from './features/userSlice.js';
 import { setUserLeagues } from './features/leagueSlice.js';
 
 function App() {
-  const logIn = true;
   const dispatch = useDispatch();
+  const logIn = true;
   const user = useSelector(selectUser);
 
   useEffect(() => {
