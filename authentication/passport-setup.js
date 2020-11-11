@@ -20,7 +20,7 @@ passport.use(
     },
     (accessToken, refreshToken, profile, done) => {
       axios.post('http://localhost:3000/user', {
-        id: '2',
+        id: profile.id,
         username: profile.name.familyName,
         full_name: profile.displayName,
         avatar: profile.photos.value

@@ -32,7 +32,6 @@ function ScoreCard({
   homeTeamId,
   getMatchups
 }) {
-  console.log(typeof awayScore, typeof awayRecord, typeof awayTeamId, typeof getMatchups);
   ScoreCard.propTypes = {
     awayScore: PropTypes.number.isRequired,
     awayRecord: PropTypes.string.isRequired,

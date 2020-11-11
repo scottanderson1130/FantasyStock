@@ -10,10 +10,6 @@
   color: black;
 }
 
-.home_logInContainer:hover {
-  transform: scale(1.1);
-}
-
 .home_logo {
   padding-top: 30px;
   object-fit: contain;
