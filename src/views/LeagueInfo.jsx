@@ -1,23 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
-import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  Card,
-  CardContent,
-  Typography
-} from '@material-ui/core';
+import { Card, CardContent } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { selectLeague } from '../features/leagueSlice.js';
 import '../css/LeagueInfo.css';
+import CardLeagueMembers from '../components/LeagueInfo/CardLeagueMembers.jsx';
+import AccordionComp from '../components/AccordionComp.jsx';
 
 function LeagueInfo() {
   const league = useSelector(selectLeague);
   const [leagueInfo, setLeagueInfo] = useState([]);
   const [owner, setOwner] = useState({});
-  const [expanded, setExpanded] = useState(false);
 
   useEffect(() => {
     axios.get(`league/oneleague/${league}`)
@@ -29,9 +23,11 @@ function LeagueInfo() {
       .then((response) => setOwner(response.data));
   }, [leagueInfo]);
 
-  const handleChange = (panel) => (event, newExpanded) => {
-    setExpanded(newExpanded ? panel : false);
-  };
+  const Component = () => (
+    <CardLeagueMembers
+      leagueInfo={leagueInfo}
+    />
+  );
 
   return (
     <div className='leagueInfo'>
@@ -46,35 +42,7 @@ function LeagueInfo() {
                 <h4>League Owner: </h4>
                 <p>{owner?.username}</p>
               </div>
-              <Accordion
-                square
-                expanded={expanded === 'leagueMembers'}
-                onChange={handleChange('leagueMembers')}
-              >
-                <AccordionSummary
-                  aria-controls='panel1d-content'
-                  id='panel1d-header'
-                >
-                  <Typography
-                    className='leagueInfo_members'
-                  >
-                    League Members
-                  </Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <Typography>
-                    {leagueInfo?.users?.map((user) => (
-                      <ul>
-                        <li>
-                          Team Name:
-                          <p>{user.league_user.team_name}</p>
-                          <p>{user?.username}</p>
-                        </li>
-                      </ul>
-                    ))}
-                  </Typography>
-                </AccordionDetails>
-              </Accordion>
+              <AccordionComp Component={Component} title='League Members' />
             </CardContent>
           </Card>
 
