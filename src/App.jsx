@@ -37,7 +37,11 @@ function App() {
   useEffect(() => {
     async function fetchUserLeagueInfo() {
       axios.get(`/league/${user?.id}`)
-        .then((response) => dispatch(setUserLeagues(response.data[0].leagues)));
+        .then((response) => {
+          if (response.data[0]) {
+            dispatch(setUserLeagues(response.data[0].leagues));
+          }
+        });
     }
     fetchUserLeagueInfo();
   }, [user, dispatch]);

@@ -1,6 +1,6 @@
 /* eslint-disable react/no-array-index-key */
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
@@ -9,6 +9,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import PropTypes from 'prop-types';
 import League from './League.jsx';
 import { selectUser } from '../../features/userSlice.js';
+import { setUserLeagues } from '../../features/leagueSlice.js';
 
 const useStyles = makeStyles({
   buttonPadding: {
@@ -16,13 +17,18 @@ const useStyles = makeStyles({
   }
 });
 
-function JoinLeague({ leagues }) {
+function JoinLeague({ leagues, userLeagues }) {
   JoinLeague.propTypes = {
-    leagues: PropTypes.instanceOf(Array).isRequired
+    leagues: PropTypes.instanceOf(Array).isRequired,
+    userLeagues: PropTypes.instanceOf(Array).isRequired
   };
+
   const [anchorEl, setAnchorEl] = useState(null);
   const classes = useStyles();
   const user = useSelector(selectUser);
+  const dispatch = useDispatch();
+
+  const userLeagueFilter = userLeagues.map((league) => league.id);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -30,12 +36,16 @@ function JoinLeague({ leagues }) {
 
   const handleClose = (id) => {
     axios.post('/league/addUser', {
-      userIDs: [user.id],
+      userID: user.id,
       leagueID: id
-    });
+    }).then(() => axios.get(`/league/${user?.id}`))
+      .then((response) => {
+        if (response.data[0]) {
+          dispatch(setUserLeagues(response.data[0].leagues));
+        }
+      });
     setAnchorEl(null);
   };
-
   return (
     <div>
       <Button
@@ -54,7 +64,7 @@ function JoinLeague({ leagues }) {
         onClose={handleClose}
       >
         {leagues && leagues.map((showLeague, ind) => {
-          if (showLeague.id_owner !== user.id) {
+          if (!userLeagueFilter.includes(showLeague.id)) {
             return (
               <MenuItem key={showLeague.id_owner} onClick={() => handleClose(showLeague.id)}>
                 <League

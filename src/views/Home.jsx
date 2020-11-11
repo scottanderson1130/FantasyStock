@@ -64,7 +64,7 @@ function Home() {
                 <CreateNewLeague />
               </div>
               <div style={{ padding: '5px' }}>
-                <JoinLeague leagues={leagues} />
+                <JoinLeague leagues={leagues} userLeagues={userLeagues} />
               </div>
             </Grid>
           </div>

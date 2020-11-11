@@ -148,7 +148,7 @@ stockRouter.get('/waivers/:leagueID', (req, res) => {
     updateStocks()
       .then((updatedStocks) => updatedStocks)
       .then((updatedStocks) => updatedStocks.map((stockInfoX) => {
-        const stockArray = Object.values(stockInfoX); // this is returning the right data
+        const stockArray = Object.values(stockInfoX);
         const plug = (stockInfo) => {
           if (!stockInfo && !stockInfo.company_name) {
             return null;
@@ -158,8 +158,8 @@ stockRouter.get('/waivers/:leagueID', (req, res) => {
             updatedStock.ticker = stockInfo.quote.symbol;
             updatedStock.company_name = stockInfo.quote.companyName;
             updatedStock.current_price_per_share = Math.round(stockInfo.quote.latestPrice * 100);
-            //   // Todo: moment for date_updated
-            // Todo: switch company name to not regularly updated
+            // TODO: moment for date_updated
+            // TODO: switch company name to not regularly updated
             return Stock.update({
               current_price_per_share: updatedStock.current_price_per_share,
               company_name: updatedStock.company_name
@@ -180,9 +180,7 @@ stockRouter.get('/waivers/:leagueID', (req, res) => {
         }))
           .then(() => {
             Stock.findAll()
-              .then(() => {
-                // res.send(stocks);
-              })
+              .then((stocks) => stocks)
               .catch((err) => {
                 res.status(500).send(err);
               });
@@ -195,6 +193,7 @@ stockRouter.get('/waivers/:leagueID', (req, res) => {
         res.status(500).send(err);
       });
   };
+
   delayStockUpdate().then(() => {});
   // sync
   const { leagueID } = req.params;
